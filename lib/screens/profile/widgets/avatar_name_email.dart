@@ -25,7 +25,6 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
     user = FireStoreFunctions.fetchUser(FirebaseAuth.instance.currentUser!.uid);
   }
 
-
   final ProfilePic profilePic = ProfilePic();
 
   @override
@@ -49,29 +48,38 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
     return Column(
       children: [
         Gap(15.h),
-        GestureDetector(
-          onTap: () {
-            profilePic.pickUploadPic().then((imageUrl) {
-              setState(() {
-                user.image = imageUrl;
-              });
-            });
-          },
-          child: CircleAvatar(
-            radius: 60.w,
-            backgroundColor: ColorsManager.gray(context),
-            child: CircleAvatar(
-              radius: 57.w,
-              backgroundImage: user.image != null
-                  ? NetworkImage(user.image!)
-                  : null,
-              child: user.image == null
-                  ? Text(
-                      ('${user.firstName[0]} ${user.lastName[0]}'),
-                      style: TextStyles.font18DarkBlue700Weight,
-                    )
-                  : null,
-            ),
+        CircleAvatar(
+          radius: 60.w,
+          backgroundColor: ColorsManager.gray76(context),
+          child: Stack(
+            children: [
+              CircleAvatar(
+                radius: 57.w,
+                backgroundImage:
+                    user.image != null ? NetworkImage(user.image!) : null,
+                child: user.image == null
+                    ? Text(
+                        ('${user.firstName[0]} ${user.lastName[0]}'),
+                        style: TextStyles.font18DarkBlue700Weight,
+                      )
+                    : null,
+              ),
+              Positioned(
+                bottom: -5,
+                right: -10,
+                child: IconButton(
+                  icon: const Icon(Icons.add_a_photo),
+                  color: ColorsManager.gray(context),
+                  onPressed: () {
+                    profilePic.pickUploadPic().then((imageUrl) {
+                      setState(() {
+                        user.image = imageUrl;
+                      });
+                    });
+                  },
+                ),
+              ),
+            ],
           ),
         ),
         Gap(15.h),

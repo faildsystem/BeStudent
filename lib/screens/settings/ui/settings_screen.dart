@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:babstrap_settings_screen/babstrap_settings_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:student/core/widgets/app_bar.dart';
+import 'package:student/screens/settings/widgets/theme_dialog.dart';
 import 'package:student/theming/colors.dart';
 import 'package:student/theming/styles.dart';
 
@@ -15,11 +16,8 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  late bool isDark;
   @override
   Widget build(BuildContext context) {
-    isDark = EasyDynamicTheme.of(context).themeMode == ThemeMode.dark;
-
     return Scaffold(
       backgroundColor: ColorsManager.white(context).withOpacity(.94),
       appBar: MyAppBar(
@@ -37,24 +35,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 settingsGroupTitleStyle: TextStyles.font17DarkBlue700Weight,
                 items: [
                   SettingsItem(
-                    onTap: () {},
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return const ThemeDialog();
+                        },
+                      );
+                    },
                     icons: Icons.dark_mode_rounded,
                     iconStyle: IconStyle(
                       iconsColor: ColorsManager.white(context),
                       withBackground: true,
                       backgroundColor: ColorsManager.darkBlue(context),
                     ),
-                    title: 'تفعيل الوضع الليلي',
-                    subtitle: "",
-                    trailing: Switch.adaptive(
-                      value: isDark,
-                      onChanged: (value) {
-                        setState(() {
-                          isDark = value;
-                          EasyDynamicTheme.of(context).changeTheme();
-                        });
-                      },
-                    ),
+                    title: 'تغيير الثيم',
                   ),
                   SettingsItem(
                     onTap: () {},
