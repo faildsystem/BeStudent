@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -37,9 +36,8 @@ Future<void> main() async {
           ? Routes.studentScreen
           : Routes.teacherScreen;
     } catch (e) {
-      // Handle any errors that occur during user fetch
       log("Error fetching user: $e");
-      initialRoute = Routes.loginScreen; // Fallback route
+      initialRoute = Routes.loginScreen;
     }
   }
   await ScreenUtil.ensureScreenSize();
