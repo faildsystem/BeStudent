@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "202903213493",
+    "firebase_url": "https://student-port-c32fe-default-rtdb.firebaseio.com",
+    "project_id": "student-port-c32fe",
+    "storage_bucket": "student-port-c32fe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:202903213493:android:57c78aa1b7b6cbff6475fc",
+        "android_client_info": {
+          "package_name": "com.example.student"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "202903213493-nl1r1ng9v2p0atnava2dvh61dnhqc6h8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.student",
+            "certificate_hash": "1edd7fd2b2aa0bc55c4459611b470f0e63785265"
+          }
+        },
+        {
+          "client_id": "202903213493-4opcpp2m5kv9mvtnek00cvr1bo92d3h7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGrqvfYxe3V-U6PFw06xvgpwA0kx-_OMk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "202903213493-4opcpp2m5kv9mvtnek00cvr1bo92d3h7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "202903213493-dcf06ifm4setvi8rs8cn8khfja75lpcg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.student.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
