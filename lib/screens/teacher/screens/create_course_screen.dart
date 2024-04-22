@@ -127,18 +127,18 @@ class _CreateCourseScreenState extends State<CreateCourseScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const Stack(
+                         Stack(
                           alignment: Alignment.center,
                           children: [
                             Icon(
                               FontAwesomeIcons.expand,
                               size: 150,
-                              color: ColorsManager.mainBlue,
+                              color: ColorsManager.mainBlue(context),
                             ),
                             Icon(
                               FontAwesomeIcons.camera,
                               size: 75,
-                              color: ColorsManager.mainBlue,
+                              color: ColorsManager.mainBlue(context),
                             ),
                           ],
                         ),
@@ -162,9 +162,9 @@ class _CreateCourseScreenState extends State<CreateCourseScreen> {
     return Row(
       textDirection: TextDirection.rtl,
       children: [
-        const CircleAvatar(
+        CircleAvatar(
           radius: 3,
-          backgroundColor: ColorsManager.gray,
+          backgroundColor: ColorsManager.gray(context),
         ),
         Gap(5.w),
         Text(

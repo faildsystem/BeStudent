@@ -30,29 +30,29 @@ class _StudentCourseScreenState extends State<StudentCourseScreen> {
     return Scaffold(
       appBar: MyAppBar(title: 'مجموعاتي'),
       body: Container(
-        color: ColorsManager.white.withOpacity(0.92),
+        color: ColorsManager.white(context).withOpacity(0.92),
         child: StreamBuilder<List<Group>>(
           stream: studentGroupsStream,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
                 child: LoadingAnimationWidget.bouncingBall(
-                  color: ColorsManager.mainBlue,
+                  color: ColorsManager.mainBlue(context),
                   size: 90,
                 ),
               );
             } else if (snapshot.hasError) {
-              return const Center(
+              return  Center(
                 child: Text(
                   'حدث خطأ اثناء التحميل',
-                  style: TextStyle(color: ColorsManager.kTextBlackColor),
+                  style: TextStyle(color: ColorsManager.kTextBlackColor(context)),
                 ),
               );
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return const Center(
+              return  Center(
                   child: Text(
                 "لا توجد مجموعات",
-                style: TextStyle(color: ColorsManager.kTextBlackColor),
+                style: TextStyle(color: ColorsManager.kTextBlackColor(context)),
               ));
             } else {
               return ListView.builder(

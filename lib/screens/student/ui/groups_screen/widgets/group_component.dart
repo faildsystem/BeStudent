@@ -22,16 +22,9 @@ class GroupComponent extends StatelessWidget {
       textDirection: TextDirection.rtl,
       child: Container(
         decoration: BoxDecoration(
-            color: ColorsManager.secondaryBlue,
+            color: ColorsManager.secondaryBlue(context),
             borderRadius: BorderRadius.circular(12),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.4),
-                spreadRadius: 1.5,
-                blurRadius: 12,
-                offset: const Offset(0, 3),
-              ),
-            ]),
+            ),
         margin: EdgeInsets.symmetric(horizontal: 5.h),
         padding: EdgeInsets.all(10.h),
         child: Column(
@@ -72,9 +65,9 @@ class GroupComponent extends StatelessWidget {
                             },
                           );
                         },
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.share,
-                          color: ColorsManager.white,
+                          color: ColorsManager.white(context),
                         )),
                     IconButton(
                       onPressed: () {
@@ -103,9 +96,9 @@ class GroupComponent extends StatelessWidget {
                           desc: 'هل تريد مغادرة هذه المجموعة؟',
                         ).show();
                       },
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.logout,
-                        color: ColorsManager.white,
+                        color: ColorsManager.white(context),
                       ),
                     ),
                   ],

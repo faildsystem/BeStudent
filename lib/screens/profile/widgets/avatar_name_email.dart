@@ -59,7 +59,7 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
           },
           child: CircleAvatar(
             radius: 60.w,
-            backgroundColor: ColorsManager.gray,
+            backgroundColor: ColorsManager.gray(context),
             child: CircleAvatar(
               radius: 57.w,
               backgroundImage: user.image != null
@@ -88,9 +88,9 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
               onPressed: () {
                 EditProfile.editProfileForm(context);
               },
-              icon: const Icon(
+              icon: Icon(
                 Icons.edit,
-                color: ColorsManager.darkBlue,
+                color: ColorsManager.darkBlue(context),
               ),
             ),
           ],

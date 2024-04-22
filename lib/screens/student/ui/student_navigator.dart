@@ -40,13 +40,13 @@ class _StudentNavigatorState extends State<StudentNavigator> {
               widget.currentIndex = index;
             });
           },
-          backgroundColor: ColorsManager.lightShadeOfGray,
+          backgroundColor: ColorsManager.lightShadeOfGray(context),
           tabBorderRadius: 12,
           gap: 8.w,
-          color: ColorsManager.secondaryBlue,
-          activeColor: ColorsManager.mainBlue,
+          color: ColorsManager.secondaryBlue(context),
+          activeColor: ColorsManager.mainBlue(context),
           iconSize: 32.w,
-          tabBackgroundColor: ColorsManager.mainBlue.withOpacity(0.2),
+          tabBackgroundColor: ColorsManager.mainBlue(context).withOpacity(0.2),
           padding: EdgeInsets.symmetric(horizontal: 0.03.sw, vertical: 0.01.sh),
           tabMargin: EdgeInsets.all(5.w),
           tabs: const [

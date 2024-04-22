@@ -35,11 +35,11 @@ class SignUpScreen extends StatelessWidget {
                   style: TextStyles.font13Grey400Weight,
                 ),
                 Gap(0.01.sh),
-                const TabBar(
-                  indicatorColor: ColorsManager.mainBlue,
-                  labelColor: ColorsManager.mainBlue,
+                TabBar(
+                  indicatorColor: ColorsManager.mainBlue(context),
+                  labelColor: ColorsManager.mainBlue(context),
                   unselectedLabelColor: Colors.grey,
-                  tabs: [
+                  tabs: const [
                     Tab(text: 'مُعلم'),
                     Tab(text: 'طالب'),
                   ],

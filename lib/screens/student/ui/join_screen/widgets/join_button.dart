@@ -40,9 +40,10 @@ class JoinButton extends StatelessWidget {
             } else if (join == 0) {
               // ignore: use_build_context_synchronously
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  backgroundColor: ColorsManager.mainBlue,
-                  content: Center(
+                SnackBar(
+                  // ignore: use_build_context_synchronously
+                  backgroundColor: ColorsManager.mainBlue(context),
+                  content: const Center(
                     child: Text(
                       'انت بالفعل منضم لهذه المجموعة.',
                     ),

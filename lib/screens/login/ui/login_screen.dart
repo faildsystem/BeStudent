@@ -37,9 +37,9 @@ class _LoginScreenState extends State<LoginScreen> {
           final bool connected = connectivity != ConnectivityResult.none;
           return connected ? _loginPage(context) : const BuildNoInternet();
         },
-        child: const Center(
+        child: Center(
           child: CircularProgressIndicator(
-            color: ColorsManager.mainBlue,
+            color: ColorsManager.mainBlue(context),
           ),
         ),
       ),

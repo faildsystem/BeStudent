@@ -19,7 +19,7 @@ class InfoRow extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: 3.dg,
-          backgroundColor: ColorsManager.white,
+          backgroundColor: ColorsManager.white(context),
         ),
         Gap(5.w),
         Text(

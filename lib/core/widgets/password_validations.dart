@@ -25,6 +25,7 @@ class PasswordValidations extends StatelessWidget {
           children: [
             Expanded(
               child: buildValidationRow(
+                context,
                 'يحتوي على حرف صغير',
                 hasLowerCase,
               ),
@@ -32,6 +33,7 @@ class PasswordValidations extends StatelessWidget {
             Gap(8.h),
             Expanded(
               child: buildValidationRow(
+                context,
                 'يحتوي على رمز ',
                 hasSpecialCharacters,
               ),
@@ -43,6 +45,7 @@ class PasswordValidations extends StatelessWidget {
           children: [
             Expanded(
               child: buildValidationRow(
+                context,
                 'يحتوي على رقم',
                 hasNumber,
               ),
@@ -50,6 +53,7 @@ class PasswordValidations extends StatelessWidget {
             Gap(8.h),
             Expanded(
               child: buildValidationRow(
+                context,
                 'يتكون من 8 أحرف على الأقل',
                 hasMinLength,
               ),
@@ -60,14 +64,14 @@ class PasswordValidations extends StatelessWidget {
     );
   }
 
-  Widget buildValidationRow(String text, bool hasValidated) {
+  Widget buildValidationRow(context, String text, bool hasValidated) {
     return Row(
       textDirection: TextDirection.rtl,
       children: [
         Gap(20.w),
-        const CircleAvatar(
+        CircleAvatar(
           radius: 2.5,
-          backgroundColor: ColorsManager.gray,
+          backgroundColor: ColorsManager.gray(context),
         ),
         Gap(6.w),
         Text(
@@ -77,7 +81,7 @@ class PasswordValidations extends StatelessWidget {
             decoration: hasValidated ? TextDecoration.lineThrough : null,
             decorationColor: Colors.green,
             decorationThickness: 2,
-            color: hasValidated ? ColorsManager.gray : ColorsManager.darkBlue,
+            color: hasValidated ? ColorsManager.gray(context) : ColorsManager.darkBlue(context),
           ),
         )
       ],

@@ -47,13 +47,13 @@ class TeacherHomeScreen extends StatelessWidget {
             margin: EdgeInsets.only(bottom: 10.h),
             width: double.infinity,
             height: 140.h,
-            decoration: const BoxDecoration(
-              color: ColorsManager.mainBlue,
-              borderRadius: BorderRadius.only(
+            decoration: BoxDecoration(
+              color: ColorsManager.mainBlue(context),
+              borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(1000),
                 bottomRight: Radius.circular(1000),
               ),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                   color: Colors.black,
                   blurRadius: 0.10,
@@ -126,30 +126,30 @@ class TeacherHomeScreen extends StatelessWidget {
                     children: [
                       Icon(Icons.remove, size: 30.h, color: Colors.black),
                       Text('Our Services', style: TextStyle(fontSize: 18.h)),
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           ServiceBox(
                               icon: Icons.menu_book_outlined,
                               title: 'الواجبات المنزلية',
-                              color: ColorsManager.mainBlue),
+                              color: ColorsManager.mainBlue(context)),
                           ServiceBox(
                               icon: Icons.menu_book_outlined,
                               title: 'الواجبات المنزلية',
-                              color: ColorsManager.mainBlue),
+                              color: ColorsManager.mainBlue(context)),
                         ],
                       ),
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           ServiceBox(
                               icon: Icons.menu_book_outlined,
                               title: 'Homework',
-                              color: ColorsManager.mainBlue),
+                              color: ColorsManager.mainBlue(context)),
                           ServiceBox(
                               icon: Icons.menu_book_outlined,
                               title: 'Homework',
-                              color: ColorsManager.mainBlue),
+                              color: ColorsManager.mainBlue(context)),
                         ],
                       ),
                     ],

@@ -661,7 +661,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
             height: MediaQuery.of(context).size.height / 1.1,
             child: Center(
               child: LoadingAnimationWidget.stretchedDots(
-                color: ColorsManager.mainBlue,
+                color: ColorsManager.mainBlue(context),
                 size: 100,
               ),
             ),

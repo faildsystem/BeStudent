@@ -12,9 +12,9 @@ class SignOutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      child: const Text('Sign Out',
+      child: Text('Sign Out',
           style: TextStyle(
-            color: ColorsManager.white,
+            color: ColorsManager.white(context),
             fontWeight: FontWeight.bold,
             fontSize: 16,
           )),

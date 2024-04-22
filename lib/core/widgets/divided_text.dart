@@ -20,14 +20,14 @@ class DividedText extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.max,
       children: [
-        BuildDivider.buildDivider(width: width),
+        BuildDivider.buildDivider(context, width: width),
         Gap(5.w),
         Text(
           text,
           style: TextStyles.font14Grey400Weight,
         ),
         Gap(5.w),
-        BuildDivider.buildDivider(width: width),
+        BuildDivider.buildDivider(context, width: width),
       ],
     );
   }
