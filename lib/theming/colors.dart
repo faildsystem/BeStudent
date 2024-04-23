@@ -61,7 +61,7 @@ class ColorsManager {
         : const Color(0xFFF4F6F7);
   }
 
-  static Color kTextBlackColor(BuildContext context) {
+  static Color black(BuildContext context) {
     return Theme.of(context).brightness == Brightness.dark
         ? Colors.white
         : const Color(0xFF313131);
@@ -80,4 +80,4 @@ class ColorsManager {
   // static const Color mediumLightShadeOfGray = Color(0xFF9E9E9E);
   // static const Color purple = Color(0xFF9C27B0);
   // static const Color white = Color(0xFFF4F6F7);
-  // static const Color kTextBlackColor = Color(0xFF313131);
+  // static const Color black = Color(0xFF313131);

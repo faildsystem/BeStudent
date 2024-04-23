@@ -65,17 +65,35 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
                     : null,
               ),
               Positioned(
-                bottom: -5,
-                right: -10,
+                bottom: -4,
+                right: 0,
                 child: IconButton(
-                  icon: const Icon(Icons.add_a_photo),
-                  color: ColorsManager.gray(context),
+                  icon: Icon(
+                    size: 20.h,
+                    Icons.add_a_photo,
+                    color: ColorsManager.darkBlue(context),
+                  ),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                      ColorsManager.white(context),
+                    ),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                    ),
+                  ),
                   onPressed: () {
-                    profilePic.pickUploadPic().then((imageUrl) {
-                      setState(() {
-                        user.image = imageUrl;
-                      });
-                    });
+                    profilePic.updateProfilePicture().then(
+                      (imageUrl) {
+                        setState(
+                          () {
+                            if (imageUrl == null) return;
+                            user.image = imageUrl;
+                          },
+                        );
+                      },
+                    );
                   },
                 ),
               ),

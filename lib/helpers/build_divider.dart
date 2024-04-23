@@ -4,7 +4,6 @@ import '../theming/colors.dart';
 
 class BuildDivider {
   
-
   static Widget buildDivider(context, {required double width}) {
     return Expanded(
       child: Container(

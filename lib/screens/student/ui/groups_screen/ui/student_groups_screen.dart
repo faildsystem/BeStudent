@@ -42,18 +42,19 @@ class _StudentCourseScreenState extends State<StudentCourseScreen> {
                 ),
               );
             } else if (snapshot.hasError) {
-              return  Center(
+              return Center(
                 child: Text(
                   'حدث خطأ اثناء التحميل',
-                  style: TextStyle(color: ColorsManager.kTextBlackColor(context)),
+                  style: TextStyle(color: ColorsManager.black(context)),
                 ),
               );
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return  Center(
-                  child: Text(
-                "لا توجد مجموعات",
-                style: TextStyle(color: ColorsManager.kTextBlackColor(context)),
-              ));
+              return Center(
+                child: Text(
+                  "لا توجد مجموعات",
+                  style: TextStyle(color: ColorsManager.black(context)),
+                ),
+              );
             } else {
               return ListView.builder(
                 itemCount: snapshot.data!.length,

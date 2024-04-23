@@ -67,10 +67,12 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const JoinCourseScreen(),
         );
+
       case Routes.studentCourseScreen:
         return MaterialPageRoute(
           builder: (_) => const StudentCourseScreen(),
         );
+
       case Routes.studentScreen:
         final int? index = settings.arguments as int?;
         return MaterialPageRoute(
@@ -78,10 +80,12 @@ class AppRouter {
             currentIndex: index ?? 0,
           ),
         );
+
       case Routes.qrScannerScreen:
         return MaterialPageRoute(
           builder: (_) => const QRScannerScreen(),
         );
+
       case Routes.teacherCourseScreen:
         final int? index = settings.arguments as int?;
         return MaterialPageRoute(
@@ -89,6 +93,7 @@ class AppRouter {
             currentIndex: index ?? 0,
           ),
         );
+        
       case Routes.teacherScreen:
         final int? index = settings.arguments as int?;
         return MaterialPageRoute(
