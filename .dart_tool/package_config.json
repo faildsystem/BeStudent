@@ -686,6 +686,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "syncfusion_flutter_datagrid",
+      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_datagrid-25.1.41",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "syncfusion_flutter_datepicker",
       "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_datepicker-25.1.41",
       "packageUri": "lib/",
@@ -764,7 +770,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-04-25T18:47:35.048830Z",
+  "generated": "2024-04-25T20:10:22.698473Z",
   "generator": "pub",
   "generatorVersion": "3.3.3"
 }
