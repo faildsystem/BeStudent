@@ -11,8 +11,13 @@ import 'package:student/theming/styles.dart';
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool isProfileOrSettings;
+  final bool isTeacher;
 
-  MyAppBar({Key? key, required this.title, this.isProfileOrSettings = false})
+  MyAppBar(
+      {Key? key,
+      required this.title,
+      this.isProfileOrSettings = false,
+      this.isTeacher = false})
       : super(key: key);
 
   final Future<AppUser> user =
@@ -31,6 +36,18 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             backgroundColor: Colors.transparent,
             centerTitle: true,
+            leading: isTeacher
+                ? IconButton(
+                    iconSize: 25,
+                    icon: const Icon(Icons.add),
+                    tooltip: 'add group',
+                    onPressed: () {
+                      context.pushNamed(
+                        Routes.createGroupScreen,
+                      );
+                    },
+                  )
+                : null,
             actions: [
               if (!isProfileOrSettings)
                 IconButton(
@@ -60,6 +77,18 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
               backgroundColor: Colors.transparent,
               centerTitle: true,
+              leading: isTeacher
+                  ? IconButton(
+                      iconSize: 25,
+                      icon: const Icon(Icons.add),
+                      tooltip: 'add group',
+                      onPressed: () {
+                        context.pushNamed(
+                          Routes.createGroupScreen,
+                        );
+                      },
+                    )
+                  : null,
               actions: [
                 if (!isProfileOrSettings)
                   IconButton(
@@ -83,10 +112,10 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                         backgroundColor: ColorsManager.gray76(context),
                         child: CircleAvatar(
                           radius: 15.w,
-                          backgroundImage: user.image != null
+                          backgroundImage: user.image != ''
                               ? NetworkImage(user.image!)
                               : null,
-                          child: user.image == null
+                          child: user.image == ''
                               ? Text(
                                   '${user.firstName[0]} ${user.lastName[0]}',
                                   style: TextStyles.font14DarkBlue500Weight,

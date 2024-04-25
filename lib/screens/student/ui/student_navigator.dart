@@ -35,7 +35,7 @@ class _StudentNavigatorState extends State<StudentNavigator> {
         controller: _pageController,
         children: const [
           JoinCourseScreen(),
-          StudentCourseScreen(),
+          StudentGroupsScreen(),
           ProfileScreen(),
           SettingsScreen(),
         ],

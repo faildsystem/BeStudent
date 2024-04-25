@@ -7,7 +7,9 @@ import 'package:student/screens/student/ui/student_navigator.dart';
 import 'package:student/screens/onboarding/ui/onboarding_screen.dart';
 import 'package:student/screens/settings/ui/settings_screen.dart';
 import 'package:student/screens/splash/ui/splash_screen.dart';
-import 'package:student/screens/teacher/screens/teacher_navigator.dart';
+import 'package:student/screens/teacher/ui/create_group_screen/ui/create_course_screen.dart';
+import 'package:student/screens/teacher/ui/groups_screen/ui/teacher_groups_screen.dart';
+import 'package:student/screens/teacher/ui/teacher_navigator.dart';
 
 import '../screens/create_password/ui/create_password.dart';
 import '../screens/forget/ui/forget_screen.dart';
@@ -63,14 +65,14 @@ class AppRouter {
           builder: (_) => const SettingsScreen(),
         );
 
-      case Routes.joinCourseScreen:
+      case Routes.joinGroupScreen:
         return MaterialPageRoute(
           builder: (_) => const JoinCourseScreen(),
         );
 
-      case Routes.studentCourseScreen:
+      case Routes.studentGroupsScreen:
         return MaterialPageRoute(
-          builder: (_) => const StudentCourseScreen(),
+          builder: (_) => const StudentGroupsScreen(),
         );
 
       case Routes.studentScreen:
@@ -86,20 +88,22 @@ class AppRouter {
           builder: (_) => const QRScannerScreen(),
         );
 
-      case Routes.teacherCourseScreen:
-        final int? index = settings.arguments as int?;
-        return MaterialPageRoute(
-          builder: (_) => TeacherNavigator(
-            currentIndex: index ?? 0,
-          ),
-        );
-        
       case Routes.teacherScreen:
         final int? index = settings.arguments as int?;
         return MaterialPageRoute(
           builder: (_) => TeacherNavigator(
             currentIndex: index ?? 0,
           ),
+        );
+
+      case Routes.createGroupScreen:
+        return MaterialPageRoute(
+          builder: (_) => const CreateGroupScreen(),
+        );
+
+      case Routes.teacherGroupsScreen:
+        return MaterialPageRoute(
+          builder: (_) => const TeacherGroupsScreen(),
         );
     }
     return null;

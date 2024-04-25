@@ -53,16 +53,27 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
           backgroundColor: ColorsManager.gray76(context),
           child: Stack(
             children: [
-              CircleAvatar(
-                radius: 57.w,
-                backgroundImage:
-                    user.image != null ? NetworkImage(user.image!) : null,
-                child: user.image == null
-                    ? Text(
-                        ('${user.firstName[0]} ${user.lastName[0]}'),
-                        style: TextStyles.font18DarkBlue700Weight,
-                      )
-                    : null,
+              GestureDetector(
+                onTap: () {
+                  if(user.image != '') {
+                    showDialog(
+                    context: context,
+                    builder: (_) =>
+                        AlertDialog(content: Image.network(user.image!)),
+                  );
+                  }
+                },
+                child: CircleAvatar(
+                  radius: 57.w,
+                  backgroundImage:
+                      user.image != '' ? NetworkImage(user.image!) : null,
+                  child: user.image == ''
+                      ? Text(
+                          ('${user.firstName[0]} ${user.lastName[0]}'),
+                          style: TextStyles.font18DarkBlue700Weight,
+                        )
+                      : null,
+                ),
               ),
               Positioned(
                 bottom: -4,

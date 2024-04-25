@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'colors.dart';
-
 class TextStyles {
   static TextStyle font24Blue700Weight = TextStyle(
     fontSize: 24.sp,

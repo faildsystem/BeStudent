@@ -5,69 +5,76 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:student/core/widgets/app_bar.dart';
 import 'package:student/core/widgets/firestore_functions.dart';
 import 'package:student/core/widgets/classes/group.dart';
-import 'package:student/screens/student/ui/groups_screen/widgets/group_component.dart';
+import 'package:student/screens/student/ui/groups_screen/widgets/student_group_component.dart';
 import 'package:student/theming/colors.dart';
 
-class StudentCourseScreen extends StatefulWidget {
-  const StudentCourseScreen({Key? key}) : super(key: key);
+class StudentGroupsScreen extends StatefulWidget {
+  const StudentGroupsScreen({Key? key}) : super(key: key);
 
   @override
-  State<StudentCourseScreen> createState() => _StudentCourseScreenState();
+  State<StudentGroupsScreen> createState() => _StudentGroupsScreenState();
 }
 
-class _StudentCourseScreenState extends State<StudentCourseScreen> {
+class _StudentGroupsScreenState extends State<StudentGroupsScreen> {
   final String studentId = FirebaseAuth.instance.currentUser!.uid;
-  late Stream<List<Group>> studentGroupsStream =
-      FireStoreFunctions.fetchStudentGroups(studentId);
+  late List<Group> studentGroups;
+  bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
+    _fetchStudentGroups();
+  }
+
+  Future<void> _fetchStudentGroups() async {
+    setState(() {
+      isLoading = true;
+    });
+    studentGroups = await FireStoreFunctions.fetchStudentGroups(studentId);
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  Future<void> _refreshStudentGroups() async {
+    await _fetchStudentGroups();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(title: 'مجموعاتي'),
-      body: Container(
-        color: ColorsManager.white(context).withOpacity(0.92),
-        child: StreamBuilder<List<Group>>(
-          stream: studentGroupsStream,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
-                child: LoadingAnimationWidget.bouncingBall(
-                  color: ColorsManager.mainBlue(context),
-                  size: 90,
-                ),
-              );
-            } else if (snapshot.hasError) {
-              return Center(
-                child: Text(
-                  'حدث خطأ اثناء التحميل',
-                  style: TextStyle(color: ColorsManager.black(context)),
-                ),
-              );
-            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return Center(
-                child: Text(
-                  "لا توجد مجموعات",
-                  style: TextStyle(color: ColorsManager.black(context)),
-                ),
-              );
-            } else {
-              return ListView.builder(
-                itemCount: snapshot.data!.length,
-                itemBuilder: (context, index) {
-                  final group = snapshot.data![index];
-                  return Padding(
-                    padding: EdgeInsets.all(3.h),
-                    child: GroupComponent(studentId: studentId, group: group),
-                  );
-                },
-              );
-            }
-          },
+      body: RefreshIndicator(
+        onRefresh: _refreshStudentGroups,
+        child: Container(
+          color: ColorsManager.white(context).withOpacity(0.92),
+          child: isLoading
+              ? Center(
+                  child: LoadingAnimationWidget.bouncingBall(
+                    color: ColorsManager.mainBlue(context),
+                    size: 90,
+                  ),
+                )
+              : studentGroups.isEmpty
+                  ? Center(
+                      child: Text(
+                        "لا توجد مجموعات",
+                        style: TextStyle(color: ColorsManager.black(context)),
+                      ),
+                    )
+                  : ListView.builder(
+                      itemCount: studentGroups.length,
+                      itemBuilder: (context, index) {
+                        final group = studentGroups[index];
+                        return Padding(
+                          padding: EdgeInsets.all(3.h),
+                          child: StudentGroupComponent(
+                            studentId: studentId,
+                            group: group,
+                          ),
+                        );
+                      },
+                    ),
         ),
       ),
     );
