@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -41,14 +42,13 @@ Future<void> main() async {
     }
   }
   await ScreenUtil.ensureScreenSize();
-  runApp(MyApp(router: AppRouter()));
+  runApp(EasyDynamicThemeWidget(child: MyApp(router: AppRouter())));
 }
 
 class MyApp extends StatelessWidget {
   final AppRouter router;
 
   const MyApp({super.key, required this.router});
-
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -59,9 +59,9 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'BeStudent',
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            useMaterial3: true,
-          ),
+          theme: ThemeData.light(),
+          darkTheme: ThemeData.dark(),
+          themeMode: EasyDynamicTheme.of(context).themeMode,
           onGenerateRoute: router.generateRoute,
           initialRoute: initialRoute,
         );

@@ -12,16 +12,16 @@
 // }
 
 class Group {
-  final String groupSubjectName;
-  final String teacherName;
+  final String subjectName;
   final String groupCode;
-  final String teacherImage;
   final String groupName;
   final String groupDay;
   final String groupTime;
+  final String teacherName;
+  final String teacherImage;
 
   Group({
-    required this.groupSubjectName,
+    required this.subjectName,
     required this.groupCode,
     required this.groupName,
     required this.teacherName,

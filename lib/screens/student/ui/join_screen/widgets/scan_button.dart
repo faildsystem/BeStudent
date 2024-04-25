@@ -22,7 +22,7 @@ class ScanButton extends StatelessWidget {
         height: screenHeight / 4,
         width: screenWidth / 2,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: ColorsManager.white(context),
           borderRadius: BorderRadius.circular(12),
           boxShadow: const [
             BoxShadow(
@@ -42,12 +42,12 @@ class ScanButton extends StatelessWidget {
                 Icon(
                   FontAwesomeIcons.expand,
                   size: 120.dg,
-                  color: ColorsManager.mainBlue,
+                  color: ColorsManager.mainBlue(context),
                 ),
                 Icon(
                   FontAwesomeIcons.camera,
                   size: 65.dg,
-                  color: ColorsManager.mainBlue,
+                  color: ColorsManager.mainBlue(context),
                 ),
               ],
             ),

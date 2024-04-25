@@ -55,10 +55,10 @@ class QrDialog extends StatelessWidget {
       Clipboard.setData(ClipboardData(text: group.groupCode))
           .then((value) => context.pop());
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Center(child: Text('تم نسخ الكود ')),
-          backgroundColor: ColorsManager.secondaryBlue,
-          duration: Duration(seconds: 1),
+        SnackBar(
+          content: const Center(child: Text('تم نسخ الكود ')),
+          backgroundColor: ColorsManager.secondaryBlue(context),
+          duration: const Duration(seconds: 1),
         ),
       );
     } catch (e) {

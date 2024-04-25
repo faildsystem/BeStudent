@@ -18,9 +18,9 @@ class MyOfflineBuilder extends StatelessWidget {
         final bool connected = connectivity != ConnectivityResult.none;
         return connected ? page : const BuildNoInternet();
       },
-      child: const Center(
+      child: Center(
         child: CircularProgressIndicator(
-          color: ColorsManager.mainBlue,
+          color: ColorsManager.mainBlue(context),
         ),
       ),
     );

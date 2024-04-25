@@ -12,13 +12,13 @@ class Routes {
   
   // student
   static const String studentScreen = "/studentScreen";
-  static const String joinCourseScreen = "/joinCourseScreen";
-  static const String studentCourseScreen = "/studentCourseScreen";
+  static const String joinGroupScreen = "/joinGroupScreen";
+  static const String studentGroupsScreen = "/studentGroupsScreen";
   
   // teacher
   static const String teacherScreen = "/teacherScreen";
-  static const String createCourseScreen = "/createCourseScreen";
-  static const String teacherCourseScreen = "/teacherCourseScreen";
+  static const String createGroupScreen = "/createGroupScreen";
+  static const String teacherGroupsScreen = "/teacherGroupsScreen";
 
 
 }

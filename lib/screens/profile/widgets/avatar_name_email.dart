@@ -25,7 +25,6 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
     user = FireStoreFunctions.fetchUser(FirebaseAuth.instance.currentUser!.uid);
   }
 
-
   final ProfilePic profilePic = ProfilePic();
 
   @override
@@ -49,29 +48,67 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
     return Column(
       children: [
         Gap(15.h),
-        GestureDetector(
-          onTap: () {
-            profilePic.pickUploadPic().then((imageUrl) {
-              setState(() {
-                user.image = imageUrl;
-              });
-            });
-          },
-          child: CircleAvatar(
-            radius: 60.w,
-            backgroundColor: ColorsManager.gray,
-            child: CircleAvatar(
-              radius: 57.w,
-              backgroundImage: user.image != null
-                  ? NetworkImage(user.image!)
-                  : null,
-              child: user.image == null
-                  ? Text(
-                      ('${user.firstName[0]} ${user.lastName[0]}'),
-                      style: TextStyles.font18DarkBlue700Weight,
-                    )
-                  : null,
-            ),
+        CircleAvatar(
+          radius: 60.w,
+          backgroundColor: ColorsManager.gray76(context),
+          child: Stack(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  if(user.image != '') {
+                    showDialog(
+                    context: context,
+                    builder: (_) =>
+                        AlertDialog(content: Image.network(user.image!)),
+                  );
+                  }
+                },
+                child: CircleAvatar(
+                  radius: 57.w,
+                  backgroundImage:
+                      user.image != '' ? NetworkImage(user.image!) : null,
+                  child: user.image == ''
+                      ? Text(
+                          ('${user.firstName[0]} ${user.lastName[0]}'),
+                          style: TextStyles.font18DarkBlue700Weight,
+                        )
+                      : null,
+                ),
+              ),
+              Positioned(
+                bottom: -4,
+                right: 0,
+                child: IconButton(
+                  icon: Icon(
+                    size: 20.h,
+                    Icons.add_a_photo,
+                    color: ColorsManager.darkBlue(context),
+                  ),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                      ColorsManager.white(context),
+                    ),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                    ),
+                  ),
+                  onPressed: () {
+                    profilePic.updateProfilePicture().then(
+                      (imageUrl) {
+                        setState(
+                          () {
+                            if (imageUrl == null) return;
+                            user.image = imageUrl;
+                          },
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
         ),
         Gap(15.h),
@@ -88,9 +125,9 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
               onPressed: () {
                 EditProfile.editProfileForm(context);
               },
-              icon: const Icon(
+              icon: Icon(
                 Icons.edit,
-                color: ColorsManager.darkBlue,
+                color: ColorsManager.darkBlue(context),
               ),
             ),
           ],

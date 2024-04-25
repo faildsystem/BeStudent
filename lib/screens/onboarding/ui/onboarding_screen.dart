@@ -14,7 +14,7 @@ class OnBoarding extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: OnBoardingSlider(
-        headerBackgroundColor: ColorsManager.white,
+        headerBackgroundColor: ColorsManager.white(context),
         skipTextButton: Text(
           'Skip',
           style: TextStyles.font14Blue400Weight,
@@ -23,16 +23,16 @@ class OnBoarding extends StatelessWidget {
           'Login',
           style: TextStyles.font14Blue400Weight,
         ),
-        controllerColor: ColorsManager.mainBlue,
+        controllerColor: ColorsManager.mainBlue(context),
         centerBackground: true,
         finishButtonText: 'Register',
-        finishButtonStyle: const FinishButtonStyle(
-          shape: RoundedRectangleBorder(
+        finishButtonStyle: FinishButtonStyle(
+          shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(16),
             ),
           ),
-          backgroundColor: ColorsManager.mainBlue,
+          backgroundColor: ColorsManager.mainBlue(context),
         ),
         onFinish: () {
           context.pushNamedAndRemoveUntil(

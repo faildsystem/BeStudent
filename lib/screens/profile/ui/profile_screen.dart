@@ -17,7 +17,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsManager.white.withOpacity(.94),
+      backgroundColor: ColorsManager.white(context).withOpacity(.94),
       appBar: MyAppBar(
         title: 'الحساب',
         isProfileOrSettings: true,
@@ -65,7 +65,7 @@ class ProfileScreen extends StatelessWidget {
                     icons: CupertinoIcons.delete_solid,
                     title: "حذف الحساب",
                     titleStyle: const TextStyle(
-                      color: Colors.red,
+                      color: ColorsManager.coralRed,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

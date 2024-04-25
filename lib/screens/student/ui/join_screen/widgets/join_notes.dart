@@ -13,22 +13,23 @@ class JoinNotes extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          _buildNotesRow('اطلب من معلمك كود المادة لتتمكن من الانضمام.'),
-          Gap(10.h),
           _buildNotesRow(
+              context, 'اطلب من معلمك كود المادة لتتمكن من الانضمام.'),
+          Gap(10.h),
+          _buildNotesRow(context,
               'الكود يجب أن يحتوي على ٦ أحرف على الأقل بدون مسافات او رموز.'),
         ],
       ),
     );
   }
 
-  Widget _buildNotesRow(String text) {
+  Widget _buildNotesRow(context, String text) {
     return Row(
       textDirection: TextDirection.rtl,
       children: [
-        const CircleAvatar(
+        CircleAvatar(
           radius: 3,
-          backgroundColor: ColorsManager.gray,
+          backgroundColor: ColorsManager.gray(context),
         ),
         Gap(5.w),
         Text(

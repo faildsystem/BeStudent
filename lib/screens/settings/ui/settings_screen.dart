@@ -1,18 +1,25 @@
+import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:babstrap_settings_screen/babstrap_settings_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:student/core/widgets/app_bar.dart';
+import 'package:student/screens/settings/widgets/theme_dialog.dart';
 import 'package:student/theming/colors.dart';
 import 'package:student/theming/styles.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
 
   @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsManager.white.withOpacity(.94),
+      backgroundColor: ColorsManager.white(context).withOpacity(.94),
       appBar: MyAppBar(
         title: "اعدادات التطبيق",
         isProfileOrSettings: true,
@@ -28,19 +35,21 @@ class SettingsScreen extends StatelessWidget {
                 settingsGroupTitleStyle: TextStyles.font17DarkBlue700Weight,
                 items: [
                   SettingsItem(
-                    onTap: () {},
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return const ThemeDialog();
+                        },
+                      );
+                    },
                     icons: Icons.dark_mode_rounded,
                     iconStyle: IconStyle(
-                      iconsColor: ColorsManager.white,
+                      iconsColor: ColorsManager.white(context),
                       withBackground: true,
-                      backgroundColor: ColorsManager.darkBlue,
+                      backgroundColor: ColorsManager.darkBlue(context),
                     ),
-                    title: 'تفعيل الوضع الليلي',
-                    subtitle: "",
-                    trailing: Switch.adaptive(
-                      value: true,
-                      onChanged: (value) {},
-                    ),
+                    title: 'تغيير الثيم',
                   ),
                   SettingsItem(
                     onTap: () {},
@@ -59,7 +68,7 @@ class SettingsScreen extends StatelessWidget {
                     onTap: () {},
                     icons: Icons.help_outlined,
                     iconStyle: IconStyle(
-                      backgroundColor: ColorsManager.purple,
+                      backgroundColor: ColorsManager.purple(context),
                     ),
                     title: 'مساعدة',
                   ),
@@ -67,7 +76,7 @@ class SettingsScreen extends StatelessWidget {
                     onTap: () {},
                     icons: Icons.info_rounded,
                     iconStyle: IconStyle(
-                      backgroundColor: ColorsManager.purple,
+                      backgroundColor: ColorsManager.purple(context),
                     ),
                     title: 'عن التطبيق',
                     subtitle: "المزيد عن التطبيق",
