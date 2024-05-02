@@ -23,10 +23,15 @@ class JoinButton extends StatelessWidget {
         buttonText: 'انضمام',
         textStyle: TextStyles.font16White600Weight,
         onPressed: () async {
+          final groupId = await FireStoreFunctions.getDocId(
+              collection: 'group',
+              field: 'groupCode',
+              value: codeController.text);
           if (AppRegex.isCodeValid(codeController.text)) {
             final int join = await FireStoreFunctions.groupJoinRequest(
               userId: userId,
               code: codeController.text,
+              groupId: groupId,
             );
             if (join == 1) {
               // ignore: use_build_context_synchronously
