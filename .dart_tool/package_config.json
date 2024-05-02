@@ -681,13 +681,13 @@
     },
     {
       "name": "syncfusion_flutter_core",
-      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_core-25.1.41",
+      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_core-25.1.41",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "syncfusion_flutter_datagrid",
-      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_datagrid-25.1.41",
+      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_datagrid-25.1.41",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -770,7 +770,9 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-05-02T12:19:38.829284Z",
+
+  "generated": "2024-04-25T21:00:50.700847Z",
   "generator": "pub",
-  "generatorVersion": "3.3.3"
+  "generatorVersion": "3.2.6"
+
 }
