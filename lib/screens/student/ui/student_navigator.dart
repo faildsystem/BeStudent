@@ -1,14 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:student/screens/profile/ui/profile_screen.dart';
-import 'package:student/screens/settings/ui/settings_screen.dart';
+
+import 'package:student/screens/schedule/student_schedule/ui/student_schedule_screen.dart';
 import 'package:student/screens/student/ui/join_screen/ui/join_group_screen.dart';
 import 'package:student/screens/student/ui/groups_screen/ui/student_groups_screen.dart';
+import 'package:student/screens/teacher/ui/group_students_screen/ui/show_all_students_screen.dart';
 import 'package:student/theming/colors.dart';
 
+// ignore: must_be_immutable
 class StudentNavigator extends StatefulWidget {
   late int currentIndex;
+  final String studentId = FirebaseAuth.instance.currentUser!.uid;
 
   StudentNavigator({
     Key? key,
@@ -33,11 +37,14 @@ class _StudentNavigatorState extends State<StudentNavigator> {
     return Scaffold(
       body: PageView(
         controller: _pageController,
-        children: const [
-          JoinCourseScreen(),
-          StudentGroupsScreen(),
-          ProfileScreen(),
-          SettingsScreen(),
+        children: [
+          const JoinCourseScreen(),
+          const StudentGroupsScreen(),
+          StudentScheduleScreen(studentId: widget.studentId),
+          // ProfileScreen(),
+          // SettingsScreen(),
+          AllStudentsScreen()
+          // CreateGroupScreen(),
         ],
         onPageChanged: (index) {
           widget.currentIndex = index;

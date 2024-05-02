@@ -83,8 +83,9 @@ class StudentGroupComponent extends StatelessWidget {
                           btnOk: TextButton(
                             onPressed: () async {
                               context.pop();
+
                               await FireStoreFunctions.unrollGroup(
-                                  studentId, group.groupCode);
+                                  studentId, group.groupId);
                             },
                             child: const Text('نعم'),
                           ),

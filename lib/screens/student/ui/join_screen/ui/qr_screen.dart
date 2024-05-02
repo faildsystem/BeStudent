@@ -48,8 +48,13 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
       controller.pauseCamera();
 
       if (AppRegex.isCodeValid(scannedCode)) {
+        final groupId = await FireStoreFunctions.getDocId(
+            collection: 'group', field: 'groupCode', value: scannedCode);
         joinState = await FireStoreFunctions.groupJoinRequest(
-            userId: userId, code: scannedCode);
+          userId: userId,
+          code: scannedCode,
+          groupId: groupId,
+        );
 
         switch (joinState) {
           case 1:
