@@ -289,27 +289,27 @@ class FireStoreFunctions {
     }
   }
 
-  static Future<List<Student>> fetchGroupStudents(String groupId) async {
-    final List<Student> students = [];
-    final enrollmentQuerySnapshot = await FirebaseFirestore.instance
-        .collection('enrollment')
-        .where('groupId', isEqualTo: groupId)
-        .get();
-    for (final enrollmentDoc in enrollmentQuerySnapshot.docs) {
-      final studentId = enrollmentDoc['studentId'];
-      final studentDocumentSnapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .where('id', isEqualTo: studentId)
-          .get();
-      final studentDocumentData = studentDocumentSnapshot.docs.first.data();
-      students.add(
-        Student(
-          firstName: studentDocumentData['firstName'],
-          lastName: studentDocumentData['lastName'],
-          email: studentDocumentData['email'],
-        ),
-      );
-    }
-    return students;
-  }
+  // static Future<List<Student>> fetchGroupStudents(String groupId) async {
+  //   final List<Student> students = [];
+  //   final enrollmentQuerySnapshot = await FirebaseFirestore.instance
+  //       .collection('enrollment')
+  //       .where('groupId', isEqualTo: groupId)
+  //       .get();
+  //   for (final enrollmentDoc in enrollmentQuerySnapshot.docs) {
+  //     final studentId = enrollmentDoc['studentId'];
+  //     final studentDocumentSnapshot = await FirebaseFirestore.instance
+  //         .collection('users')
+  //         .where('id', isEqualTo: studentId)
+  //         .get();
+  //     final studentDocumentData = studentDocumentSnapshot.docs.first.data();
+  //     students.add(
+  //       Student(
+  //         firstName: studentDocumentData['firstName'],
+  //         lastName: studentDocumentData['lastName'],
+  //         email: studentDocumentData['email'],
+  //       ),
+  //     );
+  //   }
+  //   return students;
+  // }
 }

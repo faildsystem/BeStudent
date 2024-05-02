@@ -9,6 +9,8 @@ import 'package:student/screens/student/ui/groups_screen/ui/student_groups_scree
 import 'package:student/screens/teacher/ui/group_students_screen/ui/show_all_students_screen.dart';
 import 'package:student/theming/colors.dart';
 
+import '../../settings/ui/settings_screen.dart';
+
 // ignore: must_be_immutable
 class StudentNavigator extends StatefulWidget {
   late int currentIndex;
@@ -42,8 +44,8 @@ class _StudentNavigatorState extends State<StudentNavigator> {
           const StudentGroupsScreen(),
           StudentScheduleScreen(studentId: widget.studentId),
           // ProfileScreen(),
-          // SettingsScreen(),
-          AllStudentsScreen()
+          const SettingsScreen(),
+          // AllStudentsScreen()
           // CreateGroupScreen(),
         ],
         onPageChanged: (index) {

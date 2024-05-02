@@ -22,8 +22,8 @@ Future<DataSource> getAllAppointments(String studentId) async {
         subject: group.subjectName,
         color: Colors.red,
         recurrenceRule:
-            // 'FREQ=WEEKLY;BYDAY=${group.groupDay};UNTIL=20240520T183000Z;',
-            'FREQ=WEEKLY;BYDAY=${group.groupDay};',
+            'FREQ=WEEKLY;BYDAY=${group.groupDay};UNTIL=20240520T183000Z;',
+        // 'FREQ=WEEKLY;BYDAY=${group.groupDay};',
       ),
     );
   }
