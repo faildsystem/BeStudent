@@ -1,78 +1,74 @@
-// import 'dart:developer';
+import 'dart:developer';
 
-// import 'package:flutter/material.dart';
-// import 'package:student/core/widgets/firestore_functions.dart';
-// import 'package:syncfusion_flutter_datagrid/datagrid.dart';
+import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:pluto_grid/pluto_grid.dart';
+import 'package:student/core/widgets/app_bar.dart';
+import 'package:student/theming/colors.dart';
 
-// import '../../../../../core/widgets/app_bar.dart';
-// import '../widget/teacher.dart';
+import '../../../../../core/widgets/classes/group.dart';
+import '../widget/get_all_students.dart';
 
-// // ignore: must_be_immutable
-// class AllStudentsScreen extends StatefulWidget {
-//   AllStudentsScreen({super.key});
-//   late StudentDataSource _studentDataSource;
-//   final DataGridController _dataGridController = DataGridController();
+class AllStudentsScreen extends StatefulWidget {
+  const AllStudentsScreen({super.key, required this.group});
+  final Group group;
+  @override
+  State<AllStudentsScreen> createState() => _AllStudentsScreenState();
+}
 
-//   @override
-//   State<AllStudentsScreen> createState() => _AllStudentsScreenState();
-// }
+class _AllStudentsScreenState extends State<AllStudentsScreen> {
+  @override
+  Widget build(BuildContext context) {
+    late final PlutoGridStateManager stateManager;
 
-// class _AllStudentsScreenState extends State<AllStudentsScreen> {
-//   @override
-//   void initState() {
-//     super.initState();
-//     widget._studentDataSource = StudentDataSource(students: widget._students);
-//   }
+    return SafeArea(
+      child: Scaffold(
+        appBar: MyAppBar(
+          title: '${widget.group.groupName} عرض جميع طلاب مجموعة',
+          isTeacher: true,
+        ),
+        body: FutureBuilder(
+          future: getStudentsRows(widget.group.groupId),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: LoadingAnimationWidget.bouncingBall(
+                  color: ColorsManager.mainBlue(context),
+                  size: 90,
+                ),
+              );
+            }
+            if (snapshot.hasError) {
+              return const Center(
+                child: Text('! حدث خطأ ما'),
+              );
+            }
+            if (snapshot.data == null || snapshot.data!.isEmpty) {
+              return const Center(
+                child: Text('! لا توجد بيانات لعرضها حالياً'),
+              );
+            }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return SafeArea(
-//       child: Scaffold(
-//         appBar: MyAppBar(title: 'الطلاب'),
-//         body: FutureBuilder(
-//           future: FireStoreFunctions.fetchGroupStudents('1'),
-//           builder: (BuildContext context, AsyncSnapshot snapshot) {
-//             if (snapshot.connectionState == ConnectionState.waiting) {
-//               return const Center(
-//                 child: CircularProgressIndicator(),
-//               );
-//             }
-//             if (snapshot.hasError) {
-//               return const Center(
-//                 child: Text('حدث خطأ ما'),
-//               );
-//             }
-//             if (snapshot.data == null) {
-//               return const Center(
-//                 child: Text('لا توجد مواعيد'),
-//               );
-//             }
-
-//             return StudentSchedule(appointments: snapshot.data);
-//           },
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-
-
-// // floatingActionButton: FloatingActionButton(
-// //           onPressed: () {
-// //             //Index of the checked item
-// //             int selectedIndex = widget._dataGridController.selectedIndex;
-
-// //             //CheckedRow
-// //             DataGridRow? selectedRow = widget._dataGridController.selectedRow;
-
-// //             //Collection of checkedRows
-// //             List<DataGridRow> selectedRows =
-// //                 widget._dataGridController.selectedRows;
-
-// //             log(selectedIndex.toString());
-// //             log(selectedRow.toString());
-// //             log(selectedRows.toString());
-// //           },
-// //           child: const Icon(Icons.check),
-// //         ),
+            final rows = snapshot.data as List<PlutoRow>;
+            return Directionality(
+              textDirection: TextDirection.rtl,
+              child: PlutoGrid(
+                  columns: columns,
+                  rows: rows,
+                  onChanged: (PlutoGridOnChangedEvent event) {
+                    log('${event}        changed');
+                  },
+                  onLoaded: (PlutoGridOnLoadedEvent event) {
+                    stateManager = event.stateManager;
+                    stateManager.setShowColumnFilter(true);
+                  },
+                  configuration: Theme.of(context).brightness == Brightness.dark
+                      ? const PlutoGridConfiguration.dark()
+                      : const PlutoGridConfiguration()),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}

@@ -417,9 +417,9 @@
     },
     {
       "name": "intl",
-      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/intl-0.18.1",
+      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/intl-0.19.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.0"
     },
     {
       "name": "js",
@@ -560,6 +560,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "pluto_grid",
+      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/pluto_grid-8.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "provider",
       "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/provider-6.1.2",
       "packageUri": "lib/",
@@ -594,6 +600,12 @@
       "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/rive_common-0.2.8",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "rxdart",
+      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/rxdart-0.27.7",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "shared_preferences",
@@ -686,12 +698,6 @@
       "languageVersion": "2.17"
     },
     {
-      "name": "syncfusion_flutter_datagrid",
-      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_datagrid-25.1.41",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
       "name": "syncfusion_flutter_datepicker",
       "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_datepicker-25.1.41",
       "packageUri": "lib/",
@@ -770,8 +776,7 @@
       "languageVersion": "3.2"
     }
   ],
-
-  "generated": "2024-04-25T21:00:50.700847Z",
+  "generated": "2024-05-02T22:14:34.438153Z",
   "generator": "pub",
   "generatorVersion": "3.2.6"
 
