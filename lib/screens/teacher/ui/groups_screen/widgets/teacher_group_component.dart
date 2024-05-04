@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,25 +21,30 @@ class TeacherGroupComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
-      child: Container(
-        decoration: BoxDecoration(
-          color: ColorsManager.secondaryBlue(context),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        margin: EdgeInsets.symmetric(horizontal: 5.h),
-        padding: EdgeInsets.all(10.h),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  group.groupName,
-                  style: TextStyles.font18DarkBlue700Weight,
-                ),
-                Row(
-                  children: [
-                    IconButton(
+      child: GestureDetector(
+        child: Container(
+          decoration: BoxDecoration(
+            color: ColorsManager.secondaryBlue(context),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          margin: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
+          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    group.groupName,
+                    style: TextStyles.font18DarkBlue700Weight,
+                  ),
+                  Row(
+                    children: [
+                      IconButton(
+                        icon: const Icon(
+                          Icons.share,
+                          // color: ColorsManager.white(context),
+                        ),
                         onPressed: () {
                           showDialog(
                             context: context,
@@ -46,52 +53,59 @@ class TeacherGroupComponent extends StatelessWidget {
                             },
                           );
                         },
-                        icon: Icon(
-                          Icons.share,
-                          color: ColorsManager.white(context),
-                        )),
-                    IconButton(
-                      onPressed: () {
-                        AwesomeDialog(
-                          context: context,
-                          dialogType: DialogType.question,
-                          animType: AnimType.bottomSlide,
-                          btnOk: TextButton(
-                            onPressed: () async {
-                              context.pop();
-                              // await FireStoreFunctions.unrollGroup(
-                              //     studentId, group.groupCode);
-                            },
-                            child: const Text('نعم'),
-                          ),
-                          btnCancel: TextButton(
-                            onPressed: () async {
-                              context.pop();
-                            },
-                            child: const Text(
-                              'لا',
-                              style: TextStyle(color: ColorsManager.coralRed),
-                            ),
-                          ),
-                          title: 'تأكيد',
-                          desc: 'هل تريد حذف هذه المجموعة؟',
-                        ).show();
-                      },
-                      icon: Icon(
-                        Icons.delete_forever,
-                        color: ColorsManager.white(context),
                       ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            Gap(8.h),
-            InfoRow(
-                attribute: 'الميعاد',
-                value: '${group.groupDay} الساعة  ${group.groupTime}'),
-          ],
+                      IconButton(
+                        icon: const Icon(
+                          Icons.delete_forever,
+                          // color: ColorsManager.white(context),
+                        ),
+                        onPressed: () {
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.question,
+                            animType: AnimType.bottomSlide,
+                            btnOk: TextButton(
+                              onPressed: () async {
+                                context.pop();
+                                // await FireStoreFunctions.unrollGroup(
+                                //     studentId, group.groupCode);
+                              },
+                              child: const Text('نعم'),
+                            ),
+                            btnCancel: TextButton(
+                              onPressed: () async {
+                                context.pop();
+                              },
+                              child: const Text(
+                                'لا',
+                                style: TextStyle(color: ColorsManager.coralRed),
+                              ),
+                            ),
+                            title: 'تأكيد',
+                            desc: 'هل تريد حذف هذه المجموعة؟',
+                          ).show();
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Gap(8.h),
+              InfoRow(
+                  attribute: 'الميعاد',
+                  value: '${group.groupDay} الساعة  ${group.groupTime}'),
+            ],
+          ),
         ),
+        onTap: () {
+          // Navigator.of(context).pushReplacementNamed(
+          //   Routes.allStudentsScreen,
+          //   arguments: AllStudentsScreen(
+          //     group: group,
+          //   ),
+          // );
+          log('group tapped');
+        },
       ),
     );
   }

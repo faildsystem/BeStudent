@@ -43,10 +43,7 @@ class _StudentNavigatorState extends State<StudentNavigator> {
           const JoinCourseScreen(),
           const StudentGroupsScreen(),
           StudentScheduleScreen(studentId: widget.studentId),
-          // ProfileScreen(),
           const SettingsScreen(),
-          // AllStudentsScreen()
-          // CreateGroupScreen(),
         ],
         onPageChanged: (index) {
           widget.currentIndex = index;

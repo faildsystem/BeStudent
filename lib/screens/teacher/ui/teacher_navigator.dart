@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:student/screens/profile/ui/profile_screen.dart';
+import 'package:student/screens/profile/widgets/avatar_name_email.dart';
 import 'package:student/screens/settings/ui/settings_screen.dart';
+import 'package:student/screens/teacher/ui/group_students_screen/ui/show_all_students_screen.dart';
 import 'package:student/screens/teacher/ui/groups_screen/ui/teacher_groups_screen.dart';
 import 'package:student/screens/teacher/ui/home_screen/ui/teacher_home_screen.dart';
 import 'package:student/theming/colors.dart';
@@ -36,7 +38,7 @@ class _TeacherNavigatorState extends State<TeacherNavigator> {
         children: const [
           TeacherHomeScreen(),
           TeacherGroupsScreen(),
-          ProfileScreen(),
+          ProfileAvatar(),
           SettingsScreen(),
         ],
         onPageChanged: (index) {
