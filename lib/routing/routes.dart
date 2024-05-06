@@ -19,6 +19,7 @@ class Routes {
   static const String teacherScreen = "/teacherScreen";
   static const String createGroupScreen = "/createGroupScreen";
   static const String teacherGroupsScreen = "/teacherGroupsScreen";
+  static const String notificationsScreen = "/notificationsScreen";
 
 
 }

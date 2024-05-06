@@ -1,10 +1,8 @@
 import 'dart:developer';
-import 'dart:ffi';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:student/core/widgets/classes/group.dart';
 import 'package:student/core/widgets/classes/user.dart';
 import 'package:student/helpers/app_regex.dart';
-import 'package:student/screens/teacher/ui/group_students_screen/widget/teacher.dart';
 
 class FireStoreFunctions {
   static Future<void> addUser(
