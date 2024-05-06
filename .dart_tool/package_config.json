@@ -105,7 +105,7 @@
     },
     {
       "name": "dart_ipify",
-      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/dart_ipify-1.1.1",
+      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/dart_ipify-1.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -285,7 +285,7 @@
     },
     {
       "name": "flutter_svg",
-      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_svg-2.0.10+1",
+      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_svg-2.0.10+1",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
@@ -363,7 +363,7 @@
     },
     {
       "name": "http",
-      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.2.0",
+      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.2.0",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -423,7 +423,7 @@
     },
     {
       "name": "intl",
-      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/intl-0.19.0",
+      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/intl-0.19.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -561,13 +561,13 @@
     },
     {
       "name": "pluto_grid",
-      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/pluto_grid-8.0.0",
+      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/pluto_grid-8.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "pretty_qr_code",
-      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/pretty_qr_code-3.3.0",
+      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/pretty_qr_code-3.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -609,7 +609,7 @@
     },
     {
       "name": "rxdart",
-      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/rxdart-0.27.7",
+      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/rxdart-0.27.7",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -699,7 +699,7 @@
     },
     {
       "name": "syncfusion_flutter_core",
-      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_core-25.1.41",
+      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_core-25.1.41",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -741,19 +741,19 @@
     },
     {
       "name": "vector_graphics",
-      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics-1.1.11+1",
+      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics-1.1.11+1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "vector_graphics_codec",
-      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_codec-1.1.11+1",
+      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_codec-1.1.11+1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "vector_graphics_compiler",
-      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_compiler-1.1.11+1",
+      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_compiler-1.1.11+1",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
@@ -800,7 +800,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-05-06T20:19:33.701836Z",
+  "generated": "2024-05-06T12:28:28.864151Z",
   "generator": "pub",
-  "generatorVersion": "3.3.4"
+  "generatorVersion": "3.3.3"
 }
