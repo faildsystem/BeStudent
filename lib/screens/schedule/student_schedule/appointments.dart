@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:student/core/widgets/firestore_functions.dart';
+import 'package:student/theming/colors.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class DataSource extends CalendarDataSource {
@@ -20,7 +20,7 @@ Future<DataSource> getAllAppointments(String studentId) async {
         endTime:
             group.creationDate.toDate().add(Duration(hours: group.duration)),
         subject: group.subjectName,
-        color: Colors.red,
+        color: ColorsManager.coralRed,
         recurrenceRule:
             'FREQ=WEEKLY;BYDAY=${group.groupDay};UNTIL=20240520T183000Z;',
         // 'FREQ=WEEKLY;BYDAY=${group.groupDay};',
