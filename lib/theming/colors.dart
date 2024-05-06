@@ -68,9 +68,9 @@ class ColorsManager {
   }
 
   static const Color coralRed = Color(0xFFFF4C5E);
+  static const Color mainBlueColor = Color(0xFF247CFF);
 }
 
-  // static const Color mainBlue = Color(0xFF247CFF);
   // static const Color secondaryBlue = Color(0xFF6789CA);
   // static const Color gray = Color(0xFF757575);
   // static const Color gray93Color = Color(0xFFEDEDED);

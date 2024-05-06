@@ -104,6 +104,12 @@
       "languageVersion": "2.19"
     },
     {
+      "name": "dart_ipify",
+      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/dart_ipify-1.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "dbus",
       "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/dbus-0.7.10",
       "packageUri": "lib/",
@@ -279,9 +285,9 @@
     },
     {
       "name": "flutter_svg",
-      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_svg-1.1.6",
+      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_svg-2.0.10+1",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.19"
     },
     {
       "name": "flutter_test",
@@ -357,9 +363,9 @@
     },
     {
       "name": "http",
-      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/http-0.13.6",
+      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.2.0",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.2"
     },
     {
       "name": "http_parser",
@@ -512,12 +518,6 @@
       "languageVersion": "3.0"
     },
     {
-      "name": "path_drawing",
-      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/path_drawing-1.0.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "path_parsing",
       "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/path_parsing-1.0.1",
       "packageUri": "lib/",
@@ -562,6 +562,12 @@
     {
       "name": "pluto_grid",
       "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/pluto_grid-8.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "pretty_qr_code",
+      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/pretty_qr_code-3.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -734,6 +740,24 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "vector_graphics",
+      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics-1.1.11+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "vector_graphics_codec",
+      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_codec-1.1.11+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "vector_graphics_compiler",
+      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_compiler-1.1.11+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
       "name": "vector_math",
       "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/vector_math-2.1.4",
       "packageUri": "lib/",
@@ -776,7 +800,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-05-04T20:56:02.719387Z",
+  "generated": "2024-05-06T12:28:28.864151Z",
   "generator": "pub",
   "generatorVersion": "3.3.3"
 }

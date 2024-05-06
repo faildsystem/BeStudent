@@ -6,12 +6,14 @@ import 'package:pluto_grid/pluto_grid.dart';
 import 'package:student/core/widgets/app_bar.dart';
 import 'package:student/theming/colors.dart';
 
-import '../../../../../core/widgets/classes/group.dart';
 import '../widget/get_all_students.dart';
 
 class AllStudentsScreen extends StatefulWidget {
-  const AllStudentsScreen({super.key, required this.group});
-  final Group group;
+  const AllStudentsScreen(
+      {super.key, required this.groupId, required this.groupName});
+  final String groupId;
+  final String groupName;
+
   @override
   State<AllStudentsScreen> createState() => _AllStudentsScreenState();
 }
@@ -24,11 +26,11 @@ class _AllStudentsScreenState extends State<AllStudentsScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: MyAppBar(
-          title: '${widget.group.groupName} عرض جميع طلاب مجموعة',
+          title: '${widget.groupName} عرض جميع طلاب مجموعة',
           isTeacher: true,
         ),
         body: FutureBuilder(
-          future: getStudentsRows(widget.group.groupId),
+          future: getStudentsRows(widget.groupId),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
@@ -59,8 +61,8 @@ class _AllStudentsScreenState extends State<AllStudentsScreen> {
                     log('${event}        changed');
                   },
                   onLoaded: (PlutoGridOnLoadedEvent event) {
-                    stateManager = event.stateManager;
-                    stateManager.setShowColumnFilter(true);
+                    // stateManager = event.stateManager;
+                    // stateManager.setShowColumnFilter(true);
                   },
                   configuration: Theme.of(context).brightness == Brightness.dark
                       ? const PlutoGridConfiguration.dark()

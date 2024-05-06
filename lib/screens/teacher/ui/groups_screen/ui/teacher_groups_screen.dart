@@ -68,7 +68,6 @@ class _TeacherGroupsScreenState extends State<TeacherGroupsScreen> {
                         return TeacherGroupComponent(
                           teacherId: teacherId,
                           group: group,
-                          // ),
                         );
                       },
                     ),

@@ -11,6 +11,9 @@ import 'package:student/screens/student/ui/groups_screen/widgets/qr_code_dialog.
 import 'package:student/theming/colors.dart';
 import 'package:student/theming/styles.dart';
 
+import '../../../../../routing/routes.dart';
+import '../../group_students_screen/ui/show_all_students_screen.dart';
+
 class TeacherGroupComponent extends StatelessWidget {
   const TeacherGroupComponent(
       {super.key, required this.group, required this.teacherId});
@@ -46,12 +49,12 @@ class TeacherGroupComponent extends StatelessWidget {
                           // color: ColorsManager.white(context),
                         ),
                         onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return QrDialog(group: group);
-                            },
-                          );
+                          // showDialog(
+                          //   context: context,
+                          //   builder: (context) {
+                          //     return QrDialog(group: group);
+                          //   },
+                          // );
                         },
                       ),
                       IconButton(
@@ -98,12 +101,10 @@ class TeacherGroupComponent extends StatelessWidget {
           ),
         ),
         onTap: () {
-          // Navigator.of(context).pushReplacementNamed(
-          //   Routes.allStudentsScreen,
-          //   arguments: AllStudentsScreen(
-          //     group: group,
-          //   ),
-          // );
+          context.pushNamed(
+            Routes.allStudentsScreen,
+            arguments: [group.groupId, group.groupName],
+          );
           log('group tapped');
         },
       ),
