@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:student/core/widgets/app_bar.dart';
-import 'package:student/main.dart';
 import 'package:student/screens/teacher/ui/notification_screen/widgets/custom1.dart';
 import 'package:student/theming/colors.dart';
 import 'package:student/theming/styles.dart';
 
-class NotificationsScreen extends StatelessWidget {
-  NotificationsScreen({Key? key}) : super(key: key);
+class TeacherNotificationsScreen extends StatelessWidget {
+  TeacherNotificationsScreen({Key? key}) : super(key: key);
   final List requests = ["liked", "follow"];
   final List todayItem = ["follow", "liked", "liked"];
 

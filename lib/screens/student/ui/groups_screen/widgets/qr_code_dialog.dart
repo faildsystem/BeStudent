@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 import 'package:student/helpers/extensions.dart';
 import 'package:student/core/widgets/classes/group.dart';
+import 'package:student/core/widgets/qr_code.dart';
 import 'package:student/theming/colors.dart';
 import 'package:student/theming/styles.dart';
 
 class QrDialog extends StatelessWidget {
   final Group group;
-  const QrDialog({super.key, required this.group});
+  final String studentId;
+  const QrDialog({super.key, required this.group, required this.studentId});
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +21,11 @@ class QrDialog extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            QrImageView(
-              data: group.groupCode,
-              version: QrVersions.auto,
-              size: 200.0,
+            QrCodeWidget(
+              data:
+                  '${studentId},${group.groupId},${DateTime.now().toString()}',
+              width: 150,
+              height: 150,
             ),
             Gap(15.h),
             TextButton(

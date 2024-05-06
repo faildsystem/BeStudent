@@ -56,7 +56,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                   tooltip: 'Notifications',
                   onPressed: () {
                     context.pushNamed(
-                      Routes.notificationsScreen,
+                      Routes.teacherNotificationsScreen,
                     );
                   },
                 ),
@@ -101,7 +101,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                     tooltip: 'Notifications',
                     onPressed: () {
                       context.pushNamed(
-                        Routes.notificationsScreen,
+                        Routes.teacherNotificationsScreen,
                       );
                     },
                   ),

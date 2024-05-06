@@ -104,6 +104,12 @@
       "languageVersion": "2.19"
     },
     {
+      "name": "dart_ipify",
+      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/dart_ipify-1.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "dbus",
       "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/dbus-0.7.10",
       "packageUri": "lib/",
@@ -279,9 +285,9 @@
     },
     {
       "name": "flutter_svg",
-      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_svg-1.1.6",
+      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_svg-2.0.10+1",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.19"
     },
     {
       "name": "flutter_test",
@@ -357,9 +363,9 @@
     },
     {
       "name": "http",
-      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/http-0.13.6",
+      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.2.0",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.2"
     },
     {
       "name": "http_parser",
@@ -417,9 +423,9 @@
     },
     {
       "name": "intl",
-      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/intl-0.18.1",
+      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/intl-0.19.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.0"
     },
     {
       "name": "js",
@@ -512,12 +518,6 @@
       "languageVersion": "3.0"
     },
     {
-      "name": "path_drawing",
-      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/path_drawing-1.0.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "path_parsing",
       "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/path_parsing-1.0.1",
       "packageUri": "lib/",
@@ -560,6 +560,18 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "pluto_grid",
+      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/pluto_grid-8.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "pretty_qr_code",
+      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/pretty_qr_code-3.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "provider",
       "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/provider-6.1.2",
       "packageUri": "lib/",
@@ -594,6 +606,12 @@
       "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/rive_common-0.2.8",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "rxdart",
+      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/rxdart-0.27.7",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "shared_preferences",
@@ -686,12 +704,6 @@
       "languageVersion": "2.17"
     },
     {
-      "name": "syncfusion_flutter_datagrid",
-      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_datagrid-25.1.41",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
       "name": "syncfusion_flutter_datepicker",
       "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_datepicker-25.1.41",
       "packageUri": "lib/",
@@ -726,6 +738,24 @@
       "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/universal_io-2.2.2",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "vector_graphics",
+      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics-1.1.11+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "vector_graphics_codec",
+      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_codec-1.1.11+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "vector_graphics_compiler",
+      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_compiler-1.1.11+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
     },
     {
       "name": "vector_math",
@@ -770,7 +800,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-05-02T12:32:47.063019Z",
+  "generated": "2024-05-06T20:19:33.701836Z",
   "generator": "pub",
   "generatorVersion": "3.3.4"
 }

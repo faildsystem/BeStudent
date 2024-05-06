@@ -4,6 +4,8 @@ import 'package:student/core/widgets/classes/group.dart';
 import 'package:student/core/widgets/classes/user.dart';
 import 'package:student/helpers/app_regex.dart';
 
+import 'classes/student.dart';
+
 class FireStoreFunctions {
   static Future<void> addUser(
       bool isTeacher,
@@ -241,7 +243,7 @@ class FireStoreFunctions {
         .get();
     for (final groupDoc in querySnapshot.docs) {
       final subjectName = groupDoc['subjectName'];
-      final groupId = groupDoc['groupId'];
+      final groupId = groupDoc.id;
       final groupCode = groupDoc['groupCode'];
       final String groupName = groupDoc['groupName'];
       final String groupDay = groupDoc['day'];
@@ -287,27 +289,27 @@ class FireStoreFunctions {
     }
   }
 
-  // static Future<List<Student>> fetchGroupStudents(String groupId) async {
-  //   final List<Student> students = [];
-  //   final enrollmentQuerySnapshot = await FirebaseFirestore.instance
-  //       .collection('enrollment')
-  //       .where('groupId', isEqualTo: groupId)
-  //       .get();
-  //   for (final enrollmentDoc in enrollmentQuerySnapshot.docs) {
-  //     final studentId = enrollmentDoc['studentId'];
-  //     final studentDocumentSnapshot = await FirebaseFirestore.instance
-  //         .collection('users')
-  //         .where('id', isEqualTo: studentId)
-  //         .get();
-  //     final studentDocumentData = studentDocumentSnapshot.docs.first.data();
-  //     students.add(
-  //       Student(
-  //         firstName: studentDocumentData['firstName'],
-  //         lastName: studentDocumentData['lastName'],
-  //         email: studentDocumentData['email'],
-  //       ),
-  //     );
-  //   }
-  //   return students;
-  // }
+  static Future<List<Student>> fetchGroupStudents(String groupId) async {
+    final List<Student> students = [];
+    final enrollmentQuerySnapshot = await FirebaseFirestore.instance
+        .collection('enrollment')
+        .where('groupId', isEqualTo: groupId)
+        .get();
+    for (final enrollmentDoc in enrollmentQuerySnapshot.docs) {
+      final studentId = enrollmentDoc['studentId'];
+      final studentDocumentSnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('id', isEqualTo: studentId)
+          .get();
+      final studentDocumentData = studentDocumentSnapshot.docs.first.data();
+      students.add(
+        Student(
+          firstName: studentDocumentData['firstName'],
+          lastName: studentDocumentData['lastName'],
+          email: studentDocumentData['email'],
+        ),
+      );
+    }
+    return students;
+  }
 }

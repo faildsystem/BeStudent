@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:student/core/widgets/classes/group.dart';
 import 'package:student/screens/profile/ui/profile_screen.dart';
+import 'package:student/screens/student/ui/groups_screen/ui/qr_code_screen.dart';
 import 'package:student/screens/student/ui/join_screen/ui/join_group_screen.dart';
 import 'package:student/screens/student/ui/join_screen/ui/qr_screen.dart';
 import 'package:student/screens/student/ui/groups_screen/ui/student_groups_screen.dart';
@@ -16,9 +19,18 @@ import '../screens/create_password/ui/create_password.dart';
 import '../screens/forget/ui/forget_screen.dart';
 import '../screens/login/ui/login_screen.dart';
 import '../screens/signup/ui/sign_up_sceen.dart';
+import '../screens/teacher/ui/group_students_screen/ui/show_all_students_screen.dart';
 import 'routes.dart';
 
 class AppRouter {
+  // Route<dynamic>? onGenerateRoute(RouteSettings settings) {
+  //   if (settings.name == Routes.forgetScreen) {
+  //     return MaterialPageRoute(
+  //       builder: (_) => const ForgetScreen(),
+  //     );
+  //   }
+  // }
+
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.forgetScreen:
@@ -89,6 +101,11 @@ class AppRouter {
           builder: (_) => const QRScannerScreen(),
         );
 
+      case Routes.studentQrCodeScreen:
+        return MaterialPageRoute(
+          builder: (_) => QrCodeScreen(),
+        );
+
       case Routes.teacherScreen:
         final int? index = settings.arguments as int?;
         return MaterialPageRoute(
@@ -107,9 +124,16 @@ class AppRouter {
           builder: (_) => const TeacherGroupsScreen(),
         );
 
-      case Routes.notificationsScreen:
+      case Routes.teacherNotificationsScreen:
         return MaterialPageRoute(
-          builder: (_) => NotificationsScreen(),
+          builder: (_) => TeacherNotificationsScreen(),
+        );
+      case Routes.allStudentsScreen:
+        final List<String> group = settings.arguments as List<String>;
+
+        return MaterialPageRoute(
+          builder: (_) =>
+              AllStudentsScreen(groupId: group[0], groupName: group[1]),
         );
     }
     return null;
