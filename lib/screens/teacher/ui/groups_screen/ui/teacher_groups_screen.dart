@@ -70,9 +70,6 @@ class _TeacherGroupsScreenState extends State<TeacherGroupsScreen> {
                           group: group,
                         );
                       },
-
-                      // kjkdjlkafjlksjl
-                      // fdjajldfkjalkjdfla
                     ),
         ),
       ),

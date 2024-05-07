@@ -70,7 +70,7 @@ class StudentGroupComponent extends StatelessWidget {
                                 context: context,
                                 builder: (context) {
                                   return QrDialog(
-                                      group: group, studentId: studentId);
+                                      group: group);
                                 },
                               );
                             },

@@ -28,9 +28,8 @@ class JoinButton extends StatelessWidget {
               field: 'groupCode',
               value: codeController.text);
           if (AppRegex.isCodeValid(codeController.text)) {
-            final int join = await FireStoreFunctions.groupJoinRequest(
+            final int join = await FireStoreFunctions.sendJoinRequest(
               userId: userId,
-              code: codeController.text,
               groupId: groupId,
             );
             if (join == 1) {
@@ -40,7 +39,7 @@ class JoinButton extends StatelessWidget {
                   type: DialogType.success,
                   title: 'تم الانضمام بنجاح',
                   message:
-                      'تم الانضمام بنجاح للمجموعة، يمكنك الان الانتقال لصفحة المواد.',
+                      'تم ارسال طلب الانضمام بنجاح، سيتم اعلامك بقبول الطلب من قبل المعلم.',
                   argument: 1);
             } else if (join == 0) {
               // ignore: use_build_context_synchronously

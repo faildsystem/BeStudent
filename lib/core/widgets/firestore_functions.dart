@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:student/core/widgets/classes/group.dart';
+import 'package:student/core/widgets/classes/requests.dart';
 import 'package:student/core/widgets/classes/user.dart';
 import 'package:student/helpers/app_regex.dart';
 
@@ -86,43 +87,161 @@ class FireStoreFunctions {
       return null;
     }
   }
-
-  static Future<int> groupJoinRequest({
+  
+  static Future<void> enrollStudent({
     required String userId,
     required String code,
-    required String? groupId,
+    required String groupId,
   }) async {
     try {
-      if (groupId == null) {
-        log("Group $code not found.");
-        return -1;
-      }
-
-      // Check if a document with the same code and student_id exists
-      final querySnapshot = await FirebaseFirestore.instance
-          .collection('enrollment')
-          .where('groupId', isEqualTo: groupId)
-          .where('studentId', isEqualTo: userId)
-          .get();
-
-      // check if student already enrolled in this group
-      if (querySnapshot.docs.isNotEmpty) {
-        log("Document with code $code and student ID $userId already exists.");
-        return 0;
-      }
-
       await FirebaseFirestore.instance.collection('enrollment').add({
         'groupId': groupId,
         'groupCode': code,
         'studentId': userId,
         'joinedDate': Timestamp.now(),
       });
-      log("Added Data with ID: $code");
+      log("Student enrolled in group $groupId");
+
+    } catch (error) {
+      log("Failed to enroll student: $error");
+    }
+  }
+
+  static Future<void> deleteRequestStatus(String requestId) async {
+    try {
+      await FirebaseFirestore.instance.collection('requests').doc(requestId).delete();
+      log("Request deleted");
+    } catch (error) {
+      log("Failed to delete request: $error");
+    }
+  }
+
+  static Future<int> sendJoinRequest({
+    required String userId,
+    required String? groupId,
+  }) async {
+    try {
+      if (groupId == null) {
+        log("Group $groupId not found.");
+        return -1;
+      }
+
+      // check if student already enrolled in this group
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection('enrollment')
+          .where('groupId', isEqualTo: groupId)
+          .where('studentId', isEqualTo: userId)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        log("Document with code $groupId and student ID $userId already exists.");
+        return 0;
+      }
+
+      // Check if a request with the same code and student_id exists
+      final requestQuerySnapshot = await FirebaseFirestore.instance
+          .collection('requests')
+          .where('groupId', isEqualTo: groupId)
+          .where('studentId', isEqualTo: userId)
+          .get();
+
+      // check if student already sent a request to join this group
+      if (requestQuerySnapshot.docs.isNotEmpty) {
+        log("Request with code $groupId and student ID $userId already exists.");
+        return 0;
+      } 
+
+      // get the teacher id
+      final groupDoc = await FirebaseFirestore.instance.collection('group').doc(groupId).get();
+      final teacherId = groupDoc['creatorId'];
+
+      await FirebaseFirestore.instance.collection('requests').add({
+        'studentId': userId,
+        'groupId': groupId,
+        'teacherId': teacherId,
+        'requestDate': Timestamp.now(),
+        'status': 'pending',
+      });
+      log('Request sent');
       return 1;
     } catch (error) {
       log("Failed to send group join request: $error");
       return -1;
     }
+  }
+  
+ static Future<List<Request>> fetchTeacherRequests(String teacherId) async {
+    final List<Request> requests = [];
+    final querySnapshot = await FirebaseFirestore.instance
+        .collection('requests')
+        .where('teacherId', isEqualTo: teacherId)
+        .where('status', isEqualTo: 'pending')
+        .get();
+
+    if (querySnapshot.docs.isEmpty) {
+      log("No requests found.");
+      return requests;
+    }
+
+    for (final requestDoc in querySnapshot.docs) {
+      final studentId = requestDoc['studentId'];
+      final groupId = requestDoc['groupId'];
+      final requestDate = requestDoc['requestDate'];
+      final status = requestDoc['status'];
+
+      final student = await fetchUser(studentId);
+      final group = await fetchGroup(groupId);
+
+      requests.add(
+        Request(
+          requestId: requestDoc.id,
+          student: student,
+          group: group,
+          date: requestDate,
+          status: status,
+        ),
+      );
+    }
+    return requests;
+  }
+
+  static Future<Group> fetchGroup(String groupId) async {
+    final groupDocumentSnapshot = await FirebaseFirestore.instance
+        .collection('group')
+        .doc(groupId)
+        .get();
+
+    final groupDocumentData = groupDocumentSnapshot.data();
+    final String groupCode = groupDocumentData!['groupCode'];
+    final String subjectName = groupDocumentData['subjectName'];
+    final String teacherId = groupDocumentData['creatorId'];
+    final String groupName = groupDocumentData['groupName'];
+    final String groupDay = groupDocumentData['day'];
+    final String groupTime = groupDocumentData['time'];
+    final Timestamp creationDate = groupDocumentData['creationDate'];
+    final int duration = groupDocumentData['duration'];
+
+    final teacherDocumentSnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .where('id', isEqualTo: teacherId)
+        .get();
+    final teacherDocumentData = teacherDocumentSnapshot.docs.first.data();
+    final String teacherName =
+        '${teacherDocumentData['firstName']} ${teacherDocumentData['lastName']}';
+    final String teacherImage = teacherDocumentData['imageUrl'];
+
+    return Group(
+      subjectName: subjectName,
+      groupId: groupId,
+      teacherName: teacherName,
+      teacherImage: teacherImage,
+      groupCode: groupCode,
+      groupName: groupName,
+      groupDay: groupDay,
+      groupTime: groupTime,
+      creationDate: creationDate,
+      duration: duration,
+    );
   }
 
   static Future<AppUser> fetchUser(String userId) async {
@@ -130,6 +249,7 @@ class FireStoreFunctions {
         .collection('users')
         .where('id', isEqualTo: userId)
         .get();
+
     final userDocumentData = userDocumentSnapshot.docs.first.data();
     return AppUser(
       id: userDocumentData['id'],

@@ -4,7 +4,7 @@ import 'package:student/core/widgets/classes/group.dart';
 import 'package:student/screens/profile/ui/profile_screen.dart';
 import 'package:student/screens/student/ui/groups_screen/ui/qr_code_screen.dart';
 import 'package:student/screens/student/ui/join_screen/ui/join_group_screen.dart';
-import 'package:student/screens/student/ui/join_screen/ui/qr_screen.dart';
+import 'package:student/screens/student/ui/join_screen/ui/qr_scanner_screen.dart';
 import 'package:student/screens/student/ui/groups_screen/ui/student_groups_screen.dart';
 import 'package:student/screens/student/ui/student_navigator.dart';
 import 'package:student/screens/onboarding/ui/onboarding_screen.dart';
@@ -129,11 +129,10 @@ class AppRouter {
           builder: (_) => TeacherNotificationsScreen(),
         );
       case Routes.allStudentsScreen:
-        final List<String> group = settings.arguments as List<String>;
-
+        final Group group = settings.arguments as Group;
         return MaterialPageRoute(
           builder: (_) =>
-              AllStudentsScreen(groupId: group[0], groupName: group[1]),
+              AllStudentsScreen(group: group),
         );
     }
     return null;

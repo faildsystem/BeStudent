@@ -12,7 +12,6 @@ import 'package:student/theming/colors.dart';
 import 'package:student/theming/styles.dart';
 
 import '../../../../../routing/routes.dart';
-import '../../group_students_screen/ui/show_all_students_screen.dart';
 
 class TeacherGroupComponent extends StatelessWidget {
   const TeacherGroupComponent(
@@ -44,17 +43,17 @@ class TeacherGroupComponent extends StatelessWidget {
                   Row(
                     children: [
                       IconButton(
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.share,
-                          // color: ColorsManager.white(context),
+                          color: ColorsManager.white(context),
                         ),
                         onPressed: () {
-                          // showDialog(
-                          //   context: context,
-                          //   builder: (context) {
-                          //     return QrDialog(group: group);
-                          //   },
-                          // );
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return QrDialog(group: group);
+                            },
+                          );
                         },
                       ),
                       IconButton(
@@ -103,7 +102,7 @@ class TeacherGroupComponent extends StatelessWidget {
         onTap: () {
           context.pushNamed(
             Routes.allStudentsScreen,
-            arguments: [group.groupId, group.groupName],
+            arguments: group,
           );
           log('group tapped');
         },

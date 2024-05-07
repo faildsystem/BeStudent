@@ -10,8 +10,7 @@ import 'package:student/theming/styles.dart';
 
 class QrDialog extends StatelessWidget {
   final Group group;
-  final String studentId;
-  const QrDialog({super.key, required this.group, required this.studentId});
+  const QrDialog({super.key, required this.group});
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +20,13 @@ class QrDialog extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Text(
+              'مجموعة ${group.groupName}',
+              style: TextStyles.font16Blue400Weight,
+            ),
             QrCodeWidget(
               data:
-                  '${studentId},${group.groupId},${DateTime.now().toString()}',
+                  group.groupCode,
               width: 150,
               height: 150,
             ),

@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 import 'package:student/core/widgets/app_bar.dart';
+import 'package:student/core/widgets/classes/group.dart';
 import 'package:student/theming/colors.dart';
 
 import '../widget/get_all_students.dart';
 
 class AllStudentsScreen extends StatefulWidget {
   const AllStudentsScreen(
-      {super.key, required this.groupId, required this.groupName});
-  final String groupId;
-  final String groupName;
+      {super.key,required this.group});
+  final Group group;
 
   @override
   State<AllStudentsScreen> createState() => _AllStudentsScreenState();
@@ -26,11 +26,11 @@ class _AllStudentsScreenState extends State<AllStudentsScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: MyAppBar(
-          title: '${widget.groupName} عرض جميع طلاب مجموعة',
+          title: 'طلاب مجموعة ${widget.group.groupName}',
           isTeacher: true,
         ),
         body: FutureBuilder(
-          future: getStudentsRows(widget.groupId),
+          future: getStudentsRows(widget.group.groupId),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
@@ -58,7 +58,7 @@ class _AllStudentsScreenState extends State<AllStudentsScreen> {
                   columns: columns,
                   rows: rows,
                   onChanged: (PlutoGridOnChangedEvent event) {
-                    log('${event}        changed');
+                    log('$event        changed');
                   },
                   onLoaded: (PlutoGridOnLoadedEvent event) {
                     // stateManager = event.stateManager;
