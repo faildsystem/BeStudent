@@ -22,6 +22,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
   final TextEditingController _groupNameController = TextEditingController();
   final TextEditingController _dayController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
+  final TextEditingController _durationController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +76,17 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                       }
                       return null;
                     },
-                    controller: _timeController),
+                    controller: _durationController),
+                Gap(20.h),
+                AppTextFormField(
+                    hint: 'المدة',
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'من فضلك ادخل المدة';
+                      }
+                      return null;
+                    },
+                    controller: _durationController),
                 Gap(20.h),
                 AppTextButton(
                   buttonText: 'إنشاء',
@@ -84,7 +95,8 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
                     if (_subjectNameController.text.isNotEmpty &&
                         _groupNameController.text.isNotEmpty &&
                         _dayController.text.isNotEmpty &&
-                        _timeController.text.isNotEmpty) {
+                        _timeController.text.isNotEmpty &&
+                        _durationController.text.isNotEmpty) {
                       _createGroup();
                       context.pop();
                     } else {
@@ -112,6 +124,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
       groupName: _groupNameController.text,
       day: _dayController.text,
       time: _timeController.text,
+      duration: int.parse(_durationController.text),
     );
   }
 
@@ -121,6 +134,7 @@ class _CreateGroupScreenState extends State<CreateGroupScreen> {
     _groupNameController.dispose();
     _dayController.dispose();
     _timeController.dispose();
+    _durationController.dispose();
     super.dispose();
   }
 }

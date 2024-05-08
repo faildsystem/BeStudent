@@ -66,6 +66,13 @@ cupertino_icons
 2.19
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/cupertino_icons-1.0.6/
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/cupertino_icons-1.0.6/lib/
+<<<<<<< HEAD
+=======
+dart_ipify
+2.12
+file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/dart_ipify-1.1.1/
+file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/dart_ipify-1.1.1/lib/
+>>>>>>> 4baaa1b9a9c1ffe2b690a1dcdd16d4451d685fa5
 dbus
 2.17
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/dbus-0.7.10/
@@ -179,9 +186,15 @@ flutter_screenutil
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_screenutil-5.9.0/
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_screenutil-5.9.0/lib/
 flutter_svg
+<<<<<<< HEAD
 2.17
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_svg-1.1.6/
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_svg-1.1.6/lib/
+=======
+2.19
+file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_svg-2.0.10+1/
+file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_svg-2.0.10+1/lib/
+>>>>>>> 4baaa1b9a9c1ffe2b690a1dcdd16d4451d685fa5
 font_awesome_flutter
 3.0
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/font_awesome_flutter-10.7.0/
@@ -223,9 +236,15 @@ graphs
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/graphs-2.3.1/
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/graphs-2.3.1/lib/
 http
+<<<<<<< HEAD
 2.19
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/http-0.13.6/
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/http-0.13.6/lib/
+=======
+3.2
+file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.2.0/
+file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.2.0/lib/
+>>>>>>> 4baaa1b9a9c1ffe2b690a1dcdd16d4451d685fa5
 http_parser
 2.12
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/http_parser-4.0.2/
@@ -263,6 +282,7 @@ image_picker_windows
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_windows-0.2.1+1/
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_windows-0.2.1+1/lib/
 intl
+<<<<<<< HEAD
 2.12
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/intl-0.18.1/
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/intl-0.18.1/lib/
@@ -282,6 +302,27 @@ leak_tracker_testing
 3.1
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/leak_tracker_testing-2.0.1/
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/leak_tracker_testing-2.0.1/lib/
+=======
+3.0
+file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/intl-0.19.0/
+file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/intl-0.19.0/lib/
+js
+2.19
+file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/js-0.6.7/
+file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/js-0.6.7/lib/
+leak_tracker
+3.1
+file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/leak_tracker-10.0.0/
+file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/leak_tracker-10.0.0/lib/
+leak_tracker_flutter_testing
+3.1
+file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/leak_tracker_flutter_testing-2.0.1/
+file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/leak_tracker_flutter_testing-2.0.1/lib/
+leak_tracker_testing
+3.1
+file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/leak_tracker_testing-2.0.1/
+file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/leak_tracker_testing-2.0.1/lib/
+>>>>>>> 4baaa1b9a9c1ffe2b690a1dcdd16d4451d685fa5
 lints
 3.0
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/lints-2.1.1/
@@ -292,6 +333,7 @@ file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/loading_animation_w
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/loading_animation_widget-1.2.1/lib/
 matcher
 3.0
+<<<<<<< HEAD
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/matcher-0.12.16+1/
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/matcher-0.12.16+1/lib/
 material_color_utilities
@@ -302,6 +344,18 @@ meta
 2.12
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/meta-1.11.0/
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/meta-1.11.0/lib/
+=======
+file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/matcher-0.12.16+1/
+file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/matcher-0.12.16+1/lib/
+material_color_utilities
+2.17
+file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/material_color_utilities-0.8.0/
+file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/material_color_utilities-0.8.0/lib/
+meta
+2.12
+file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/meta-1.11.0/
+file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/meta-1.11.0/lib/
+>>>>>>> 4baaa1b9a9c1ffe2b690a1dcdd16d4451d685fa5
 mime
 3.2
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/mime-1.0.5/
@@ -326,10 +380,13 @@ path
 3.0
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/path-1.9.0/
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/path-1.9.0/lib/
+<<<<<<< HEAD
 path_drawing
 2.12
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/path_drawing-1.0.1/
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/path_drawing-1.0.1/lib/
+=======
+>>>>>>> 4baaa1b9a9c1ffe2b690a1dcdd16d4451d685fa5
 path_parsing
 2.12
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/path_parsing-1.0.1/
@@ -358,6 +415,17 @@ plugin_platform_interface
 3.0
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/plugin_platform_interface-2.1.8/
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/plugin_platform_interface-2.1.8/lib/
+<<<<<<< HEAD
+=======
+pluto_grid
+2.17
+file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/pluto_grid-8.0.0/
+file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/pluto_grid-8.0.0/lib/
+pretty_qr_code
+2.17
+file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/pretty_qr_code-3.3.0/
+file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/pretty_qr_code-3.3.0/lib/
+>>>>>>> 4baaa1b9a9c1ffe2b690a1dcdd16d4451d685fa5
 provider
 2.12
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/provider-6.1.2/
@@ -382,6 +450,13 @@ rive_common
 2.17
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/rive_common-0.2.8/
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/rive_common-0.2.8/lib/
+<<<<<<< HEAD
+=======
+rxdart
+2.12
+file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/rxdart-0.27.7/
+file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/rxdart-0.27.7/lib/
+>>>>>>> 4baaa1b9a9c1ffe2b690a1dcdd16d4451d685fa5
 shared_preferences
 2.19
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences-2.2.2/
@@ -462,6 +537,7 @@ universal_io
 2.17
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/universal_io-2.2.2/
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/universal_io-2.2.2/lib/
+<<<<<<< HEAD
 vector_math
 2.14
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/vector_math-2.1.4/
@@ -470,6 +546,28 @@ vm_service
 3.0
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/vm_service-13.0.0/
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/vm_service-13.0.0/lib/
+=======
+vector_graphics
+2.17
+file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics-1.1.11+1/
+file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics-1.1.11+1/lib/
+vector_graphics_codec
+2.17
+file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_codec-1.1.11+1/
+file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_codec-1.1.11+1/lib/
+vector_graphics_compiler
+2.19
+file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_compiler-1.1.11+1/
+file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_compiler-1.1.11+1/lib/
+vector_math
+2.14
+file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/vector_math-2.1.4/
+file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/vector_math-2.1.4/lib/
+vm_service
+3.0
+file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/vm_service-13.0.0/
+file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/vm_service-13.0.0/lib/
+>>>>>>> 4baaa1b9a9c1ffe2b690a1dcdd16d4451d685fa5
 web
 3.2
 file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/web-0.3.0/

@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:student/core/widgets/app_bar.dart';
 import 'package:student/core/widgets/firestore_functions.dart';
@@ -66,14 +65,14 @@ class _TeacherGroupsScreenState extends State<TeacherGroupsScreen> {
                       itemCount: teacherGroups.length,
                       itemBuilder: (context, index) {
                         final group = teacherGroups[index];
-                        return Padding(
-                          padding: EdgeInsets.all(3.h),
-                          child: TeacherGroupComponent(
-                            teacherId: teacherId,
-                            group: group,
-                          ),
+                        return TeacherGroupComponent(
+                          teacherId: teacherId,
+                          group: group,
                         );
                       },
+
+                      // kjkdjlkafjlksjl
+                      // fdjajldfkjalkjdfla
                     ),
         ),
       ),

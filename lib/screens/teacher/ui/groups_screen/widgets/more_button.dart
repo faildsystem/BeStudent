@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:student/routing/routes.dart';
+
+import '../../../../../routing/routes.dart';
 
 class MoreButton extends StatelessWidget {
   const MoreButton({super.key});

@@ -54,7 +54,11 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                   iconSize: 25,
                   icon: const Icon(Icons.notifications),
                   tooltip: 'Notifications',
-                  onPressed: () {},
+                  onPressed: () {
+                    context.pushNamed(
+                      Routes.teacherNotificationsScreen,
+                    );
+                  },
                 ),
               if (!isProfileOrSettings)
                 Padding(
@@ -95,7 +99,11 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                     iconSize: 25,
                     icon: const Icon(Icons.notifications),
                     tooltip: 'Notifications',
-                    onPressed: () {},
+                    onPressed: () {
+                      context.pushNamed(
+                        Routes.teacherNotificationsScreen,
+                      );
+                    },
                   ),
                 if (!isProfileOrSettings)
                   GestureDetector(

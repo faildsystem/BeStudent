@@ -4,6 +4,8 @@ import 'package:student/core/widgets/classes/group.dart';
 import 'package:student/core/widgets/classes/user.dart';
 import 'package:student/helpers/app_regex.dart';
 
+import 'classes/student.dart';
+
 class FireStoreFunctions {
   static Future<void> addUser(
       bool isTeacher,
@@ -88,35 +90,35 @@ class FireStoreFunctions {
   static Future<int> groupJoinRequest({
     required String userId,
     required String code,
+    required String? groupId,
   }) async {
     try {
+      if (groupId == null) {
+        log("Group $code not found.");
+        return -1;
+      }
+
       // Check if a document with the same code and student_id exists
       final querySnapshot = await FirebaseFirestore.instance
           .collection('enrollment')
-          .where('groupCode', isEqualTo: code)
+          .where('groupId', isEqualTo: groupId)
           .where('studentId', isEqualTo: userId)
           .get();
 
+      // check if student already enrolled in this group
       if (querySnapshot.docs.isNotEmpty) {
         log("Document with code $code and student ID $userId already exists.");
         return 0;
-      } else {
-        // Document does not exist, proceed to add
-        final docId = await getDocId(
-            collection: 'group', field: 'groupCode', value: code);
-        if (docId != null) {
-          await FirebaseFirestore.instance.collection('enrollment').add({
-            'groupCode': code,
-            'studentId': userId,
-            'joinedDate': Timestamp.now(),
-          });
-          log("Added Data with ID: $code");
-          return 1;
-        } else {
-          log("Group $code not found.");
-          return -1;
-        }
       }
+
+      await FirebaseFirestore.instance.collection('enrollment').add({
+        'groupId': groupId,
+        'groupCode': code,
+        'studentId': userId,
+        'joinedDate': Timestamp.now(),
+      });
+      log("Added Data with ID: $code");
+      return 1;
     } catch (error) {
       log("Failed to send group join request: $error");
       return -1;
@@ -150,19 +152,22 @@ class FireStoreFunctions {
     final List<Group> groups = [];
 
     for (final enrollmentDoc in enrollmentQuerySnapshot.docs) {
-      final groupCode = enrollmentDoc['groupCode'];
+      final groupId = enrollmentDoc['groupId'];
 
       final groupDocumentSnapshot = await FirebaseFirestore.instance
           .collection('group')
-          .where('groupCode', isEqualTo: groupCode)
+          .doc(groupId)
           .get();
 
-      final groupDocumentData = groupDocumentSnapshot.docs.first.data();
+      final groupDocumentData = groupDocumentSnapshot.data();
+      final String groupCode = groupDocumentData!['groupCode'];
       final String subjectName = groupDocumentData['subjectName'];
       final String teacherId = groupDocumentData['creatorId'];
       final String groupName = groupDocumentData['groupName'];
       final String groupDay = groupDocumentData['day'];
-      final String grouptime = groupDocumentData['time'];
+      final String groupTime = groupDocumentData['time'];
+      final Timestamp creationDate = groupDocumentData['creationDate'];
+      final int duration = groupDocumentData['duration'];
 
       final teacherDocumentSnapshot = await FirebaseFirestore.instance
           .collection('users')
@@ -176,12 +181,15 @@ class FireStoreFunctions {
       groups.add(
         Group(
           subjectName: subjectName,
+          groupId: groupId,
           teacherName: teacherName,
           teacherImage: teacherImage,
           groupCode: groupCode,
           groupName: groupName,
           groupDay: groupDay,
-          groupTime: grouptime,
+          groupTime: groupTime,
+          creationDate: creationDate,
+          duration: duration,
         ),
       );
     }
@@ -194,6 +202,7 @@ class FireStoreFunctions {
     required String groupName,
     required String day,
     required String time,
+    required int duration,
   }) async {
     String code;
     bool codeExists = false;
@@ -218,6 +227,7 @@ class FireStoreFunctions {
         'groupName': groupName,
         'day': day,
         'time': time,
+        'duration': duration,
       });
       log("Group Created");
     } catch (error) {
@@ -233,50 +243,73 @@ class FireStoreFunctions {
         .get();
     for (final groupDoc in querySnapshot.docs) {
       final subjectName = groupDoc['subjectName'];
+      final groupId = groupDoc.id;
       final groupCode = groupDoc['groupCode'];
       final String groupName = groupDoc['groupName'];
       final String groupDay = groupDoc['day'];
-      final String grouptime = groupDoc['time'];
+      final String groupTime = groupDoc['time'];
+      final Timestamp creationDate = groupDoc['creationDate'];
+      final int duration = groupDoc['duration'];
 
       groups.add(
         Group(
           subjectName: subjectName,
+          groupId: groupId,
           groupCode: groupCode,
           groupName: groupName,
           teacherName: '',
           teacherImage: '',
           groupDay: groupDay,
-          groupTime: grouptime,
+          groupTime: groupTime,
+          creationDate: creationDate,
+          duration: duration,
         ),
       );
     }
     return groups;
   }
 
-  static Future<void> unrollGroup(String studentId, String groupCode) async {
+  static Future<void> unrollGroup(String studentId, String groupId) async {
     try {
-      final enrollmentDocId = await getDocId(
-          collection: 'enrollment', field: 'student_id', value: studentId);
-      if (enrollmentDocId != null) {
-        final querySnapshot = await FirebaseFirestore.instance
-            .collection('enrollment')
-            .where('group_code', isEqualTo: groupCode)
-            .where('student_id', isEqualTo: studentId)
-            .get();
-        if (querySnapshot.docs.isNotEmpty) {
-          await FirebaseFirestore.instance
-              .collection('enrollment')
-              .doc(querySnapshot.docs.first.id)
-              .delete();
-          log("Document with code $groupCode and student ID $studentId deleted.");
-        } else {
-          log("Document with code $groupCode and student ID $studentId not found.");
-        }
-      } else {
-        log("Document with student ID $studentId not found.");
+      final enrollmentDoc = await FirebaseFirestore.instance
+          .collection('enrollment')
+          .where('studentId', isEqualTo: studentId)
+          .where('groupId', isEqualTo: groupId)
+          .get();
+      if (enrollmentDoc.docs.isEmpty) {
+        log("Document with code $groupId and student ID $studentId not found.");
       }
+
+      await FirebaseFirestore.instance
+          .collection('enrollment')
+          .doc(enrollmentDoc.docs.first.id)
+          .delete();
     } catch (error) {
       log("Failed to delete document: $error");
     }
+  }
+
+  static Future<List<Student>> fetchGroupStudents(String groupId) async {
+    final List<Student> students = [];
+    final enrollmentQuerySnapshot = await FirebaseFirestore.instance
+        .collection('enrollment')
+        .where('groupId', isEqualTo: groupId)
+        .get();
+    for (final enrollmentDoc in enrollmentQuerySnapshot.docs) {
+      final studentId = enrollmentDoc['studentId'];
+      final studentDocumentSnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('id', isEqualTo: studentId)
+          .get();
+      final studentDocumentData = studentDocumentSnapshot.docs.first.data();
+      students.add(
+        Student(
+          firstName: studentDocumentData['firstName'],
+          lastName: studentDocumentData['lastName'],
+          email: studentDocumentData['email'],
+        ),
+      );
+    }
+    return students;
   }
 }
