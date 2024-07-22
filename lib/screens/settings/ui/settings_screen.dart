@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:babstrap_settings_screen/babstrap_settings_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:student/core/widgets/app_bar.dart';
-import 'package:student/screens/settings/widgets/theme_dialog.dart';
 import 'package:student/theming/colors.dart';
 import 'package:student/theming/styles.dart';
+
+import '../widgets/theme_dialog.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);

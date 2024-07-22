@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
-import '../../../../../helpers/app_regex.dart';
-import '../../../../../theming/styles.dart';
 import '../../../../core/widgets/app_text_button.dart';
 import '../../../../core/widgets/app_text_form_field.dart';
+import '../../../../helpers/app_regex.dart';
+import '../../../../theming/styles.dart';
 
 class PasswordReset extends StatefulWidget {
   const PasswordReset({super.key});
@@ -50,8 +50,7 @@ class _PasswordResetState extends State<PasswordReset> {
               dialogType: DialogType.info,
               animType: AnimType.bottomSlide,
               title: 'اعادة تعيين',
-              desc:
-                  'تم ارسال رابط لانشاء كلمة سر الى حسابك ',
+              desc: 'تم ارسال رابط لانشاء كلمة سر الى حسابك ',
             ).show();
           } on FirebaseAuthException catch (e) {
             if (e.code == 'user-not-found') {

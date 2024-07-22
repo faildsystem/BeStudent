@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:student/helpers/extensions.dart';
-import 'package:student/core/widgets/classes/group.dart';
-import 'package:student/core/widgets/qr_code.dart';
+import 'package:student/core/classes/group.dart';
+import 'package:student/core/widgets/qr_code_generator.dart';
 import 'package:student/theming/colors.dart';
 import 'package:student/theming/styles.dart';
 

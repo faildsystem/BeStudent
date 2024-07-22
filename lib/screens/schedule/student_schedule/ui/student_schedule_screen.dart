@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:student/screens/schedule/student_schedule/widgets/schedule.dart';
 
 import '../../../../core/widgets/app_bar.dart';
 import '../appointments.dart';
+import '../widgets/schedule.dart';
 
 class StudentScheduleScreen extends StatelessWidget {
   const StudentScheduleScreen({super.key, required this.studentId});

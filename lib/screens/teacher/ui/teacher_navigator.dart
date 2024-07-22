@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:student/screens/profile/widgets/avatar_name_email.dart';
-import 'package:student/screens/settings/ui/settings_screen.dart';
-import 'package:student/screens/teacher/ui/groups_screen/ui/teacher_groups_screen.dart';
-import 'package:student/screens/teacher/ui/home_screen/ui/teacher_home_screen.dart';
 import 'package:student/theming/colors.dart';
+
+import '../../profile/widgets/avatar_name_email.dart';
+import '../../settings/ui/settings_screen.dart';
+import 'groups_screen/ui/teacher_groups_screen.dart';
+import 'home_screen/ui/teacher_home_screen.dart';
 
 // ignore: must_be_immutable
 class TeacherNavigator extends StatefulWidget {

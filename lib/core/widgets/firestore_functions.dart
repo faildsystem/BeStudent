@@ -1,10 +1,10 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:student/core/widgets/classes/group.dart';
-import 'package:student/core/widgets/classes/user.dart';
+import 'package:student/core/classes/group.dart';
+import 'package:student/core/classes/user.dart';
 import 'package:student/helpers/app_regex.dart';
 
-import 'classes/student.dart';
+import '../classes/student.dart';
 
 class FireStoreFunctions {
   static Future<void> addUser(
@@ -302,14 +302,24 @@ class FireStoreFunctions {
           .where('id', isEqualTo: studentId)
           .get();
       final studentDocumentData = studentDocumentSnapshot.docs.first.data();
+
       students.add(
         Student(
-          firstName: studentDocumentData['firstName'],
-          lastName: studentDocumentData['lastName'],
+          id: studentId,
+          fullName:
+              '${studentDocumentData['firstName']} ${studentDocumentData['lastName']}',
           email: studentDocumentData['email'],
+          attendance: enrollmentDoc['attendance'],
         ),
       );
     }
     return students;
+  }
+
+  static Future<void> saveAttendance(List<String> presentStudents) async {
+    await FirebaseFirestore.instance.collection('attendance').add({
+      'students': presentStudents,
+      'timestamp': FieldValue.serverTimestamp(),
+    });
   }
 }

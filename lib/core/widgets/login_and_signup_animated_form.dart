@@ -258,7 +258,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
             await _auth.currentUser!.sendEmailVerification();
 
             await FireStoreFunctions.addUser(
-              widget.isStudent == null ? true: false,
+              widget.isStudent == null ? true : false,
               _auth.currentUser!.uid,
               firstNameController.text.trim(),
               lastNameController.text.trim(),
@@ -418,7 +418,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
                 .updatePhotoURL(widget.googleUser!.photoUrl);
 
             FireStoreFunctions.addUser(
-              widget.isStudent == null ? true: false,
+              widget.isStudent == null ? true : false,
               _auth.currentUser!.uid,
               widget.googleUser!.displayName!.split(' ')[0],
               widget.googleUser!.displayName!.split(' ')[1],
@@ -685,11 +685,11 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
                     children: [
                       SizedBox(
                         width: 145.w,
-                        child: lastNameField(),
+                        child: firstNameField(),
                       ),
                       SizedBox(
                         width: 145.w,
-                        child: firstNameField(),
+                        child: lastNameField(),
                       ),
                     ],
                   ),

@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:student/core/widgets/app_bar.dart';
-import 'package:student/screens/teacher/ui/notification_screen/widgets/custom1.dart';
 import 'package:student/theming/colors.dart';
 import 'package:student/theming/styles.dart';
+
+import '../widgets/custom1.dart';
 
 class TeacherNotificationsScreen extends StatelessWidget {
   TeacherNotificationsScreen({Key? key}) : super(key: key);
@@ -28,7 +29,8 @@ class TeacherNotificationsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("طلبات الانضمام", style: TextStyles.font18DarkBlue700Weight),
+                Text("طلبات الانضمام",
+                    style: TextStyles.font18DarkBlue700Weight),
                 Gap(10.h),
                 ListView.builder(
                   shrinkWrap: true,

@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:student/core/widgets/qr_code.dart';
+import 'package:student/core/widgets/qr_code_generator.dart';
 
 class QrCodeScreen extends StatelessWidget {
   QrCodeScreen({super.key});

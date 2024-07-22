@@ -1,25 +1,23 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:student/core/widgets/classes/group.dart';
-import 'package:student/screens/profile/ui/profile_screen.dart';
-import 'package:student/screens/student/ui/groups_screen/ui/qr_code_screen.dart';
-import 'package:student/screens/student/ui/join_screen/ui/join_group_screen.dart';
-import 'package:student/screens/student/ui/join_screen/ui/qr_screen.dart';
-import 'package:student/screens/student/ui/groups_screen/ui/student_groups_screen.dart';
-import 'package:student/screens/student/ui/student_navigator.dart';
-import 'package:student/screens/onboarding/ui/onboarding_screen.dart';
-import 'package:student/screens/settings/ui/settings_screen.dart';
-import 'package:student/screens/splash/ui/splash_screen.dart';
-import 'package:student/screens/teacher/ui/create_group_screen/ui/create_course_screen.dart';
-import 'package:student/screens/teacher/ui/groups_screen/ui/teacher_groups_screen.dart';
-import 'package:student/screens/teacher/ui/notification_screen/ui/notifications_screen.dart';
-import 'package:student/screens/teacher/ui/teacher_navigator.dart';
 
 import '../screens/create_password/ui/create_password.dart';
 import '../screens/forget/ui/forget_screen.dart';
 import '../screens/login/ui/login_screen.dart';
+import '../screens/onboarding/ui/onboarding_screen.dart';
+import '../screens/profile/ui/profile_screen.dart';
+import '../screens/settings/ui/settings_screen.dart';
 import '../screens/signup/ui/sign_up_sceen.dart';
+import '../screens/splash/ui/splash_screen.dart';
+import '../screens/student/ui/groups_screen/ui/qr_code_screen.dart';
+import '../screens/student/ui/groups_screen/ui/student_groups_screen.dart';
+import '../screens/student/ui/join_screen/ui/join_group_screen.dart';
+import '../screens/student/ui/join_screen/ui/qr_screen.dart';
+import '../screens/student/ui/student_navigator.dart';
+import '../screens/teacher/ui/create_group_screen/ui/create_course_screen.dart';
 import '../screens/teacher/ui/group_students_screen/ui/show_all_students_screen.dart';
+import '../screens/teacher/ui/groups_screen/ui/teacher_groups_screen.dart';
+import '../screens/teacher/ui/notification_screen/ui/notifications_screen.dart';
+import '../screens/teacher/ui/teacher_navigator.dart';
 import 'routes.dart';
 
 class AppRouter {
@@ -128,6 +126,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => TeacherNotificationsScreen(),
         );
+
       case Routes.allStudentsScreen:
         final List<String> group = settings.arguments as List<String>;
 

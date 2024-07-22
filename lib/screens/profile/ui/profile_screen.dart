@@ -8,9 +8,10 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:student/core/widgets/app_bar.dart';
 import 'package:student/helpers/extensions.dart';
 import 'package:student/routing/routes.dart';
-import 'package:student/screens/profile/widgets/avatar_name_email.dart';
 import 'package:student/theming/colors.dart';
 import 'package:student/theming/styles.dart';
+
+import '../widgets/avatar_name_email.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

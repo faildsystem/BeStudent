@@ -53,7 +53,7 @@ class ForgetScreen extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     const TermsAndConditionsText(),
-                    Gap(24.h),
+                    Gap(2.h),
                     const AlreadyHaveAccountText(),
                   ],
                 ),

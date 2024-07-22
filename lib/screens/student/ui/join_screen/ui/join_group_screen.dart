@@ -4,9 +4,10 @@ import 'package:gap/gap.dart';
 import 'package:student/core/widgets/app_bar.dart';
 import 'package:student/core/widgets/app_text_form_field.dart';
 import 'package:student/core/widgets/divided_text.dart';
-import 'package:student/screens/student/ui/join_screen/widgets/join_notes.dart';
-import 'package:student/screens/student/ui/join_screen/widgets/join_button.dart';
-import 'package:student/screens/student/ui/join_screen/widgets/scan_button.dart';
+
+import '../widgets/join_button.dart';
+import '../widgets/join_notes.dart';
+import '../widgets/scan_button.dart';
 
 class JoinCourseScreen extends StatefulWidget {
   const JoinCourseScreen({Key? key}) : super(key: key);
