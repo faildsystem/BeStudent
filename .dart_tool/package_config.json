@@ -134,8 +134,8 @@
       "languageVersion": "2.19"
     },
     {
-      "name": "csslib",
-      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/csslib-1.0.0",
+      "name": "dart_ipify",
+      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/dart_ipify-1.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
@@ -327,7 +327,7 @@
     },
     {
       "name": "flutter_svg",
-      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_svg-2.0.10+1",
+      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_svg-2.0.10+1",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
@@ -417,7 +417,7 @@
     },
     {
       "name": "http",
-      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.2.2",
+      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.2.0",
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
@@ -483,7 +483,7 @@
     },
     {
       "name": "intl",
-      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/intl-0.19.0",
+      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/intl-0.19.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -627,13 +627,13 @@
     },
     {
       "name": "pluto_grid",
-      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/pluto_grid-8.0.0",
+      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/pluto_grid-8.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "pretty_qr_code",
-      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/pretty_qr_code-3.3.0",
+      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/pretty_qr_code-3.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -675,7 +675,7 @@
     },
     {
       "name": "rxdart",
-      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/rxdart-0.27.7",
+      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/rxdart-0.27.7",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -764,14 +764,9 @@
       "languageVersion": "2.17"
     },
     {
-      "name": "syncfusion_flutter_core",
-      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_core-25.2.7",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
       "name": "syncfusion_flutter_datagrid",
       "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_datagrid-25.2.7",
+      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_core-25.1.41",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -813,19 +808,19 @@
     },
     {
       "name": "vector_graphics",
-      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics-1.1.11+1",
+      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics-1.1.11+1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "vector_graphics_codec",
-      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_codec-1.1.11+1",
+      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_codec-1.1.11+1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "vector_graphics_compiler",
-      "rootUri": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_compiler-1.1.11+1",
+      "rootUri": "file:///C:/Users/WHOAMI/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_compiler-1.1.11+1",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
@@ -878,10 +873,16 @@
       "languageVersion": "3.2"
     }
   ],
+<<<<<<< HEAD
   "generated": "2024-07-26T01:23:47.961946Z",
   "generator": "pub",
   "generatorVersion": "3.4.3",
+=======
+>>>>>>> 02cf749bdf27b42761626a188ba67194d373d166
   "flutterRoot": "file:///F:/programs/flutter_sdk/flutter",
   "flutterVersion": "3.22.2",
   "pubCache": "file:///C:/Users/Zizo/AppData/Local/Pub/Cache"
+  "generated": "2024-07-26T16:07:34.227069Z",
+  "generator": "pub",
+  "generatorVersion": "3.3.4"
 }
