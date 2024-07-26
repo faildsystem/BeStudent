@@ -1,5 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 import '../../../../../core/classes/student.dart';
@@ -21,7 +23,6 @@ class _AllStudentsScreenState extends State<AllStudentsScreen> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   List<Student> students = [];
   QRViewController? qrController;
-  Set<String> scannedIds = {}; // Track scanned student IDs
 
   @override
   void initState() {
@@ -42,65 +43,76 @@ class _AllStudentsScreenState extends State<AllStudentsScreen> {
     controller.scannedDataStream.listen((scanData) async {
       String scannedId = scanData.code!;
 
-      // Check if the QR code has already been scanned
-      if (scannedIds.contains(scannedId)) {
-        AwesomeDialog(
-          context: context,
-          dialogType: DialogType.info,
-          title: 'تم المسح مسبقًا',
-          desc: 'تم مسح هذا الرمز QR مسبقًا.',
-          btnOkOnPress: () {
-            qrController?.resumeCamera();
-          },
-          onDismissCallback: (type) => qrController?.resumeCamera(),
-        ).show();
-        qrController?.pauseCamera();
-      } else {
-        scannedIds.add(scannedId); // Mark this QR code as scanned
+      try {
+        // Attempt to find the student by ID
+        Student student =
+            students.firstWhere((student) => student.id == scannedId);
 
-        bool studentExists = students.any((student) => student.id == scannedId);
-        if (studentExists) {
-          qrController?.pauseCamera();
-          setState(() {
-            var student =
-                students.firstWhere((student) => student.id == scannedId);
-            if (!student.isPresent) {
-              student.isPresent = true;
-              AwesomeDialog(
-                context: context,
-                dialogType: DialogType.success,
-                title: 'نجاح',
-                desc: 'تم تسجيل حضور الطالب ${student.fullName}.',
-                btnOkOnPress: () {
-                  qrController?.resumeCamera();
-                },
-                onDismissCallback: (type) => qrController?.resumeCamera(),
-              ).show();
-            }
-          });
-        } else {
-          qrController?.pauseCamera();
+        if (student.isPresent) {
           AwesomeDialog(
             context: context,
-            dialogType: DialogType.error,
-            title: 'فشل',
-            desc: 'الطالب غير مسجل.',
+            dialogType: DialogType.info,
+            title: 'تم المسح مسبقًا',
+            desc: 'تم مسح هذا الرمز QR مسبقًا.',
             btnOkOnPress: () {
               qrController?.resumeCamera();
             },
             onDismissCallback: (type) => qrController?.resumeCamera(),
           ).show();
+          qrController?.pauseCamera();
+        } else {
+          qrController?.pauseCamera();
+          setState(() {
+            student.isPresent = true;
+            AwesomeDialog(
+              context: context,
+              dialogType: DialogType.success,
+              title: 'نجاح',
+              desc: 'تم تسجيل حضور الطالب ${student.fullName}.',
+              btnOkOnPress: () {
+                qrController?.resumeCamera();
+              },
+              onDismissCallback: (type) => qrController?.resumeCamera(),
+            ).show();
+          });
         }
+      } catch (e) {
+        // If the student is not found
+        qrController?.pauseCamera();
+        AwesomeDialog(
+          context: context,
+          dialogType: DialogType.error,
+          title: 'فشل',
+          desc: 'الطالب غير مسجل.',
+          btnOkOnPress: () {
+            qrController?.resumeCamera();
+          },
+          onDismissCallback: (type) => qrController?.resumeCamera(),
+        ).show();
       }
     });
   }
 
   void saveAttendance() async {
+    // Check network connectivity
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      // If there is no network connection, show a dialog
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.error,
+        title: 'لا يوجد اتصال بالإنترنت',
+        desc: 'يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.',
+        btnOkOnPress: () {},
+        onDismissCallback: (type) => qrController?.resumeCamera(),
+      ).show();
+      return;
+    }
     List<String> presentStudents = students
         .where((student) => student.isPresent)
         .map((student) => student.id)
         .toList();
-    await FireStoreFunctions.saveAttendance(presentStudents);
+    await FireStoreFunctions.saveAttendance(presentStudents, widget.groupId);
     AwesomeDialog(
       context: context,
       dialogType: DialogType.success,
@@ -113,7 +125,7 @@ class _AllStudentsScreenState extends State<AllStudentsScreen> {
 
   Color getColor(double attendance) {
     if (attendance >= .75) return Colors.green;
-    if (attendance >= .50) return Colors.yellow;
+    if (attendance >= .50) return Color.fromARGB(255, 199, 181, 16);
     return Colors.red;
   }
 
@@ -127,8 +139,12 @@ class _AllStudentsScreenState extends State<AllStudentsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          '${widget.groupName}',
+        title: Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.only(top: 4.h),
+          child: Text(
+            widget.groupName,
+          ),
         ),
       ),
       body: Directionality(
@@ -154,7 +170,7 @@ class _AllStudentsScreenState extends State<AllStudentsScreen> {
                         children: [
                           _buildHeaderCell('حاضر'),
                           _buildHeaderCell('الاسم'),
-                          _buildHeaderCell('الحضور'),
+                          _buildHeaderCell('نسبة الحضور'),
                         ],
                       ),
                       for (var student in students)
@@ -166,10 +182,6 @@ class _AllStudentsScreenState extends State<AllStudentsScreen> {
                                 onChanged: (value) {
                                   setState(() {
                                     student.isPresent = value!;
-                                    // Remove student ID from scannedIds if unchecked
-                                    if (!student.isPresent) {
-                                      scannedIds.remove(student.id);
-                                    }
                                   });
                                 },
                                 checkColor: Colors.white,
@@ -178,15 +190,24 @@ class _AllStudentsScreenState extends State<AllStudentsScreen> {
                             ),
                             _buildTableCell(
                               child: Text(student.fullName,
-                                  style:
-                                      Theme.of(context).textTheme.bodyMedium),
+                                  style: Theme.of(context).textTheme.bodyLarge),
                             ),
                             _buildTableCell(
-                              child: Text(
-                                '${(student.attendance * 100).round()}%',
-                                style: TextStyle(
+                              child: Container(
+                                height: 35.h,
+                                width: 35.w,
+                                decoration: BoxDecoration(
                                   color: getColor(student.attendance),
-                                  fontWeight: FontWeight.bold,
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '${(student.attendance * 100).round()}%',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        fontSize: 15.sp),
+                                  ),
                                 ),
                               ),
                             ),
@@ -260,8 +281,8 @@ class _AllStudentsScreenState extends State<AllStudentsScreen> {
       builder: (context) => AlertDialog(
         title: const Text('مسح رمز QR'),
         content: SizedBox(
-          width: 300,
-          height: 300,
+          width: 300.w,
+          height: 300.h,
           child: QRView(
             key: qrKey,
             onQRViewCreated: onQRViewCreated,
@@ -276,6 +297,7 @@ class _AllStudentsScreenState extends State<AllStudentsScreen> {
               child: const Text('إلغاء',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
+                    fontSize: 20,
                   )),
             ),
           ),

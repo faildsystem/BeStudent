@@ -7,6 +7,8 @@ import 'package:student/helpers/app_regex.dart';
 import '../classes/student.dart';
 
 class FireStoreFunctions {
+  static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
   static Future<void> addUser(
       bool isTeacher,
       String id,
@@ -17,7 +19,7 @@ class FireStoreFunctions {
       String phone,
       String address,
       String imageUrl) {
-    return FirebaseFirestore.instance
+    return _firestore
         .collection('users')
         .add({
           'id': id,
@@ -54,10 +56,7 @@ class FireStoreFunctions {
           if (studyYear != null) 'studyYear': studyYear,
           if (imageUrl != null) 'imageUrl': imageUrl,
         };
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc(docId)
-            .update(updatedData);
+        await _firestore.collection('users').doc(docId).update(updatedData);
         log("User Updated");
       } else {
         log("User with ID $id not found.");
@@ -73,7 +72,7 @@ class FireStoreFunctions {
     required var value,
   }) async {
     try {
-      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+      QuerySnapshot querySnapshot = await _firestore
           .collection(collection)
           .where(field, isEqualTo: value)
           .get();
@@ -99,7 +98,7 @@ class FireStoreFunctions {
       }
 
       // Check if a document with the same code and student_id exists
-      final querySnapshot = await FirebaseFirestore.instance
+      final querySnapshot = await _firestore
           .collection('enrollment')
           .where('groupId', isEqualTo: groupId)
           .where('studentId', isEqualTo: userId)
@@ -111,7 +110,7 @@ class FireStoreFunctions {
         return 0;
       }
 
-      await FirebaseFirestore.instance.collection('enrollment').add({
+      await _firestore.collection('enrollment').add({
         'groupId': groupId,
         'groupCode': code,
         'studentId': userId,
@@ -126,7 +125,7 @@ class FireStoreFunctions {
   }
 
   static Future<AppUser> fetchUser(String userId) async {
-    final userDocumentSnapshot = await FirebaseFirestore.instance
+    final userDocumentSnapshot = await _firestore
         .collection('users')
         .where('id', isEqualTo: userId)
         .get();
@@ -145,7 +144,7 @@ class FireStoreFunctions {
   }
 
   static Future<List<Group>> fetchStudentGroups(String studentId) async {
-    final enrollmentQuerySnapshot = await FirebaseFirestore.instance
+    final enrollmentQuerySnapshot = await _firestore
         .collection('enrollment')
         .where('studentId', isEqualTo: studentId)
         .get();
@@ -154,10 +153,8 @@ class FireStoreFunctions {
     for (final enrollmentDoc in enrollmentQuerySnapshot.docs) {
       final groupId = enrollmentDoc['groupId'];
 
-      final groupDocumentSnapshot = await FirebaseFirestore.instance
-          .collection('group')
-          .doc(groupId)
-          .get();
+      final groupDocumentSnapshot =
+          await _firestore.collection('group').doc(groupId).get();
 
       final groupDocumentData = groupDocumentSnapshot.data();
       final String groupCode = groupDocumentData!['groupCode'];
@@ -169,7 +166,7 @@ class FireStoreFunctions {
       final Timestamp creationDate = groupDocumentData['creationDate'];
       final int duration = groupDocumentData['duration'];
 
-      final teacherDocumentSnapshot = await FirebaseFirestore.instance
+      final teacherDocumentSnapshot = await _firestore
           .collection('users')
           .where('id', isEqualTo: teacherId)
           .get();
@@ -210,7 +207,7 @@ class FireStoreFunctions {
     do {
       code = AppRegex.generateCode();
 
-      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+      QuerySnapshot querySnapshot = await _firestore
           .collection('group')
           .where('groupCode', isEqualTo: code)
           .get();
@@ -219,7 +216,7 @@ class FireStoreFunctions {
     } while (codeExists);
 
     try {
-      await FirebaseFirestore.instance.collection('group').add({
+      await _firestore.collection('group').add({
         'creatorId': teacherId,
         'creationDate': Timestamp.now(),
         'subjectName': subjectName,
@@ -237,7 +234,7 @@ class FireStoreFunctions {
 
   static Future<List<Group>> fetchTeacherGroups(String teacherId) async {
     final List<Group> groups = [];
-    final querySnapshot = await FirebaseFirestore.instance
+    final querySnapshot = await _firestore
         .collection('group')
         .where('creatorId', isEqualTo: teacherId)
         .get();
@@ -271,7 +268,7 @@ class FireStoreFunctions {
 
   static Future<void> unrollGroup(String studentId, String groupId) async {
     try {
-      final enrollmentDoc = await FirebaseFirestore.instance
+      final enrollmentDoc = await _firestore
           .collection('enrollment')
           .where('studentId', isEqualTo: studentId)
           .where('groupId', isEqualTo: groupId)
@@ -280,7 +277,7 @@ class FireStoreFunctions {
         log("Document with code $groupId and student ID $studentId not found.");
       }
 
-      await FirebaseFirestore.instance
+      await _firestore
           .collection('enrollment')
           .doc(enrollmentDoc.docs.first.id)
           .delete();
@@ -291,13 +288,13 @@ class FireStoreFunctions {
 
   static Future<List<Student>> fetchGroupStudents(String groupId) async {
     final List<Student> students = [];
-    final enrollmentQuerySnapshot = await FirebaseFirestore.instance
+    final enrollmentQuerySnapshot = await _firestore
         .collection('enrollment')
         .where('groupId', isEqualTo: groupId)
         .get();
     for (final enrollmentDoc in enrollmentQuerySnapshot.docs) {
       final studentId = enrollmentDoc['studentId'];
-      final studentDocumentSnapshot = await FirebaseFirestore.instance
+      final studentDocumentSnapshot = await _firestore
           .collection('users')
           .where('id', isEqualTo: studentId)
           .get();
@@ -316,10 +313,73 @@ class FireStoreFunctions {
     return students;
   }
 
-  static Future<void> saveAttendance(List<String> presentStudents) async {
-    await FirebaseFirestore.instance.collection('attendance').add({
+  static Future<void> saveAttendance(
+      List<String> presentStudents, String groupId) async {
+    await _firestore.collection('attendance').add({
+      'groupId': groupId,
       'students': presentStudents,
       'timestamp': FieldValue.serverTimestamp(),
     });
+  }
+
+  static Future<void> sendJoinRequestNotification(String teacherId,
+      String groupId, String studentId, String groupName) async {
+    await _firestore.collection('notifications').add({
+      'receiverId': teacherId,
+      'senderId': studentId,
+      'groupId': groupId,
+      'groupName': groupName,
+      'type': 'join_request',
+      'status': 'pending',
+      'timestamp': FieldValue.serverTimestamp(),
+    });
+  }
+
+  static Future<void> sendJoinResponseNotification(
+      String studentId, String groupId, String groupName, bool accepted) async {
+    await _firestore.collection('notifications').add({
+      'receiverId': studentId,
+      'groupId': groupId,
+      'groupName': groupName,
+      'type': 'join_response',
+      'status': accepted ? 'accepted' : 'rejected',
+      'timestamp': FieldValue.serverTimestamp(),
+    });
+  }
+
+  static Future<void> updateNotificationStatus(
+      String notificationId, String status) async {
+    await _firestore.collection('notifications').doc(notificationId).update({
+      'status': status,
+    });
+  }
+
+  static Future<void> updateUserToken(String userId, String token) async {
+    await _firestore.collection('users').doc(userId).update({
+      'fcmToken': token,
+    });
+  }
+
+  static Future<void> handleJoinRequest(
+      String notificationId, bool accepted) async {
+    final notification =
+        await _firestore.collection('notifications').doc(notificationId).get();
+    final studentId = notification['senderId'];
+    final groupId = notification['groupId'];
+    final groupName = notification['groupName'];
+
+    if (accepted) {
+      // Add student to the group
+      await _firestore.collection('groups').doc(groupId).update({
+        'students': FieldValue.arrayUnion([studentId]),
+      });
+    }
+
+    // Update notification status
+    await updateNotificationStatus(
+        notificationId, accepted ? 'accepted' : 'rejected');
+
+    // Notify the student
+    await sendJoinResponseNotification(studentId, groupId, groupName, accepted);
   }
 }
