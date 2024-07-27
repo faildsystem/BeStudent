@@ -5,9 +5,10 @@ import 'package:gap/gap.dart';
 import 'package:student/core/widgets/firestore_functions.dart';
 import 'package:student/screens/profile/widgets/edit_profile_form.dart';
 import 'package:student/screens/profile/widgets/update_profile_pic.dart';
-import 'package:student/core/widgets/classes/user.dart';
 import 'package:student/theming/colors.dart';
 import 'package:student/theming/styles.dart';
+
+import '../../../core/classes/user.dart';
 
 class ProfileAvatar extends StatefulWidget {
   const ProfileAvatar({Key? key}) : super(key: key);
@@ -55,12 +56,12 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
             children: [
               GestureDetector(
                 onTap: () {
-                  if(user.image != '') {
+                  if (user.image != '') {
                     showDialog(
-                    context: context,
-                    builder: (_) =>
-                        AlertDialog(content: Image.network(user.image!)),
-                  );
+                      context: context,
+                      builder: (_) =>
+                          AlertDialog(content: Image.network(user.image!)),
+                    );
                   }
                 },
                 child: CircleAvatar(

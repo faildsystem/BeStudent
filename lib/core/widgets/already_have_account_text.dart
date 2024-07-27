@@ -22,11 +22,14 @@ class AlreadyHaveAccountText extends StatelessWidget {
           children: [
             TextSpan(
               text: 'لديك حساب بالفعل؟',
-              style: TextStyles.font11DarkBlue400Weight,
+              style: TextStyles.font11DarkBlue400Weight
+                  .copyWith(color: Color.fromARGB(255, 29, 221, 255)),
             ),
             TextSpan(
               text: ' تسجيل الدخول',
-              style: TextStyles.font11Blue600Weight,
+              style: TextStyles.font11Blue600Weight.copyWith(
+                color: Color.fromARGB(255, 29, 221, 255),
+              ),
             ),
           ],
         ),

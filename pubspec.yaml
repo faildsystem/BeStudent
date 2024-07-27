@@ -40,7 +40,6 @@ dependencies:
   font_awesome_flutter: ^10.7.0
   gap: ^3.0.1
   google_sign_in: ^6.2.1
-  flutter_facebook_auth: "^3.5.0"
   rive: ^0.12.4
   awesome_drawer_bar: ^1.2.0
   loading_animation_widget: ^1.2.1
@@ -65,12 +64,28 @@ dependencies:
   syncfusion_flutter_calendar: ^25.1.41
   pluto_grid: ^8.0.0
   pretty_qr_code: ^3.3.0
-  dart_ipify: ^1.1.1
+  percent_indicator: ^4.2.3
+  syncfusion_flutter_datagrid: ^25.1.42
+  flutter_native_splash: ^2.4.1
+  fluttertoast: ^8.2.6
+  connectivity_plus: ^5.0.2
+  firebase_messaging: ^14.9.4
+  cloud_functions: ^4.7.6
 
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
+
+flutter_native_splash:
+  color: "#42a5f5"
+  image: assets/images/logo.jpg
+  android: true
+  ios: true
+
+  android_12:
+    image: assets/images/logo.jpg
+    color: "#42a5f5"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:student/core/widgets/firestore_functions.dart';
 import 'package:student/helpers/extensions.dart';
 import 'package:student/routing/routes.dart';
-import 'package:student/core/widgets/classes/user.dart';
+import 'package:student/core/classes/user.dart';
 import 'package:student/theming/colors.dart';
 import 'package:student/theming/styles.dart';
 

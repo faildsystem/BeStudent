@@ -4,14 +4,14 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:student/core/widgets/classes/group.dart';
+import 'package:student/core/classes/group.dart';
 import 'package:student/helpers/extensions.dart';
-import 'package:student/screens/student/ui/groups_screen/widgets/group_info_row.dart';
-import 'package:student/screens/student/ui/groups_screen/widgets/qr_code_dialog.dart';
+
 import 'package:student/theming/colors.dart';
 import 'package:student/theming/styles.dart';
 
 import '../../../../../routing/routes.dart';
+import '../../../../student/ui/groups_screen/widgets/group_info_row.dart';
 import '../../group_students_screen/ui/show_all_students_screen.dart';
 
 class TeacherGroupComponent extends StatelessWidget {
@@ -105,7 +105,6 @@ class TeacherGroupComponent extends StatelessWidget {
             Routes.allStudentsScreen,
             arguments: [group.groupId, group.groupName],
           );
-          log('group tapped');
         },
       ),
     );

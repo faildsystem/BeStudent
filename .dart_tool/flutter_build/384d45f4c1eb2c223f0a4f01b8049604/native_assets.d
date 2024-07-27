@@ -1,0 +1,1 @@
+ G:\\flutter_projects\\BeStudent\\.dart_tool\\flutter_build\\384d45f4c1eb2c223f0a4f01b8049604\\native_assets.yaml: 

@@ -4,9 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:student/core/widgets/app_bar.dart';
 import 'package:student/core/widgets/firestore_functions.dart';
-import 'package:student/core/widgets/classes/group.dart';
-import 'package:student/screens/student/ui/groups_screen/widgets/student_group_component.dart';
+import 'package:student/core/classes/group.dart';
 import 'package:student/theming/colors.dart';
+
+import '../widgets/student_group_component.dart';
 
 class StudentGroupsScreen extends StatefulWidget {
   const StudentGroupsScreen({Key? key}) : super(key: key);

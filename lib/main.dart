@@ -3,9 +3,10 @@ import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:student/core/widgets/classes/user.dart';
+import 'package:student/core/classes/user.dart';
 import 'package:student/core/widgets/firestore_functions.dart';
 import 'package:student/firebase_options.dart';
 import 'routing/app_router.dart';
@@ -19,7 +20,8 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+  FlutterNativeSplash.preserve(
+      widgetsBinding: WidgetsFlutterBinding.ensureInitialized());
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   initScreen = prefs.getInt("initScreen");
@@ -42,6 +44,8 @@ Future<void> main() async {
     }
   }
   await ScreenUtil.ensureScreenSize();
+  FlutterNativeSplash.remove();
+
   runApp(EasyDynamicThemeWidget(child: MyApp(router: AppRouter())));
 }
 

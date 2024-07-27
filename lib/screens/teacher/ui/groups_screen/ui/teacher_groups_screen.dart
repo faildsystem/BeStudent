@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:student/core/widgets/app_bar.dart';
 import 'package:student/core/widgets/firestore_functions.dart';
-import 'package:student/core/widgets/classes/group.dart';
-import 'package:student/screens/teacher/ui/groups_screen/widgets/teacher_group_component.dart';
+import 'package:student/core/classes/group.dart';
 import 'package:student/theming/colors.dart';
+
+import '../widgets/teacher_group_component.dart';
 
 class TeacherGroupsScreen extends StatefulWidget {
   const TeacherGroupsScreen({Key? key}) : super(key: key);
@@ -70,9 +71,6 @@ class _TeacherGroupsScreenState extends State<TeacherGroupsScreen> {
                           group: group,
                         );
                       },
-
-                      // kjkdjlkafjlksjl
-                      // fdjajldfkjalkjdfla
                     ),
         ),
       ),

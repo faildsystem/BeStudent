@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:student/core/widgets/app_bar.dart';
-import 'package:student/screens/teacher/ui/home_screen/widgets/our_services_box.dart';
-import 'package:student/screens/teacher/ui/home_screen/widgets/quick_updates.dart';
+
 import 'package:student/theming/colors.dart';
+
+import '../widgets/our_services_box.dart';
+import '../widgets/quick_updates.dart';
 
 class TeacherHomeScreen extends StatelessWidget {
   const TeacherHomeScreen({super.key});

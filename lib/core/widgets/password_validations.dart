@@ -54,7 +54,7 @@ class PasswordValidations extends StatelessWidget {
             Expanded(
               child: buildValidationRow(
                 context,
-                'يتكون من 8 أحرف على الأقل',
+                ' ثمانية احرف على الاقل',
                 hasMinLength,
               ),
             ),
@@ -70,7 +70,7 @@ class PasswordValidations extends StatelessWidget {
       children: [
         Gap(20.w),
         CircleAvatar(
-          radius: 2.5,
+          radius: 2.5.sp,
           backgroundColor: ColorsManager.gray(context),
         ),
         Gap(6.w),
@@ -81,7 +81,9 @@ class PasswordValidations extends StatelessWidget {
             decoration: hasValidated ? TextDecoration.lineThrough : null,
             decorationColor: Colors.green,
             decorationThickness: 2,
-            color: hasValidated ? ColorsManager.gray(context) : ColorsManager.darkBlue(context),
+            color: hasValidated
+                ? ColorsManager.gray(context)
+                : ColorsManager.darkBlue(context),
           ),
         )
       ],

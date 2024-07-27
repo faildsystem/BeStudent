@@ -2,15 +2,16 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:student/core/widgets/classes/group.dart';
+import 'package:student/core/classes/group.dart';
 import 'package:student/core/widgets/firestore_functions.dart';
 import 'package:student/helpers/extensions.dart';
-import 'package:student/screens/student/ui/groups_screen/widgets/group_info_row.dart';
-import 'package:student/screens/student/ui/groups_screen/widgets/qr_code_dialog.dart';
+
 import 'package:student/theming/colors.dart';
 import 'package:student/theming/styles.dart';
 
 import '../../../../../routing/routes.dart';
+import 'group_info_row.dart';
+import 'qr_code_dialog.dart';
 
 class StudentGroupComponent extends StatelessWidget {
   const StudentGroupComponent(
