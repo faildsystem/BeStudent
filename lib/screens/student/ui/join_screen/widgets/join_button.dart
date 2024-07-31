@@ -1,9 +1,10 @@
+import 'dart:developer';
+
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:student/core/widgets/app_text_button.dart';
 import 'package:student/core/widgets/firestore_functions.dart';
-import 'package:student/core/widgets/dialog_message.dart';
 import 'package:student/helpers/app_regex.dart';
 import 'package:student/theming/colors.dart';
 import 'package:student/theming/styles.dart';
@@ -11,7 +12,7 @@ import 'package:student/theming/styles.dart';
 class JoinButton extends StatelessWidget {
   JoinButton({super.key, required this.codeController});
   final TextEditingController codeController;
-  final String userId = FirebaseAuth.instance.currentUser!.uid;
+  final String studentId = FirebaseAuth.instance.currentUser!.uid;
 
   @override
   Widget build(BuildContext context) {
@@ -23,62 +24,87 @@ class JoinButton extends StatelessWidget {
         buttonText: 'انضمام',
         textStyle: TextStyles.font16White600Weight,
         onPressed: () async {
-          final groupId = await FireStoreFunctions.getDocId(
+          log('Join button pressed');
+          final group = await FireStoreFunctions.getDoc(
               collection: 'group',
               field: 'groupCode',
               value: codeController.text);
-          if (AppRegex.isCodeValid(codeController.text)) {
-            final int join = await FireStoreFunctions.groupJoinRequest(
-              userId: userId,
-              code: codeController.text,
-              groupId: groupId,
-            );
-            if (join == 1) {
-              // ignore: use_build_context_synchronously
-              CustomDialog.showDialog(
+          log('Fetched group: $group');
+
+          if (AppRegex.isCodeValid(codeController.text) && group != null) {
+            log('Group code is valid and group exists');
+            final joinState =
+                await FireStoreFunctions.sendJoinRequestNotification(
+                    group['creatorId'],
+                    group.id,
+                    studentId,
+                    group['groupName']);
+            log('Join state: $joinState');
+
+            if (joinState == 1) {
+              log('Join request successful');
+              if (context.mounted) {
+                AwesomeDialog(
                   context: context,
-                  type: DialogType.success,
-                  title: 'تم الانضمام بنجاح',
-                  message:
-                      'تم الانضمام بنجاح للمجموعة، يمكنك الان الانتقال لصفحة المواد.',
-                  argument: 1);
-            } else if (join == 0) {
-              // ignore: use_build_context_synchronously
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  // ignore: use_build_context_synchronously
-                  backgroundColor: ColorsManager.mainBlue(context),
-                  content: const Center(
-                    child: Text(
-                      'انت بالفعل منضم لهذه المجموعة.',
+                  dialogType: DialogType.success,
+                  animType: AnimType.bottomSlide,
+                  btnOkOnPress: () {},
+                  btnOkText: 'حسنا',
+                  title: 'تم ارسال طلب الانضمام بنجاح',
+                  desc:
+                      'تم ارسال طلب الانضمام بنجاح، سيتم اعلامك بالرد عليه في اقرب وقت ممكن.',
+                ).show();
+              }
+            } else if (joinState == 0) {
+              log('Join request is pending');
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    backgroundColor: ColorsManager.mainBlue(context),
+                    content: const Center(
+                      child: Text('طلب الانضمام قيد الانتظار.'),
                     ),
                   ),
-                ),
-              );
+                );
+              }
+            } else if (joinState == 2) {
+              log('Already joined this group');
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    backgroundColor: ColorsManager.mainBlue(context),
+                    content: const Center(
+                      child: Text('انت بالفعل منضم لهذه المجموعة.'),
+                    ),
+                  ),
+                );
+              }
             } else {
-              // ignore: use_build_context_synchronously
+              log('Join request failed');
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    backgroundColor: ColorsManager.coralRed,
+                    content: Center(
+                      child: Text(
+                          'حدث خطأ أثناء إرسال طلب الانضمام، يرجى المحاولة مرة أخرى.'),
+                    ),
+                  ),
+                );
+              }
+            }
+          } else {
+            log('Invalid group code or group not found');
+            if (context.mounted) {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   backgroundColor: ColorsManager.coralRed,
                   content: Center(
-                    child: Text(
-                      'الكود الذي ادخلته غير صحيح، يرجى التأكد من الكود والمحاولة مرة اخرى.',
-                    ),
+                    child: Text('من فضلك أدخل كود المادة بشكل صحيح'),
                   ),
                 ),
               );
             }
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                backgroundColor: ColorsManager.coralRed,
-                content: Center(
-                  child: Text(
-                    'من فضلك أدخل كود المادة بشكل صحيح',
-                  ),
-                ),
-              ),
-            );
           }
         },
       ),

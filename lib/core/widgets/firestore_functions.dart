@@ -1,5 +1,7 @@
 import 'dart:developer';
+import 'dart:ffi';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:student/core/classes/group.dart';
 import 'package:student/core/classes/user.dart';
 import 'package:student/helpers/app_regex.dart';
@@ -45,7 +47,8 @@ class FireStoreFunctions {
       String? studyYear,
       String? imageUrl}) async {
     try {
-      final docId = await getDocId(collection: 'users', field: 'id', value: id);
+      final doc = await getDoc(collection: 'users', field: 'id', value: id);
+      final docId = doc?.id;
       if (docId != null) {
         Map<String, dynamic> updatedData = {
           if (firstName != null) 'firstName': firstName,
@@ -66,7 +69,7 @@ class FireStoreFunctions {
     }
   }
 
-  static Future<String?> getDocId({
+  static Future<QueryDocumentSnapshot<Object?>?> getDoc({
     required String collection,
     required String field,
     required var value,
@@ -77,7 +80,7 @@ class FireStoreFunctions {
           .where(field, isEqualTo: value)
           .get();
       if (querySnapshot.docs.isNotEmpty) {
-        return querySnapshot.docs.first.id;
+        return querySnapshot.docs.first;
       } else {
         return null;
       }
@@ -322,30 +325,66 @@ class FireStoreFunctions {
     });
   }
 
-  static Future<void> sendJoinRequestNotification(String teacherId,
-      String groupId, String studentId, String groupName) async {
-    await _firestore.collection('notifications').add({
-      'receiverId': teacherId,
-      'senderId': studentId,
-      'groupId': groupId,
-      'groupName': groupName,
-      'type': 'join_request',
-      'status': 'pending',
-      'timestamp': FieldValue.serverTimestamp(),
-    });
+  static Future<int> sendJoinRequestNotification(
+    String teacherId,
+    String groupId,
+    String studentId,
+    String groupName,
+  ) async {
+    try {
+      log("Checking for existing join requests");
+
+      // Initial query without orderBy
+      final querySnapshot = await _firestore
+          .collection('notifications')
+          .where('senderId', isEqualTo: studentId)
+          .where('groupId', isEqualTo: groupId)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        final latestRequest = querySnapshot.docs.first;
+        final status = latestRequest['status'];
+        log("Found existing request with status: $status");
+
+        if (status == 'pending') {
+          return 0; // Indicates a pending request
+        } else if (status == 'accepted') {
+          return 2; // Indicates already accepted
+        }
+      }
+
+      log("No existing requests found or last request not pending/accepted. Adding new request");
+      await _firestore.collection('notifications').add({
+        'receiverId': teacherId,
+        'senderId': studentId,
+        'groupId': groupId,
+        'groupName': groupName,
+        'type': 'join_request',
+        'status': 'pending',
+        'seen': false,
+        'timestamp': FieldValue.serverTimestamp(),
+      });
+
+      log("Join request successfully added");
+      return 1; // Indicates successful request
+    } catch (error) {
+      log("Failed to send join request: $error");
+      return -1; // Indicates an error
+    }
   }
 
-  static Future<void> sendJoinResponseNotification(
-      String studentId, String groupId, String groupName, bool accepted) async {
-    await _firestore.collection('notifications').add({
-      'receiverId': studentId,
-      'groupId': groupId,
-      'groupName': groupName,
-      'type': 'join_response',
-      'status': accepted ? 'accepted' : 'rejected',
-      'timestamp': FieldValue.serverTimestamp(),
-    });
-  }
+  // static Future<void> sendJoinResponseNotification(
+  //     String studentId, String groupId, String groupName, bool accepted) async {
+  //   await _firestore.collection('notifications').add({
+  //     'receiverId': studentId,
+  //     'groupId': groupId,
+  //     'groupName': groupName,
+  //     'type': 'join_response',
+  //     'status': accepted ? 'accepted' : 'rejected',
+  //     'seen': false,
+  //     'timestamp': FieldValue.serverTimestamp(),
+  //   });
+  // }
 
   static Future<void> updateNotificationStatus(
       String notificationId, String status) async {
@@ -354,9 +393,9 @@ class FireStoreFunctions {
     });
   }
 
-  static Future<void> updateUserToken(String userId, String token) async {
-    await _firestore.collection('users').doc(userId).update({
-      'fcmToken': token,
+  static Future<void> notificationSeen(String notificationId) async {
+    await _firestore.collection('notifications').doc(notificationId).update({
+      'seen': true,
     });
   }
 
@@ -380,6 +419,74 @@ class FireStoreFunctions {
         notificationId, accepted ? 'accepted' : 'rejected');
 
     // Notify the student
-    await sendJoinResponseNotification(studentId, groupId, groupName, accepted);
+    // await sendJoinResponseNotification(studentId, groupId, groupName, accepted);
+  }
+
+  static Future<List<Map<String, String>>> fetchTeacherNotifications(
+      String teacherId) async {
+    final List<Map<String, String>> notifications = [];
+    final querySnapshot = await _firestore
+        .collection('notifications')
+        .where('receiverId', isEqualTo: teacherId)
+        .where('status', isEqualTo: 'pending')
+        .get();
+    log('Fetching notifications for teacher $teacherId');
+
+    for (final notificationDoc in querySnapshot.docs) {
+      final senderId = notificationDoc['senderId'];
+      final groupId = notificationDoc['groupId'];
+      final groupName = notificationDoc['groupName'];
+      final type = notificationDoc['type'];
+      final timestamp = notificationDoc['timestamp'].toDate().toString();
+
+      final studentData = await FireStoreFunctions.getDoc(
+          collection: 'users', field: 'id', value: senderId);
+
+      notifications.add({
+        'notificationId': notificationDoc.id,
+        'senderId': senderId,
+        'groupId': groupId,
+        'groupName': groupName,
+        'type': type,
+        'timestamp': timestamp,
+        'name': '${studentData!['firstName']} ${studentData['lastName']}',
+        'image': studentData['imageUrl'],
+      });
+    }
+    return notifications;
+  }
+
+  static Future<List<Map<String, String>>> fetchStudentNotifications(
+      String studentId) async {
+    final List<Map<String, String>> notifications = [];
+    final querySnapshot = await _firestore
+        .collection('notifications')
+        .where('senderId', isEqualTo: studentId)
+        .where('status', isNotEqualTo: 'pending')
+        .get();
+    log('Fetching notifications for student 11');
+
+    for (final notificationDoc in querySnapshot.docs) {
+      final receiverId = notificationDoc['receiverId'];
+      final groupId = notificationDoc['groupId'];
+      final groupName = notificationDoc['groupName'];
+      final type = notificationDoc['type'];
+      final timestamp = notificationDoc['timestamp'].toDate().toString();
+
+      final teacherData = await FireStoreFunctions.getDoc(
+          collection: 'users', field: 'id', value: receiverId);
+
+      notifications.add({
+        'notificationId': notificationDoc.id,
+        'receiverId': receiverId,
+        'groupId': groupId,
+        'groupName': groupName,
+        'type': type,
+        'timestamp': timestamp,
+        'name': '${teacherData!['firstName']} ${teacherData['lastName']}',
+        'image': teacherData['imageUrl'],
+      });
+    }
+    return notifications;
   }
 }
