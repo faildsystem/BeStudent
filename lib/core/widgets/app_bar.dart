@@ -50,16 +50,27 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                 : null,
             actions: [
               if (!isProfileOrSettings)
-                IconButton(
-                  iconSize: 25,
-                  icon: const Icon(Icons.notifications),
-                  tooltip: 'Notifications',
-                  onPressed: () {
-                    context.pushNamed(
-                      Routes.teacherNotificationsScreen,
-                    );
-                  },
-                ),
+                isTeacher
+                    ? IconButton(
+                        iconSize: 25,
+                        icon: const Icon(Icons.notifications),
+                        tooltip: 'Notifications',
+                        onPressed: () {
+                          context.pushNamed(
+                            Routes.teacherNotificationsScreen,
+                          );
+                        },
+                      )
+                    : IconButton(
+                        iconSize: 25,
+                        icon: const Icon(Icons.notifications),
+                        tooltip: 'Notifications',
+                        onPressed: () {
+                          context.pushNamed(
+                            Routes.studentNotificationsScreen,
+                          );
+                        },
+                      ),
               if (!isProfileOrSettings)
                 Padding(
                   padding: const EdgeInsets.all(8.0),

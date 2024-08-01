@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:student/screens/student/ui/notification_screen/ui/student_notifications_screen.dart';
 
 import '../screens/create_password/ui/create_password.dart';
 import '../screens/forget/ui/forget_screen.dart';
@@ -16,7 +17,7 @@ import '../screens/student/ui/student_navigator.dart';
 import '../screens/teacher/ui/create_group_screen/ui/create_course_screen.dart';
 import '../screens/teacher/ui/group_students_screen/ui/show_all_students_screen.dart';
 import '../screens/teacher/ui/groups_screen/ui/teacher_groups_screen.dart';
-import '../screens/teacher/ui/notification_screen/ui/notifications_screen.dart';
+import '../screens/teacher/ui/notification_screen/ui/teacher_notifications_screen.dart';
 import '../screens/teacher/ui/teacher_navigator.dart';
 import 'routes.dart';
 
@@ -92,6 +93,11 @@ class AppRouter {
           builder: (_) => StudentNavigator(
             currentIndex: index ?? 0,
           ),
+        );
+
+      case Routes.studentNotificationsScreen:
+        return MaterialPageRoute(
+          builder: (_) => const StudentNotificationsScreen(),
         );
 
       case Routes.qrScannerScreen:

@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:student/core/widgets/firestore_functions.dart';
-import 'package:student/core/widgets/dialog_message.dart';
 import 'package:student/helpers/app_regex.dart';
 
 class QRScannerScreen extends StatefulWidget {
@@ -15,7 +14,7 @@ class QRScannerScreen extends StatefulWidget {
 }
 
 class _QRScannerScreenState extends State<QRScannerScreen> {
-  String userId = FirebaseAuth.instance.currentUser!.uid;
+  String studentId = FirebaseAuth.instance.currentUser!.uid;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   QRViewController? controller;
   String scannedCode = '';
@@ -40,64 +39,80 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
     this.controller = controller;
 
     controller.scannedDataStream.listen((scanData) async {
-      late int joinState;
       setState(() {
         scannedCode = scanData.code!;
       });
       controller.stopCamera();
       controller.pauseCamera();
 
-      if (AppRegex.isCodeValid(scannedCode)) {
-        final groupId = await FireStoreFunctions.getDocId(
-            collection: 'group', field: 'groupCode', value: scannedCode);
-        joinState = await FireStoreFunctions.groupJoinRequest(
-          userId: userId,
-          code: scannedCode,
-          groupId: groupId,
-        );
+      final group = await FireStoreFunctions.getDoc(
+          collection: 'group', field: 'groupCode', value: scannedCode);
+
+      if (AppRegex.isCodeValid(scannedCode) && group != null) {
+        final joinState = await FireStoreFunctions.sendJoinRequestNotification(
+            group['creatorId'], group.id, studentId, group['groupName']);
 
         switch (joinState) {
           case 1:
             // ignore: use_build_context_synchronously
-            CustomDialog.showDialog(
+            AwesomeDialog(
               context: context,
-              type: DialogType.success,
-              title: 'تم الانضمام بنجاح',
-              message:
-                  'تم الانضمام بنجاح للمجموعة، يمكنك الان الانتقال لصفحة المواد.',
-              argument: 1,
-            );
+              dialogType: DialogType.success,
+              animType: AnimType.bottomSlide,
+              btnOkOnPress: () {
+                controller.resumeCamera();
+              },
+              btnOkText: 'حسنا',
+              title: 'تم ارسال طلب الانضمام ',
+              desc:
+                  'تم ارسال طلب الانضمام بنجاح، سيتم اعلامك بالرد عليه في اقرب وقت ممكن.',
+            ).show();
+            break;
+          case 2:
+            // ignore: use_build_context_synchronously
+            AwesomeDialog(
+              context: context,
+              dialogType: DialogType.info,
+              animType: AnimType.bottomSlide,
+              onDismissCallback: (type) => controller.resumeCamera(),
+              btnOkOnPress: () {
+                controller.resumeCamera();
+              },
+              btnOkText: 'حسنا',
+              title: 'تنبيه',
+              desc: 'انت بالفعل منضم لهذه المجموعة.',
+            ).show();
             break;
           case 0:
             // ignore: use_build_context_synchronously
-            CustomDialog.showDialog(
+            AwesomeDialog(
               context: context,
-              type: DialogType.info,
-              title: 'منضم مسبقاً',
-              message: 'انت بالفعل منضم لهذه المجموعة.',
-              argument: 0,
-            );
-            break;
-          case -1:
-            // ignore: use_build_context_synchronously
-            CustomDialog.showDialog(
-              context: context,
-              type: DialogType.error,
-              title: 'خطأ',
-              message:
-                  'الكود الذي قمت بمسحه غير صحيح، يرجى التأكد من الكود والمحاولة مرة اخرى.',
-              argument: 0,
-            );
+              dialogType: DialogType.info,
+              animType: AnimType.bottomSlide,
+              onDismissCallback: (type) => controller.resumeCamera(),
+              btnOkOnPress: () {
+                controller.resumeCamera();
+              },
+              btnOkText: 'طلب الانضمام قيد الانتظار.',
+              title: 'تنبيه',
+              desc:
+                  'طلب الانضمام قيد الانتظار، سيتم اعلامك بالرد عليه في اقرب وقت ممكن.',
+            ).show();
         }
       } else {
-        CustomDialog.showDialog(
+        AwesomeDialog(
           context: context,
-          type: DialogType.error,
+          dialogType: DialogType.error,
+          animType: AnimType.bottomSlide,
+          onDismissCallback: (type) => controller.resumeCamera(),
+          btnCancelOnPress: () {
+            controller.resumeCamera();
+          },
+          btnCancelText: 'حاول مرة اخرى',
           title: 'خطأ',
-          message:
+          desc:
               'الكود الذي قمت بمسحه غير صحيح، يرجى التأكد من الكود والمحاولة مرة اخرى.',
-          argument: 0,
-        );
+        ).show();
       }
     });
   }
