@@ -28,51 +28,51 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  awesome_dialog: ^3.2.0
-  cupertino_icons: ^1.0.2
-  firebase_auth: ^4.17.5
-  firebase_core: ^2.25.4
+  awesome_dialog: 3.2.0
+  cupertino_icons: 1.0.2
+  firebase_auth: 4.17.5
+  firebase_core: 2.32.0
   firebase_storage:
   flutter:
     sdk: flutter
-  flutter_screenutil: ^5.9.0
-  flutter_offline: ^3.0.1
-  font_awesome_flutter: ^10.7.0
-  gap: ^3.0.1
-  google_sign_in: ^6.2.1
-  rive: ^0.12.4
-  awesome_drawer_bar: ^1.2.0
-  loading_animation_widget: ^1.2.1
-  babstrap_settings_screen: ^0.1.6
-  flutter_svg: ^2.0.10+1
-  sizer: ^2.0.15
+  flutter_screenutil: 5.9.0
+  flutter_offline: 3.0.1
+  font_awesome_flutter: 10.7.0
+  gap: 3.0.1
+  google_sign_in: 6.2.1
+  rive: 0.12.4
+  awesome_drawer_bar: 1.2.0
+  loading_animation_widget: 1.2.1
+  babstrap_settings_screen: 0.1.6
+  flutter_svg: 2.0.10+1
+  sizer: 2.0.15
 
   cloud_firestore:
   intl:
   image_picker:
-  google_nav_bar: ^5.0.6
+  google_nav_bar: 5.0.6
 
-  # flutter_slidable: ^0.6.0
+  # flutter_slidable: 0.6.0
 
-  flutter_barcode_scanner: ^2.0.0
+  flutter_barcode_scanner: 2.0.0
   qr_code_scanner:
-  qr_flutter: ^4.1.0
+  qr_flutter: 4.1.0
 
   flutter_onboarding_slider:
   shared_preferences:
-  easy_dynamic_theme: ^2.2.0
-  syncfusion_flutter_calendar: ^25.1.41
-  pluto_grid: ^8.0.0
-  pretty_qr_code: ^3.3.0
-  percent_indicator: ^4.2.3
-  flutter_native_splash: ^2.4.0
-  # fluttertoast: ^8.2.6
-  connectivity_plus: ^5.0.2
-  firebase_messaging: ^14.9.4
-  cloud_functions: ^4.7.6
+  easy_dynamic_theme: 2.2.0
+  syncfusion_flutter_calendar: 25.1.41
+  pluto_grid: 8.0.0
+  pretty_qr_code: 3.3.0
+  percent_indicator: 4.2.3
+  flutter_native_splash: 2.4.0
+  # fluttertoast: 8.2.6
+  connectivity_plus: 5.0.2
+  firebase_messaging: 14.9.4
+  cloud_functions: 4.7.6
 
 dev_dependencies:
-  flutter_lints: ^2.0.0
+  flutter_lints: 2.0.0
   flutter_test:
     sdk: flutter
 
