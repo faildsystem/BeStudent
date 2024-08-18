@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:student/core/widgets/firestore_functions.dart';
-import 'package:student/screens/profile/widgets/edit_profile_form.dart';
 import 'package:student/screens/profile/widgets/update_profile_pic.dart';
 import 'package:student/theming/colors.dart';
 import 'package:student/theming/styles.dart';
@@ -119,20 +118,20 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
         ),
         Gap(5.h),
         Text(user.email, style: TextStyles.font11DarkBlue600Weight),
-        Gap(10.h),
-        Column(
-          children: [
-            IconButton(
-              onPressed: () {
-                EditProfile.editProfileForm(context);
-              },
-              icon: Icon(
-                Icons.edit,
-                color: ColorsManager.darkBlue(context),
-              ),
-            ),
-          ],
-        )
+        // Gap(10.h),
+        // Column(
+        //   children: [
+        //     IconButton(
+        //       onPressed: () {
+        //         EditProfile.editProfileForm(context);
+        //       },
+        //       icon: Icon(
+        //         Icons.edit,
+        //         color: ColorsManager.darkBlue(context),
+        //       ),
+        //     ),
+        //   ],
+        // )
       ],
     );
   }

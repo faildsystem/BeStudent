@@ -18,6 +18,7 @@ class StudentGroupsScreen extends StatefulWidget {
 
 class _StudentGroupsScreenState extends State<StudentGroupsScreen> {
   final String studentId = FirebaseAuth.instance.currentUser!.uid;
+
   late List<Group> studentGroups;
   bool isLoading = false;
 
@@ -58,9 +59,22 @@ class _StudentGroupsScreenState extends State<StudentGroupsScreen> {
                 )
               : studentGroups.isEmpty
                   ? Center(
-                      child: Text(
-                        "لا توجد مجموعات",
-                        style: TextStyle(color: ColorsManager.black(context)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.group_off,
+                            color: ColorsManager.mainBlue(context),
+                            size: 100,
+                          ),
+                          const SizedBox(height: 16),
+                          Text(
+                            "لا توجد مجموعات",
+                            style: TextStyle(
+                                color: ColorsManager.black(context),
+                                fontSize: 18),
+                          ),
+                        ],
                       ),
                     )
                   : ListView.builder(

@@ -1,4 +1,3 @@
-import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:babstrap_settings_screen/babstrap_settings_screen.dart';
@@ -6,17 +5,29 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:student/core/widgets/app_bar.dart';
 import 'package:student/theming/colors.dart';
 import 'package:student/theming/styles.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/theme_dialog.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
-
+  const SettingsScreen({Key? key, required this.isTeacher}) : super(key: key);
+  final bool isTeacher;
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  Future<void> _launchTelegramGroup() async {
+    final Uri telegramUrl = Uri.parse(
+        'https://t.me/+mSkZBcW5tuExZTQ0'); // Replace with your Telegram group link
+
+    if (await canLaunchUrl(telegramUrl)) {
+      await launchUrl(telegramUrl, mode: LaunchMode.externalApplication);
+    } else {
+      throw 'Could not launch $telegramUrl';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +51,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          return const ThemeDialog();
+                          return ThemeDialog(isTeacher: widget.isTeacher);
                         },
                       );
                     },
@@ -50,14 +61,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       withBackground: true,
                       backgroundColor: ColorsManager.darkBlue(context),
                     ),
-                    title: 'تغيير الثيم',
-                  ),
-                  SettingsItem(
-                    onTap: () {},
-                    icons: CupertinoIcons.pencil_outline,
-                    iconStyle: IconStyle(),
-                    title: 'الخطوط',
-                    subtitle: "حجم و نوع الخط",
+                    title: 'تغيير المظهر',
                   ),
                 ],
               ),
@@ -66,7 +70,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 settingsGroupTitleStyle: TextStyles.font17DarkBlue700Weight,
                 items: [
                   SettingsItem(
-                    onTap: () {},
+                    onTap: _launchTelegramGroup, // Navigate to Telegram group
                     icons: Icons.help_outlined,
                     iconStyle: IconStyle(
                       backgroundColor: ColorsManager.purple(context),
@@ -74,13 +78,36 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     title: 'مساعدة',
                   ),
                   SettingsItem(
-                    onTap: () {},
-                    icons: Icons.info_rounded,
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('حول التطبيق'),
+                            content: Text(
+                              'تطبيق يساعد الطلاب و المعلمين علي ادارة الدروس و الواجبات و الامتحانات بشكل سهل و مريح و يمكنكم الانضمام الي مجموعتنا علي تليجرام للمزيد من المساعدة',
+                              style: TextStyles.font15DarkBlue500Weight,
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text(
+                                  'اغلاق',
+                                  style: TextStyles.font15DarkBlue500Weight,
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    icons: Icons.info_outline,
                     iconStyle: IconStyle(
                       backgroundColor: ColorsManager.purple(context),
                     ),
-                    title: 'عن التطبيق',
-                    subtitle: "المزيد عن التطبيق",
+                    title: 'حول التطبيق',
                   ),
                 ],
               ),

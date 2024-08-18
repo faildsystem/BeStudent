@@ -99,10 +99,10 @@ class TextStyles {
     fontWeight: FontWeight.w300,
     // color: ColorsManager.white,
   );
-  static TextStyle font24White400Weight = TextStyle(
+  static TextStyle font20White400Weight = TextStyle(
     fontSize: 20.sp,
     fontWeight: FontWeight.w400,
-    // color: ColorsManager.white,
+    color: Colors.white,
   );
 
   static TextStyle font18White400Weight = TextStyle(

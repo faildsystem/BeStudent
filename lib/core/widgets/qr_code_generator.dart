@@ -4,8 +4,8 @@ import 'package:pretty_qr_code/pretty_qr_code.dart';
 
 import '../../theming/colors.dart';
 
-class QrCodeWidget extends StatelessWidget {
-  const QrCodeWidget({
+class QrCodeGenerator extends StatelessWidget {
+  const QrCodeGenerator({
     super.key,
     required this.data,
     required this.width,
@@ -24,15 +24,12 @@ class QrCodeWidget extends StatelessWidget {
         height: height.h,
         child: PrettyQrView.data(
           data: data,
-          errorCorrectLevel: QrErrorCorrectLevel.H,
+          // errorCorrectLevel: QrErrorCorrectLevel.H,
           decoration: const PrettyQrDecoration(
-            image: PrettyQrDecorationImage(
-              image: AssetImage('assets/images/quiz.png'),
-            ),
-            shape: PrettyQrSmoothSymbol(
-              color: ColorsManager.mainBlueColor,
-            ),
-          ),
+              image: PrettyQrDecorationImage(
+                image: AssetImage('assets/images/quiz.png'),
+              ),
+              shape: PrettyQrSmoothSymbol(color: ColorsManager.mainBlueColor)),
         ),
       ),
     );

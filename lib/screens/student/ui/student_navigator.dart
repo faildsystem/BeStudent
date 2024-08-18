@@ -4,14 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:student/theming/colors.dart';
 
-import '../../schedule/student_schedule/ui/student_schedule_screen.dart';
+import 'student_schedule/ui/student_schedule_screen.dart';
 import '../../settings/ui/settings_screen.dart';
 import 'groups_screen/ui/student_groups_screen.dart';
 import 'join_screen/ui/join_group_screen.dart';
 
 // ignore: must_be_immutable
 class StudentNavigator extends StatefulWidget {
-  late int currentIndex;
+  int currentIndex;
   final String studentId = FirebaseAuth.instance.currentUser!.uid;
 
   StudentNavigator({
@@ -41,10 +41,14 @@ class _StudentNavigatorState extends State<StudentNavigator> {
           const JoinCourseScreen(),
           const StudentGroupsScreen(),
           StudentScheduleScreen(studentId: widget.studentId),
-          const SettingsScreen(),
+          const SettingsScreen(
+            isTeacher: false,
+          ),
         ],
         onPageChanged: (index) {
-          widget.currentIndex = index;
+          setState(() {
+            widget.currentIndex = index;
+          });
         },
       ),
       bottomNavigationBar: GNav(

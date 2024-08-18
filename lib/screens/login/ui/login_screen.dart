@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:student/core/widgets/no_internet.dart';
-import '../../../core/widgets/divided_text.dart';
-import '../../../helpers/google_sign_in.dart';
+
 import '../../../core/widgets/login_and_signup_animated_form.dart';
-import '../../../core/widgets/terms_and_conditions_text.dart';
 import '../../../theming/colors.dart';
 import '../../../theming/styles.dart';
 import 'widgets/do_not_have_account.dart';

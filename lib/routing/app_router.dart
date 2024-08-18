@@ -6,10 +6,8 @@ import '../screens/forget/ui/forget_screen.dart';
 import '../screens/login/ui/login_screen.dart';
 import '../screens/onboarding/ui/onboarding_screen.dart';
 import '../screens/profile/ui/profile_screen.dart';
-import '../screens/settings/ui/settings_screen.dart';
 import '../screens/signup/ui/sign_up_sceen.dart';
 import '../screens/splash/ui/splash_screen.dart';
-import '../screens/student/ui/groups_screen/ui/qr_code_screen.dart';
 import '../screens/student/ui/groups_screen/ui/student_groups_screen.dart';
 import '../screens/student/ui/join_screen/ui/join_group_screen.dart';
 import '../screens/student/ui/join_screen/ui/qr_screen.dart';
@@ -72,10 +70,10 @@ class AppRouter {
           builder: (_) => const ProfileScreen(),
         );
 
-      case Routes.settingsScreen:
-        return MaterialPageRoute(
-          builder: (_) => const SettingsScreen(),
-        );
+      // case Routes.settingsScreen:
+      //   return MaterialPageRoute(
+      //     builder: (_) => const SettingsScreen(),
+      //   );
 
       case Routes.joinGroupScreen:
         return MaterialPageRoute(
@@ -103,11 +101,6 @@ class AppRouter {
       case Routes.qrScannerScreen:
         return MaterialPageRoute(
           builder: (_) => const QRScannerScreen(),
-        );
-
-      case Routes.studentQrCodeScreen:
-        return MaterialPageRoute(
-          builder: (_) => QrCodeScreen(),
         );
 
       case Routes.teacherScreen:
