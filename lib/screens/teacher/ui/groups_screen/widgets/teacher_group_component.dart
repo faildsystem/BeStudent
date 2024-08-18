@@ -1,18 +1,19 @@
-import 'dart:developer';
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:student/core/classes/days.dart';
 import 'package:student/core/classes/group.dart';
+import 'package:student/core/widgets/firestore_functions.dart';
 import 'package:student/helpers/extensions.dart';
 
 import 'package:student/theming/colors.dart';
 import 'package:student/theming/styles.dart';
 
+import '../../../../../core/classes/time.dart';
+import '../../../../../core/widgets/qr_code_dialog.dart';
 import '../../../../../routing/routes.dart';
 import '../../../../student/ui/groups_screen/widgets/group_info_row.dart';
-import '../../group_students_screen/ui/show_all_students_screen.dart';
 
 class TeacherGroupComponent extends StatelessWidget {
   const TeacherGroupComponent(
@@ -44,23 +45,22 @@ class TeacherGroupComponent extends StatelessWidget {
                   Row(
                     children: [
                       IconButton(
-                        icon: const Icon(
-                          Icons.share,
-                          // color: ColorsManager.white(context),
-                        ),
-                        onPressed: () {
-                          // showDialog(
-                          //   context: context,
-                          //   builder: (context) {
-                          //     return QrDialog(group: group);
-                          //   },
-                          // );
-                        },
-                      ),
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return GroupQrCode(group: group);
+                              },
+                            );
+                          },
+                          icon: Icon(
+                            Icons.share,
+                            color: ColorsManager.white(context),
+                          )),
                       IconButton(
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.delete_forever,
-                          // color: ColorsManager.white(context),
+                          color: ColorsManager.white(context),
                         ),
                         onPressed: () {
                           AwesomeDialog(
@@ -69,9 +69,9 @@ class TeacherGroupComponent extends StatelessWidget {
                             animType: AnimType.bottomSlide,
                             btnOk: TextButton(
                               onPressed: () async {
+                                await FireStoreFunctions.deleteGroup(
+                                    group.groupId);
                                 context.pop();
-                                // await FireStoreFunctions.unrollGroup(
-                                //     studentId, group.groupCode);
                               },
                               child: const Text('نعم'),
                             ),
@@ -96,7 +96,8 @@ class TeacherGroupComponent extends StatelessWidget {
               Gap(8.h),
               InfoRow(
                   attribute: 'الميعاد',
-                  value: '${group.groupDay} الساعة  ${group.groupTime}'),
+                  value:
+                      '${Days.translateDayToArabic(group.groupDay)} الساعة  ${FormatTimeToArabic.formatTimeToArabic(group.groupTime)}'),
             ],
           ),
         ),

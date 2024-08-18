@@ -1,16 +1,17 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:student/theming/colors.dart';
-
-import '../../profile/widgets/avatar_name_email.dart';
+import 'package:student/screens/teacher/ui/teacher_schedule/ui/teacher_schedule_screen.dart';
+import '../../../theming/colors.dart';
 import '../../settings/ui/settings_screen.dart';
 import 'groups_screen/ui/teacher_groups_screen.dart';
-import 'home_screen/ui/teacher_home_screen.dart';
+import 'home_screen/ui/teacher_dashboard_screen.dart';
 
 // ignore: must_be_immutable
 class TeacherNavigator extends StatefulWidget {
-  late int currentIndex;
+  int currentIndex;
+  final String teacherId = FirebaseAuth.instance.currentUser!.uid;
 
   TeacherNavigator({
     Key? key,
@@ -35,14 +36,16 @@ class _TeacherNavigatorState extends State<TeacherNavigator> {
     return Scaffold(
       body: PageView(
         controller: _pageController,
-        children: const [
-          TeacherHomeScreen(),
-          TeacherGroupsScreen(),
-          ProfileAvatar(),
-          SettingsScreen(),
+        children: [
+          const TeacherDashboardScreen(),
+          const TeacherGroupsScreen(),
+          TeacherScheduleScreen(teacherId: widget.teacherId),
+          const SettingsScreen(isTeacher: true),
         ],
         onPageChanged: (index) {
-          widget.currentIndex = index;
+          setState(() {
+            widget.currentIndex = index;
+          });
         },
       ),
       bottomNavigationBar: GNav(
@@ -65,8 +68,8 @@ class _TeacherNavigatorState extends State<TeacherNavigator> {
         tabMargin: EdgeInsets.all(5.w),
         tabs: const [
           GButton(
-            icon: Icons.add_circle,
-            text: 'انضمام',
+            icon: Icons.home,
+            text: 'الرئيسية',
           ),
           GButton(
             icon: Icons.note,

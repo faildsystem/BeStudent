@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
@@ -93,6 +95,100 @@ class _AllStudentsScreenState extends State<AllStudentsScreen> {
     });
   }
 
+  Future<int> fetchStudentAttendanceCount(String studentId) async {
+    // Fetch the count of attendance records for the given student in the group
+    // return await FireStoreFunctions.getAttendanceCountForStudent(
+    //     widget.groupId, studentId);
+    return 0;
+  }
+
+  Future<void> showStudentProfileDialog(
+      BuildContext context, String studentId) async {
+    final profileData = await FireStoreFunctions.fetchStudentProfile(studentId);
+    final attendanceData =
+        await FireStoreFunctions.fetchStudentAttendance(studentId);
+
+    if (profileData.isEmpty) {
+      // Handle empty profile data
+      return;
+    }
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          contentPadding: EdgeInsets.symmetric(
+            vertical: 20.h,
+            horizontal: 15.w,
+          ),
+          content: Directionality(
+            textDirection: TextDirection.rtl,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (profileData['imageUrl'] != null)
+                    Center(
+                      child: CircleAvatar(
+                        backgroundImage: NetworkImage(profileData['imageUrl']),
+                        radius: 50.r,
+                      ),
+                    ),
+                  SizedBox(height: 20.h),
+                  Text(
+                    profileData['fullName'] ?? 'No Name',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18.sp,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: 20.h),
+                  Text(
+                    'عدد أيام الحضور: ${attendanceData['count']}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.sp,
+                    ),
+                  ),
+                  SizedBox(height: 10.h),
+                  ExpansionTile(
+                    title: Text(
+                      'تواريخ الحضور',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.sp,
+                      ),
+                    ),
+                    children: attendanceData['dates']
+                        .map<Widget>((date) => ListTile(
+                              title: Text(
+                                date.split(' ')[0], // Show only the date part
+                                style: TextStyle(fontSize: 14.sp),
+                              ),
+                            ))
+                        .toList(),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'إغلاق',
+                style: TextStyle(fontSize: 16.sp),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void saveAttendance() async {
     // Check network connectivity
     var connectivityResult = await (Connectivity().checkConnectivity());
@@ -123,12 +219,6 @@ class _AllStudentsScreenState extends State<AllStudentsScreen> {
     ).show();
   }
 
-  Color getColor(double attendance) {
-    if (attendance >= .75) return Colors.green;
-    if (attendance >= .50) return Color.fromARGB(255, 199, 181, 16);
-    return Colors.red;
-  }
-
   @override
   void dispose() {
     qrController?.dispose();
@@ -151,79 +241,64 @@ class _AllStudentsScreenState extends State<AllStudentsScreen> {
         textDirection: TextDirection.rtl,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Table(
-                    border: TableBorder.all(color: Colors.grey.shade300),
-                    columnWidths: const {
-                      0: FlexColumnWidth(1),
-                      1: FlexColumnWidth(3),
-                      2: FlexColumnWidth(1.5),
-                    },
-                    children: [
-                      TableRow(
-                        decoration: BoxDecoration(
-                          color: Colors.blue.shade100,
-                        ),
-                        children: [
-                          _buildHeaderCell('حاضر'),
-                          _buildHeaderCell('الاسم'),
-                          _buildHeaderCell('نسبة الحضور'),
-                        ],
-                      ),
-                      for (var student in students)
-                        TableRow(
+          child: (students.isNotEmpty)
+              ? Column(
+                  children: [
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Table(
+                          border: TableBorder.all(color: Colors.grey.shade300),
+                          columnWidths: const {
+                            0: FlexColumnWidth(1),
+                            1: FlexColumnWidth(3),
+                          },
                           children: [
-                            _buildTableCell(
-                              child: Checkbox(
-                                value: student.isPresent,
-                                onChanged: (value) {
-                                  setState(() {
-                                    student.isPresent = value!;
-                                  });
-                                },
-                                checkColor: Colors.white,
-                                activeColor: Colors.lightBlue,
+                            TableRow(
+                              decoration: BoxDecoration(
+                                color: Colors.blue.shade100,
                               ),
+                              children: [
+                                _buildHeaderCell('حاضر'),
+                                _buildHeaderCell('الاسم'),
+                              ],
                             ),
-                            _buildTableCell(
-                              child: Text(student.fullName,
-                                  style: Theme.of(context).textTheme.bodyLarge),
-                            ),
-                            _buildTableCell(
-                              child: Container(
-                                height: 35.h,
-                                width: 35.w,
-                                decoration: BoxDecoration(
-                                  color: getColor(student.attendance),
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    '${(student.attendance * 100).round()}%',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                        fontSize: 15.sp),
+                            for (var student in students)
+                              TableRow(
+                                children: [
+                                  _buildTableCell(
+                                    child: Checkbox(
+                                      value: student.isPresent,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          student.isPresent = value!;
+                                        });
+                                      },
+                                      checkColor: Colors.white,
+                                      activeColor: Colors.lightBlue,
+                                    ),
                                   ),
-                                ),
+                                  _buildTableCell(
+                                    child: InkWell(
+                                      onTap: () => showStudentProfileDialog(
+                                          context, student.id),
+                                      child: Text(student.fullName,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleMedium),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
                           ],
                         ),
-                    ],
-                  ),
-                ),
-              ),
-              if (students.isEmpty)
-                Center(
+                      ),
+                    ),
+                  ],
+                )
+              : Center(
                   child: Text('لا يوجد طلاب متاحين',
                       style: Theme.of(context).textTheme.bodyLarge),
                 ),
-            ],
-          ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

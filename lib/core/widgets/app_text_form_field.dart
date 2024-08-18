@@ -13,6 +13,8 @@ class AppTextFormField extends StatelessWidget {
   final bool? isDense;
   final TextEditingController? controller;
   final Function(String?) validator;
+  final TextInputType? keyboardType; // Add this line
+
   const AppTextFormField({
     super.key,
     required this.hint,
@@ -23,7 +25,9 @@ class AppTextFormField extends StatelessWidget {
     this.onChanged,
     this.focusNode,
     required this.validator,
+    this.keyboardType, // Add this line
   });
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -33,6 +37,7 @@ class AppTextFormField extends StatelessWidget {
       },
       onChanged: onChanged,
       controller: controller,
+      keyboardType: keyboardType, // Add this line
       decoration: InputDecoration(
         hintTextDirection: TextDirection.rtl,
         hintText: hint,
