@@ -1,0 +1,14 @@
+// version 1
+
+8 - make the student name cell clickable in the attendance screen and add student performance for teacher 
+
+1- onboarding screen 
+9- logo and splash screen 
+
+
+// version 2
+
+4- ColorManager and TextStyles
+
+
+

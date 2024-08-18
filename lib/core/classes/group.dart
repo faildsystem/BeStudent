@@ -5,6 +5,7 @@ class Group {
   final String groupId;
   final String groupCode;
   final String groupName;
+  // final String groupGrade;
   final String groupDay;
   final String groupTime;
   final String teacherName;
@@ -19,6 +20,7 @@ class Group {
     required this.groupName,
     required this.teacherName,
     required this.teacherImage,
+    // required this.groupGrade,
     required this.groupDay,
     required this.groupTime,
     required this.creationDate,
