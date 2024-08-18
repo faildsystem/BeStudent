@@ -60,7 +60,7 @@ dependencies:
 
   flutter_onboarding_slider:
   shared_preferences:
-  easy_dynamic_theme: ^2.2.0
+  easy_dynamic_theme: ^2.3.1
   syncfusion_flutter_calendar: ^25.1.41
   pluto_grid: ^8.0.0
   pretty_qr_code: ^3.3.0
@@ -79,12 +79,12 @@ dev_dependencies:
 
 flutter_native_splash:
   color: "#42a5f5"
-  image: assets/images/logo.jpg
+  image: assets/images/logo.png
   android: true
   ios: true
 
   android_12:
-    image: assets/images/logo.jpg
+    image: assets/images/logo.png
     color: "#42a5f5"
 
   # The "flutter_lints" package below contains a set of recommended lints to

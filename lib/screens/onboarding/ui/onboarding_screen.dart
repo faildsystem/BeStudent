@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:student/helpers/extensions.dart';
 import 'package:student/routing/routes.dart';
 import 'package:student/theming/colors.dart';
-import 'package:student/theming/styles.dart';
 
 class OnBoarding extends StatelessWidget {
   const OnBoarding({super.key});
@@ -15,17 +14,10 @@ class OnBoarding extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: OnBoardingSlider(
         headerBackgroundColor: ColorsManager.white(context),
-        skipTextButton: Text(
-          'Skip',
-          style: TextStyles.font14Blue400Weight,
-        ),
-        trailing: Text(
-          'Login',
-          style: TextStyles.font14Blue400Weight,
-        ),
+        pageBackgroundColor: ColorsManager.white(context),
         controllerColor: ColorsManager.mainBlue(context),
         centerBackground: true,
-        finishButtonText: 'Register',
+        finishButtonText: 'تسجيل',
         finishButtonStyle: FinishButtonStyle(
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
@@ -47,32 +39,45 @@ class OnBoarding extends StatelessWidget {
           );
         },
         background: [
-          Image.asset('assets/images/slide_1.png', scale: 1.5),
-          Image.asset('assets/images/slide_2.png', scale: 3),
+          Image.asset('assets/images/logo.png', scale: 1.5),
+          Image.asset('assets/images/calendar.png', scale: 1.2),
         ],
         totalPage: 2,
         speed: 1.8,
         pageBodies: [
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 40),
-            child:  Column(
+            child: Column(
               children: <Widget>[
                 SizedBox(
                   height: 420.h,
                 ),
-                const Text(
-                    "Hey there, eager learner! 🎓 Welcome to BeStudent, where your academic journey gets an upgrade! We're thrilled to have you on board. Let's kickstart this adventure together! Tap 'Next' to continue."),
+                Text(
+                  "مرحبًا بك في BeStudent، مساعدك الشخصي لتحقيق النجاح الأكاديمي! 🎓جاهز للتفوق؟ نحن هنا لدعمك في كل خطوة. دعنا نبدأ رحلتك التعليمية معًا! 🌟",
+                  style: TextStyle(
+                    color: ColorsManager.black(context),
+                    fontSize: 16.sp,
+                  ),
+                  textDirection: TextDirection.rtl,
+                ),
               ],
             ),
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 40),
-            child:  Column(
+            child: Column(
               children: <Widget>[
                 SizedBox(
                   height: 420.h,
                 ),
-                const Text('Description Text 2'),
+                Text(
+                  'نظّم وقتك بكفاءة مع BeStudent! 🗓️ خطط جدولك الدراسي بسهولة، وحدد أولوياتك، وابقَ دائمًا على المسار الصحيح لتحقيق أهدافك.',
+                  style: TextStyle(
+                    color: ColorsManager.black(context),
+                    fontSize: 16.sp,
+                  ),
+                  textDirection: TextDirection.rtl,
+                ),
               ],
             ),
           ),

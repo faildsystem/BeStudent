@@ -84,7 +84,7 @@ class _StudentNavigatorState extends State<StudentNavigator> {
           ),
           GButton(
             icon: Icons.settings,
-            text: 'الحساب',
+            text: 'الاعدادات',
           ),
         ],
       ),
