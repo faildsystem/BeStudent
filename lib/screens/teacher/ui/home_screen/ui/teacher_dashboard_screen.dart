@@ -220,7 +220,7 @@ class _StatCard extends StatelessWidget {
   final String title;
   final String value;
 
-  _StatCard({required this.title, required this.value});
+  const _StatCard({required this.title, required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -246,7 +246,7 @@ class _QuickActionButton extends StatelessWidget {
   final String label;
   final VoidCallback onPressed;
 
-  _QuickActionButton(
+  const _QuickActionButton(
       {required this.icon, required this.label, required this.onPressed});
 
   @override
@@ -267,7 +267,7 @@ class _EventCard extends StatelessWidget {
   final String date;
   final String title;
 
-  _EventCard({required this.date, required this.title});
+  const _EventCard({required this.date, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -276,7 +276,7 @@ class _EventCard extends StatelessWidget {
         title: Text(title,
             style: TextStyles.font18DarkBlue700Weight,
             textAlign: TextAlign.right),
-        subtitle: Text(date, style: TextStyle(), textAlign: TextAlign.right),
+        subtitle: Text(date, style: const TextStyle(), textAlign: TextAlign.right),
       ),
     );
   }

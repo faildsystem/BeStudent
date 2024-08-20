@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, constant_identifier_names
+import 'dart:developer';
+
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +54,7 @@ class EmailAndPassword extends StatefulWidget {
 class _EmailAndPasswordState extends State<EmailAndPassword> {
   bool isObscureText = true;
   bool hasLowercase = false;
-  late final _auth = FirebaseAuth.instance;
+  final _auth = FirebaseAuth.instance;
 
   bool hasSpecialCharacters = false;
   bool hasNumber = false;
@@ -346,6 +348,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
             if (c.user!.emailVerified) {
               addSuccessController();
               await Future.delayed(const Duration(seconds: 2));
+
               removeAllControllers();
 
               final user = await FireStoreFunctions.fetchUser(c.user!.uid);
@@ -357,6 +360,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
                 predicate: (route) => false,
               );
             } else {
+              
               await _auth.signOut();
               addFailController();
               if (!context.mounted) return;
@@ -391,7 +395,9 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
           }
           isLoading = false;
           await Future.delayed(const Duration(seconds: 2));
+          
           setState(() {});
+          log('done');
         }
       },
     );

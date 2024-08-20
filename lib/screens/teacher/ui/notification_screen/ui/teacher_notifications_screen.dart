@@ -7,7 +7,7 @@ import 'package:student/core/widgets/firestore_functions.dart';
 import 'package:student/theming/colors.dart';
 
 class TeacherNotificationsScreen extends StatefulWidget {
-  TeacherNotificationsScreen({Key? key}) : super(key: key);
+  const TeacherNotificationsScreen({Key? key}) : super(key: key);
 
   @override
   _TeacherNotificationsScreenState createState() =>
@@ -103,7 +103,7 @@ class _TeacherNotificationsScreenState
         ),
         backgroundColor: ColorsManager.white(context),
         body: isLoading
-            ? Center(child: CircularProgressIndicator())
+            ? const Center(child: CircularProgressIndicator())
             : RefreshIndicator(
                 onRefresh: _refreshNotifications,
                 child: Directionality(
@@ -185,7 +185,7 @@ class _TeacherNotificationsScreenState
                                                 handleAcceptRequest(
                                                     notificationId);
                                               },
-                                              icon: Icon(Icons.check),
+                                              icon: const Icon(Icons.check),
                                               label: const Text('تأكيد'),
                                               style: ElevatedButton.styleFrom(),
                                             ),
@@ -194,7 +194,7 @@ class _TeacherNotificationsScreenState
                                                 handleRejectRequest(
                                                     notificationId);
                                               },
-                                              icon: Icon(Icons.close),
+                                              icon: const Icon(Icons.close),
                                               label: const Text('رفض'),
                                               style: ElevatedButton.styleFrom(),
                                             ),
@@ -214,7 +214,7 @@ class _TeacherNotificationsScreenState
                                                   ? Colors.green
                                                   : Colors.red,
                                             ),
-                                            SizedBox(width: 5),
+                                            const SizedBox(width: 5),
                                             Text(
                                               request['status'] == 'accepted'
                                                   ? 'تم قبول الطلب'

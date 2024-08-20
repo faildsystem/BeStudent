@@ -41,7 +41,7 @@ class _AllStudentsScreenState extends State<AllStudentsScreen> {
   }
 
   void onQRViewCreated(QRViewController controller) {
-    this.qrController = controller;
+    qrController = controller;
     controller.scannedDataStream.listen((scanData) async {
       String scannedId = scanData.code!;
 
@@ -369,7 +369,7 @@ class _AllStudentsScreenState extends State<AllStudentsScreen> {
               Navigator.of(context).pop();
             },
             child: const Center(
-              child: const Text('إلغاء',
+              child: Text('إلغاء',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,

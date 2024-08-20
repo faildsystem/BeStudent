@@ -85,10 +85,10 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
                     color: ColorsManager.darkBlue(context),
                   ),
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
+                    backgroundColor: WidgetStateProperty.all(
                       ColorsManager.white(context),
                     ),
-                    shape: MaterialStateProperty.all(
+                    shape: WidgetStateProperty.all(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50),
                       ),
