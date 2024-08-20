@@ -20,54 +20,56 @@ class SignUpScreen extends StatelessWidget {
           child: Padding(
             padding:
                 EdgeInsets.only(left: 30.w, right: 30.w, bottom: 5.h, top: 5.h),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'إنشاء حساب',
-                  style: TextStyles.font24Blue700Weight,
-                ),
-                Gap(0.001.sh),
-                Text(
-                  'اطلق العنان لإمكانياتك الكاملة مع BeStudent ',
-                  style: TextStyles.font13Grey400Weight,
-                ),
-                EmailAndPassword(
-                  isSignUpPage: true,
-                  isStudent: true,
-                ),
-                Gap(0.02.sh),
-                Center(
-                  child: RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: 'هل أنت مدرس؟ ',
-                          style: TextStyles.font14Blue400Weight,
-                        ),
-                        TextSpan(
-                          text: 'تواصل معنا',
-                          style: TextStyles.font14Blue400Weight,
-                        ),
-                      ],
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'إنشاء حساب',
+                    style: TextStyles.font24Blue700Weight,
+                  ),
+                  Gap(0.001.sh),
+                  Text(
+                    'اطلق العنان لإمكانياتك الكاملة مع BeStudent ',
+                    style: TextStyles.font13Grey400Weight,
+                  ),
+                  EmailAndPassword(
+                    isSignUpPage: true,
+                    isStudent: true,
+                  ),
+                  Gap(0.02.sh),
+                  Center(
+                    child: RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'مدرس؟  ',
+                            style: TextStyles.font14Blue400Weight,
+                          ),
+                          TextSpan(
+                            text: 'تواصل معنا',
+                            style: TextStyles.font14Blue400Weight,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Gap(0.005.sh),
-                const Center(
-                  child: IconButton(
-                    onPressed: _launchWhatsappGroup,
-                    icon: Icon(
-                      FontAwesomeIcons.whatsapp,
-                      size: 40,
-                      color: ColorsManager.green,
+                  Gap(0.005.sh),
+                  const Center(
+                    child: IconButton(
+                      onPressed: _launchWhatsappGroup,
+                      icon: Icon(
+                        FontAwesomeIcons.whatsapp,
+                        size: 40,
+                        color: ColorsManager.green,
+                      ),
                     ),
                   ),
-                ),
-                const Center(child: AlreadyHaveAccountText()),
-                SizedBox(height: 30.h),
-              ],
+                  SizedBox(height: 0.02.sh),
+                  const Center(child: AlreadyHaveAccountText()),
+                ],
+              ),
             ),
           ),
         ),
@@ -76,10 +78,11 @@ class SignUpScreen extends StatelessWidget {
   }
 }
 
- Future<void> _launchWhatsappGroup() async {
-    const String messageForm = 'السلام عليكم أود إنشاء حساب معلم في تطبيق BeStudent'; 
-    String url = 'https://wa.me/201011309251?text=$messageForm';
+Future<void> _launchWhatsappGroup() async {
+  const String messageForm =
+      'السلام عليكم أود إنشاء حساب معلم في تطبيق BeStudent';
+  String url = 'https://wa.me/201011309251?text=$messageForm';
 
-    // ignore: deprecated_member_use
-    launch(url);
-  }
+  // ignore: deprecated_member_use
+  launch(url);
+}

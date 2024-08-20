@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:student/core/widgets/app_bar.dart';
 import 'package:student/core/widgets/app_text_form_field.dart';
@@ -41,25 +42,77 @@ class ProfileScreen extends StatelessWidget {
                 settingsGroupTitleStyle: TextStyles.font17DarkBlue700Weight,
                 items: [
                   SettingsItem(
+                    icons: FontAwesomeIcons.edit,
+                    title: "تغيير كلمة المرور",
+                    onTap: () {
+                      AwesomeDialog(
+                        context: context,
+                        dialogType: DialogType.question,
+                        animType: AnimType.bottomSlide,
+                        title: 'إعادة تعيين كلمة المرور',
+                        desc:
+                            'سيتم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني.',
+                        btnCancelText: 'إلغاء',
+                        btnCancelOnPress: () {},
+                        btnOkText: 'تأكيد',
+                        btnOkOnPress: () {
+                          try {
+                            var _auth = FirebaseAuth.instance;
+                            FirebaseAuth.instance.sendPasswordResetEmail(
+                                email: _auth.currentUser!.email!);
+                            AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.info,
+                              animType: AnimType.bottomSlide,
+                              title: 'تم إرسال الرابط',
+                              desc:
+                                  'قم بفحص بريدك الإلكتروني لإعادة تعيين كلمة المرور.',
+                            ).show();
+                          } catch (e) {
+                            AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.info,
+                              animType: AnimType.bottomSlide,
+                              title: 'خطأ في  إرسال الرابط',
+                              desc: 'حدث خطأ أثناء إرسال الرابط.',
+                            ).show();
+                          }
+                        },
+                      ).show();
+                    },
+                  ),
+                  SettingsItem(
                     icons: Icons.exit_to_app_rounded,
                     title: "تسجيل الخروج",
                     onTap: () async {
-                      try {
-                        GoogleSignIn().disconnect();
-                        FirebaseAuth.instance.signOut();
-                        context.pushNamedAndRemoveUntil(
-                          Routes.loginScreen,
-                          predicate: (route) => false,
-                        );
-                      } catch (e) {
-                        await AwesomeDialog(
-                          context: context,
-                          dialogType: DialogType.info,
-                          animType: AnimType.bottomSlide,
-                          title: 'خطأ في تسجيل الخروج',
-                          desc: e.toString(),
-                        ).show();
-                      }
+                      await AwesomeDialog(
+                        context: context,
+                        dialogType: DialogType.question,
+                        animType: AnimType.bottomSlide,
+                        title: 'تأكيد تسجيل الخروج',
+                        desc: 'هل أنت متأكد من تسجيل الخروج؟',
+                        btnCancelText: 'إلغاء',
+                        btnCancelOnPress: () {},
+                        btnOkText: 'تأكيد',
+                        btnOkOnPress: () async {
+                          try {
+                            GoogleSignIn().disconnect();
+                            FirebaseAuth.instance.signOut();
+                            context.pushNamedAndRemoveUntil(
+                              Routes.loginScreen,
+                              predicate: (route) => false,
+                            );
+                          } catch (e) {
+                            await AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.info,
+                              animType: AnimType.bottomSlide,
+                              title: 'خطأ في تسجيل الخروج',
+                              desc: e.toString(),
+                            ).show();
+                          }
+                        },
+                      ).show();
                     },
                   ),
                   SettingsItem(

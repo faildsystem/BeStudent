@@ -82,7 +82,7 @@ class _ProfileAvatarState extends State<ProfileAvatar> {
                   icon: Icon(
                     size: 20.h,
                     Icons.add_a_photo,
-                    color: ColorsManager.darkBlue(context),
+                    color: ColorsManager.mainBlue(context),
                   ),
                   style: ButtonStyle(
                     backgroundColor: WidgetStateProperty.all(
