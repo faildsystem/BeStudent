@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:student/theming/colors.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../core/widgets/already_have_account_text.dart';
 import '../../../core/widgets/login_and_signup_animated_form.dart';
 import '../../../theming/styles.dart';
@@ -11,52 +13,61 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        body: SafeArea(
-          child: Directionality(
-            textDirection: TextDirection.rtl,
-            child: Padding(
-              padding: EdgeInsets.only(
-                  left: 30.w, right: 30.w, bottom: 5.h, top: 5.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'إنشاء حساب',
-                    style: TextStyles.font24Blue700Weight,
-                  ),
-                  Gap(0.001.sh),
-                  Text(
-                    'اطلق العنان لإمكانياتك الكاملة مع بي ستودنت',
-                    style: TextStyles.font13Grey400Weight,
-                  ),
-                  Gap(0.01.sh),
-                  TabBar(
-                    indicatorColor: ColorsManager.mainBlue(context),
-                    labelColor: ColorsManager.mainBlue(context),
-                    unselectedLabelColor: Colors.grey,
-                    tabs: const [
-                      Tab(text: 'مُعلم'),
-                      Tab(text: 'طالب'),
-                    ],
-                  ),
-                  Expanded(
-                    child: TabBarView(
+    return Scaffold(
+      body: SafeArea(
+        child: Directionality(
+          textDirection: TextDirection.rtl,
+          child: Padding(
+            padding:
+                EdgeInsets.only(left: 30.w, right: 30.w, bottom: 5.h, top: 5.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'إنشاء حساب',
+                  style: TextStyles.font24Blue700Weight,
+                ),
+                Gap(0.001.sh),
+                Text(
+                  'اطلق العنان لإمكانياتك الكاملة مع BeStudent ',
+                  style: TextStyles.font13Grey400Weight,
+                ),
+                EmailAndPassword(
+                  isSignUpPage: true,
+                  isStudent: true,
+                ),
+                Gap(0.02.sh),
+                Center(
+                  child: RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
                       children: [
-                        EmailAndPassword(isSignUpPage: true),
-                        EmailAndPassword(
-                          isSignUpPage: true,
-                          isStudent: true,
+                        TextSpan(
+                          text: 'هل أنت مدرس؟ ',
+                          style: TextStyles.font14Blue400Weight,
+                        ),
+                        TextSpan(
+                          text: 'تواصل معنا',
+                          style: TextStyles.font14Blue400Weight,
                         ),
                       ],
                     ),
                   ),
-                  const Center(child: AlreadyHaveAccountText()),
-                  SizedBox(height: 30.h),
-                ],
-              ),
+                ),
+                Gap(0.005.sh),
+                const Center(
+                  child: IconButton(
+                    onPressed: _launchWhatsappGroup,
+                    icon: Icon(
+                      FontAwesomeIcons.whatsapp,
+                      size: 40,
+                      color: ColorsManager.green,
+                    ),
+                  ),
+                ),
+                const Center(child: AlreadyHaveAccountText()),
+                SizedBox(height: 30.h),
+              ],
             ),
           ),
         ),
@@ -64,3 +75,11 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 }
+
+ Future<void> _launchWhatsappGroup() async {
+    const String messageForm = 'السلام عليكم أود إنشاء حساب معلم في تطبيق BeStudent'; 
+    String url = 'https://wa.me/201011309251?text=$messageForm';
+
+    // ignore: deprecated_member_use
+    launch(url);
+  }

@@ -19,13 +19,11 @@ class DoNotHaveAccountText extends StatelessWidget {
           children: [
             TextSpan(
               text: 'لا تمتلك حساب؟',
-              style: TextStyles.font14DarkBlue500Weight
-                  .copyWith(color: const Color.fromARGB(255, 29, 221, 255)),
+              style: TextStyles.font14Blue400Weight,
             ),
             TextSpan(
               text: ' أنشئ حسابك الآن',
-              style: TextStyles.font11Blue600Weight
-                  .copyWith(color: const Color.fromARGB(255, 29, 221, 255)),
+              style: TextStyles.font14Blue400Weight,
             ),
           ],
         ),
