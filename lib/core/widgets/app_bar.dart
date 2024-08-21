@@ -100,7 +100,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                 if (isProfile)
                   IconButton(
                     iconSize: 25,
-                    icon: const Icons.qr_code,
+                    icon: const Icon(FontAwesomeIcons.qrcode),
                     tooltip: 'QR Code',
                     onPressed: () async {
                       QrDialog().showQR(context, user.id);
