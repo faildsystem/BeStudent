@@ -478,7 +478,7 @@ class FireStoreFunctions {
     return groups;
   }
 
-  static Future<void> unrollGroup(String studentId, String groupId) async {
+  static Future<void> unenrolledGroup(String studentId, String groupId) async {
     try {
       final enrollmentDoc = await _firestore
           .collection('enrollment')

@@ -34,7 +34,6 @@ Future<void> main() async {
     initialRoute = initScreen == 0 || initScreen == null
         ? Routes.onboardingScreen
         : Routes.loginScreen;
-    
   } else {
     try {
       currentUser = await FireStoreFunctions.fetchUser(user.uid);

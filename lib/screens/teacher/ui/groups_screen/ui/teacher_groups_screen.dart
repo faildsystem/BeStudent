@@ -7,6 +7,7 @@ import 'package:student/core/widgets/firestore_functions.dart';
 import 'package:student/core/classes/group.dart';
 import 'package:student/theming/colors.dart';
 
+import '../../create_group_screen/ui/create_course_screen.dart';
 import '../widgets/teacher_group_component.dart';
 
 class TeacherGroupsScreen extends StatefulWidget {
@@ -45,13 +46,23 @@ class _TeacherGroupsScreenState extends State<TeacherGroupsScreen> {
     final query = searchController.text.toLowerCase();
     setState(() {
       filteredGroups = teacherGroups.where((group) {
-        return group.groupName.toLowerCase().contains(query);
+        return group.groupName.toLowerCase().contains(query) ||
+            group.subjectName.toLowerCase().contains(query);
       }).toList();
     });
   }
 
   Future<void> _refreshTeacherGroups() async {
     await _fetchTeacherGroups();
+  }
+
+  void _showCreateGroupDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const CreateGroupScreen();
+      },
+    );
   }
 
   @override
@@ -63,8 +74,7 @@ class _TeacherGroupsScreenState extends State<TeacherGroupsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(
-          title: 'مجموعاتي', isTeacher: true, isTeacherGroupsScreen: true),
+      appBar: MyAppBar(title: 'مجموعاتي', isTeacher: true),
       body: RefreshIndicator(
         onRefresh: _refreshTeacherGroups,
         child: Container(
@@ -147,6 +157,11 @@ class _TeacherGroupsScreenState extends State<TeacherGroupsScreen> {
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _showCreateGroupDialog,
+        backgroundColor: ColorsManager.mainBlue(context),
+        child: const Icon(Icons.add),
       ),
     );
   }

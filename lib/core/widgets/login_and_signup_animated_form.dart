@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, constant_identifier_names
-import 'dart:developer';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -321,9 +320,10 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
               title: 'خطأ',
               desc: e.toString(),
             ).show();
+          } finally {
+            isLoading = false;
+            setState(() {});
           }
-          isLoading = false;
-          setState(() {});
         }
       },
     );
@@ -360,7 +360,6 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
                 predicate: (route) => false,
               );
             } else {
-              
               await _auth.signOut();
               addFailController();
               if (!context.mounted) return;
@@ -392,12 +391,11 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
                 desc: e.message,
               ).show();
             }
+          } finally {
+            isLoading = false;
+            await Future.delayed(const Duration(seconds: 2));
+            setState(() {});
           }
-          isLoading = false;
-          await Future.delayed(const Duration(seconds: 2));
-          
-          setState(() {});
-          log('done');
         }
       },
     );
@@ -535,10 +533,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
               }
             },
             validator: (value) {
-              if (value == null ||
-                  value.isEmpty ||
-                  value.startsWith(' ') ||
-                  !AppRegex.isNameValid(value)) {
+              if (value == null || !AppRegex.isNameValid(value.trim())) {
                 addFailController();
                 return 'من فضلك أدخل اسم صحيح';
               }
@@ -566,10 +561,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
               }
             },
             validator: (value) {
-              if (value == null ||
-                  value.isEmpty ||
-                  value.startsWith(' ') ||
-                  !AppRegex.isNameValid(value)) {
+              if (value == null || !AppRegex.isNameValid(value.trim())) {
                 addFailController();
                 return 'من فضلك أدخل اسم صحيح';
               }
@@ -618,47 +610,47 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
     );
   }
 
-  Widget passwordConfirmationField() {
-    if (widget.isSignUpPage == true ||
-        widget.isPasswordPage == true && !isLoading) {
-      return AppTextFormField(
-        focusNode: passwordConfirmationFocuseNode,
-        controller: passwordConfirmationController,
-        hint: 'تأكيد كلمة المرور',
-        isObscureText: isObscureText,
-        suffixIcon: GestureDetector(
-          onTap: () {
-            setState(() {
-              if (isObscureText) {
-                isObscureText = false;
-                addHandsDownController();
-              } else {
-                addHandsUpController();
-                isObscureText = true;
-              }
-            });
-          },
-          child: Icon(
-            isObscureText ? Icons.visibility_off : Icons.visibility,
-          ),
-        ),
-        validator: (value) {
-          if (value != passwordController.text) {
-            addFailController();
+  // Widget passwordConfirmationField() {
+  //   if (widget.isSignUpPage == true ||
+  //       widget.isPasswordPage == true && !isLoading) {
+  //     return AppTextFormField(
+  //       focusNode: passwordConfirmationFocuseNode,
+  //       controller: passwordConfirmationController,
+  //       hint: 'تأكيد كلمة المرور',
+  //       isObscureText: isObscureText,
+  //       suffixIcon: GestureDetector(
+  //         onTap: () {
+  //           setState(() {
+  //             if (isObscureText) {
+  //               isObscureText = false;
+  //               addHandsDownController();
+  //             } else {
+  //               addHandsUpController();
+  //               isObscureText = true;
+  //             }
+  //           });
+  //         },
+  //         child: Icon(
+  //           isObscureText ? Icons.visibility_off : Icons.visibility,
+  //         ),
+  //       ),
+  //       validator: (value) {
+  //         if (value != passwordController.text) {
+  //           addFailController();
 
-            return 'كلمة المرور غير متطابقة';
-          }
-          if (value == null ||
-              value.isEmpty ||
-              !AppRegex.isPasswordValid(value)) {
-            addFailController();
-            return 'من فضلك أدخل كلمة مرور صحيحة';
-          }
-        },
-      );
-    }
-    return const SizedBox.shrink();
-  }
+  //           return 'كلمة المرور غير متطابقة';
+  //         }
+  //         if (value == null ||
+  //             value.isEmpty ||
+  //             !AppRegex.isPasswordValid(value)) {
+  //           addFailController();
+  //           return 'من فضلك أدخل كلمة مرور صحيحة';
+  //         }
+  //       },
+  //     );
+  //   }
+  //   return const SizedBox.shrink();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -701,8 +693,8 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
                   ),
                   emailField(),
                   passwordField(),
-                  Gap(10.h),
-                  passwordConfirmationField(),
+                  // Gap(10.h),
+                  // passwordConfirmationField(),
                   forgetPasswordTextButton(context),
                   Gap(10.h),
                   passwordsValidations(context),

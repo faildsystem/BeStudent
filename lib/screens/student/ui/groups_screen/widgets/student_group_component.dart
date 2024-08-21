@@ -1,11 +1,8 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:student/core/classes/days.dart';
 import 'package:student/core/classes/group.dart';
-import 'package:student/core/widgets/firestore_functions.dart';
-import 'package:student/helpers/extensions.dart';
 
 import 'package:student/theming/colors.dart';
 import 'package:student/theming/styles.dart';
@@ -77,39 +74,6 @@ class StudentGroupComponent extends StatelessWidget {
                           Icons.share,
                           color: ColorsManager.white(context),
                         )),
-                    IconButton(
-                      onPressed: () {
-                        AwesomeDialog(
-                          context: context,
-                          dialogType: DialogType.question,
-                          animType: AnimType.bottomSlide,
-                          btnOk: TextButton(
-                            onPressed: () async {
-                              context.pop();
-
-                              await FireStoreFunctions.unrollGroup(
-                                  studentId, group.groupId);
-                            },
-                            child: const Text('نعم'),
-                          ),
-                          btnCancel: TextButton(
-                            onPressed: () async {
-                              context.pop();
-                            },
-                            child: const Text(
-                              'لا',
-                              style: TextStyle(color: ColorsManager.coralRed),
-                            ),
-                          ),
-                          title: 'تأكيد',
-                          desc: 'هل تريد مغادرة هذه المجموعة؟',
-                        ).show();
-                      },
-                      icon: Icon(
-                        Icons.logout,
-                        color: ColorsManager.white(context),
-                      ),
-                    ),
                   ],
                 ),
               ],

@@ -20,17 +20,13 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   Future<void> _launchWhatsappGroup() async {
-    // final Uri whatsappUrl =
-    //     Uri.parse('https://wa.me/+201011309251/?text=Hello bitch');
-
-    // if (await canLaunchUrl(whatsappUrl)) {
-    //   await launchUrl(whatsappUrl, mode: LaunchMode.externalApplication);
-    // } else {
-    //   throw 'Could not launch $whatsappUrl';
-    // }
-
     String url = 'https://chat.whatsapp.com/CzHBGdJsKD67u21O0NhLGf';
+    // ignore: deprecated_member_use
+    launch(url);
+  }
 
+  Future<void> _launchContactUs() async {
+    String url = 'https://wa.me/201011309251';
     // ignore: deprecated_member_use
     launch(url);
   }
@@ -77,12 +73,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 settingsGroupTitleStyle: TextStyles.font17DarkBlue700Weight,
                 items: [
                   SettingsItem(
-                    onTap: _launchWhatsappGroup, // Navigate to whatsapp group
+                    onTap: _launchContactUs,
                     icons: FontAwesomeIcons.whatsapp,
                     iconStyle: IconStyle(
                       backgroundColor: ColorsManager.green,
                     ),
                     title: 'تواصل معنا',
+                  ),
+                  SettingsItem(
+                    onTap: _launchWhatsappGroup,
+                    icons: FontAwesomeIcons.whatsapp,
+                    iconStyle: IconStyle(
+                      backgroundColor: ColorsManager.green,
+                    ),
+                    title: ' مجتمعنا على الواتساب',
                   ),
                   SettingsItem(
                     onTap: () {

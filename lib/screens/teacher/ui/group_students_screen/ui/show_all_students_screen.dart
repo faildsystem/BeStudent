@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
@@ -219,6 +217,45 @@ class _AllStudentsScreenState extends State<AllStudentsScreen> {
     ).show();
   }
 
+  Future<void> _deleteStudent(String studentId) async {
+    try {
+      await FireStoreFunctions.unenrolledGroup(studentId, widget.groupId);
+      setState(() {
+        students.removeWhere((student) => student.id == studentId);
+      });
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.success,
+        title: 'تم الحذف',
+        desc: 'تم حذف الطالب بنجاح.',
+        btnOkOnPress: () {},
+      ).show();
+    } catch (e) {
+      AwesomeDialog(
+        context: context,
+        dialogType: DialogType.error,
+        title: 'فشل',
+        desc: 'فشل حذف الطالب. حاول مرة أخرى.',
+        btnOkOnPress: () {},
+      ).show();
+    }
+  }
+
+  void _confirmDeleteStudent(Student student) {
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.warning,
+      title: 'تأكيد الحذف',
+      desc: 'هل أنت متأكد أنك تريد حذف الطالب؟ ${student.fullName}',
+      btnCancelText: 'إلغاء',
+      btnOkText: 'حذف',
+      btnCancelOnPress: () {},
+      btnOkOnPress: () async {
+        await _deleteStudent(student.id);
+      },
+    ).show();
+  }
+
   @override
   void dispose() {
     qrController?.dispose();
@@ -250,7 +287,8 @@ class _AllStudentsScreenState extends State<AllStudentsScreen> {
                           border: TableBorder.all(color: Colors.grey.shade300),
                           columnWidths: const {
                             0: FlexColumnWidth(1),
-                            1: FlexColumnWidth(3),
+                            1: FlexColumnWidth(2),
+                            2: FlexColumnWidth(1),
                           },
                           children: [
                             TableRow(
@@ -260,6 +298,7 @@ class _AllStudentsScreenState extends State<AllStudentsScreen> {
                               children: [
                                 _buildHeaderCell('حاضر'),
                                 _buildHeaderCell('الاسم'),
+                                _buildHeaderCell('حذف'),
                               ],
                             ),
                             for (var student in students)
@@ -285,6 +324,14 @@ class _AllStudentsScreenState extends State<AllStudentsScreen> {
                                           style: Theme.of(context)
                                               .textTheme
                                               .titleMedium),
+                                    ),
+                                  ),
+                                  _buildTableCell(
+                                    child: IconButton(
+                                      icon: const Icon(Icons.delete,
+                                          color: Colors.red),
+                                      onPressed: () =>
+                                          _confirmDeleteStudent(student),
                                     ),
                                   ),
                                 ],

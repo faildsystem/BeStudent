@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,14 +12,12 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool isProfileOrSettings;
   final bool isTeacher;
-  final bool isTeacherGroupsScreen;
 
   MyAppBar(
       {Key? key,
       required this.title,
       this.isProfileOrSettings = false,
-      this.isTeacher = false,
-      this.isTeacherGroupsScreen = false})
+      this.isTeacher = false})
       : super(key: key);
 
   final Future<AppUser> user =
@@ -32,7 +28,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     return FutureBuilder<AppUser>(
       future: user,
       builder: (context, snapshot) {
-        log('isTeacher: $isTeacher');
+        // log('isTeacher: $isTeacher');
         if (snapshot.connectionState == ConnectionState.waiting) {
           return AppBar(
             title: Text(
@@ -41,18 +37,6 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             backgroundColor: Colors.transparent,
             centerTitle: true,
-            leading: isTeacher && isTeacherGroupsScreen
-                ? IconButton(
-                    iconSize: 25,
-                    icon: const Icon(Icons.add),
-                    tooltip: 'add group',
-                    onPressed: () {
-                      context.pushNamed(
-                        Routes.createGroupScreen,
-                      );
-                    },
-                  )
-                : null,
             actions: [
               if (!isProfileOrSettings)
                 isTeacher
@@ -97,18 +81,6 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
               backgroundColor: Colors.transparent,
               centerTitle: true,
-              leading: isTeacher && isTeacherGroupsScreen
-                  ? IconButton(
-                      iconSize: 25,
-                      icon: const Icon(Icons.add),
-                      tooltip: 'add group',
-                      onPressed: () {
-                        context.pushNamed(
-                          Routes.createGroupScreen,
-                        );
-                      },
-                    )
-                  : null,
               actions: [
                 if (!isProfileOrSettings)
                   isTeacher

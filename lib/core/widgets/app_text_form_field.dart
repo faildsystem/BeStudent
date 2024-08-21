@@ -13,7 +13,7 @@ class AppTextFormField extends StatelessWidget {
   final bool? isDense;
   final TextEditingController? controller;
   final Function(String?) validator;
-  final TextInputType? keyboardType; // Add this line
+  final TextInputType? keyboardType;
 
   const AppTextFormField({
     super.key,
@@ -25,7 +25,7 @@ class AppTextFormField extends StatelessWidget {
     this.onChanged,
     this.focusNode,
     required this.validator,
-    this.keyboardType, // Add this line
+    this.keyboardType,
   });
 
   @override
@@ -37,7 +37,7 @@ class AppTextFormField extends StatelessWidget {
       },
       onChanged: onChanged,
       controller: controller,
-      keyboardType: keyboardType, // Add this line
+      keyboardType: keyboardType,
       decoration: InputDecoration(
         hintTextDirection: TextDirection.rtl,
         hintText: hint,

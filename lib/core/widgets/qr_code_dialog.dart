@@ -51,6 +51,9 @@ class GroupQrCode extends StatelessWidget {
   }
 
   void _copyCode(BuildContext context) {
+    // Unfocus any active text field to ensure the keyboard is dismissed
+    FocusScope.of(context).unfocus();
+
     try {
       Clipboard.setData(ClipboardData(text: group.groupCode))
           .then((value) => context.pop());
