@@ -1,29 +1,27 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:student/helpers/extensions.dart';
 import 'package:student/theming/colors.dart';
 
-class GenerateQrWidget extends StatelessWidget {
-  final String data;
-
-  GenerateQrWidget({required this.data});
-
-  @override
-  Widget build(BuildContext context) {
-    return Dialog(
-      child: Center(
-        child: Material(
-          type: MaterialType.transparency,
-          child: SingleChildScrollView(
+class QrDialog {
+  Future<void> showQR(BuildContext context, dynamic data,
+      {bool isGroup = false}) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return Center(
+          child: Material(
+            type: MaterialType.transparency,
             child: Container(
               padding: const EdgeInsets.symmetric(
                 horizontal: 32,
                 vertical: 36,
               ),
-              height: MediaQuery.of(context).size.height * 0.70,
+              height: MediaQuery.of(context).size.height * 0.60,
               width: MediaQuery.of(context).size.width * 0.860,
               decoration: const BoxDecoration(
                 color: Colors.black,
@@ -43,7 +41,7 @@ class GenerateQrWidget extends StatelessWidget {
                 ),
               ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
                     padding: const EdgeInsets.all(16),
@@ -67,41 +65,59 @@ class GenerateQrWidget extends StatelessWidget {
                     ),
                     child: Center(
                       child: QrImageView(
-                        data: data,
+                        data: isGroup ? data.groupCode : data,
                         size: 180,
                         foregroundColor: ColorsManager.mainBlue(context),
                       ),
                     ),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        isGroup
+                            ? 'رمز مجموعة ${data.groupName}'
+                            : 'هذا هو رمز الاستجابة السريعة الخاص بك',
+                        style: TextStyle(
+                          fontFamily: 'poppins_bold',
+                          fontSize: 16.sp,
+                          color: ColorsManager.secondaryBlue(context),
+                        ),
+                      ),
+                    ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Column(
                         children: [
-                          Container(
-                            padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(12),
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 32.0,
-                                  color:
-                                      const Color.fromARGB(255, 133, 142, 212)
-                                          .withOpacity(0.68),
+                          GestureDetector(
+                            onTap: () => _copyCode(context, isGroup ? data.groupCode : data),
+                            child: Container(
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(12),
                                 ),
-                              ],
-                            ),
-                            child: const Icon(
-                              EvaIcons.shareOutline,
-                              color: Color(0xFF6565FF),
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 32.0,
+                                    color:
+                                        const Color.fromARGB(255, 133, 142, 212)
+                                            .withOpacity(0.68),
+                                  ),
+                                ],
+                              ),
+                              child: Icon(
+                                EvaIcons.copyOutline,
+                                color: ColorsManager.mainBlue(context),
+                              ),
                             ),
                           ),
                           const Gap(8),
                           const Text(
-                            "Share",
+                            "Copy",
                             style: TextStyle(
                               fontFamily: 'poppins_semi_bold',
                               fontSize: 14,
@@ -112,25 +128,28 @@ class GenerateQrWidget extends StatelessWidget {
                       const Gap(40),
                       Column(
                         children: [
-                          Container(
-                            padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(12),
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 32.0,
-                                  color:
-                                      const Color.fromARGB(255, 133, 142, 212)
-                                          .withOpacity(0.68),
+                          GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(12),
                                 ),
-                              ],
-                            ),
-                            child: const Icon(
-                              EvaIcons.saveOutline,
-                              color: Color(0xFF6565FF),
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 32.0,
+                                    color:
+                                        const Color.fromARGB(255, 133, 142, 212)
+                                            .withOpacity(0.68),
+                                  ),
+                                ],
+                              ),
+                              child: Icon(
+                                EvaIcons.saveOutline,
+                                color: ColorsManager.mainBlue(context),
+                              ),
                             ),
                           ),
                           const Gap(8),
@@ -145,15 +164,37 @@ class GenerateQrWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  
                 ],
               ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
-  
+  void _copyCode(BuildContext context, String data) {
+    // Unfocus any active text field to ensure the keyboard is dismissed
+    FocusScope.of(context).unfocus();
+
+    try {
+      Clipboard.setData(ClipboardData(text: data))
+          .then((value) => context.pop());
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Center(child: Text('تم نسخ الكود ')),
+          backgroundColor: ColorsManager.secondaryBlue(context),
+          duration: const Duration(seconds: 1),
+        ),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Center(child: Text('حدث خطأ أثناء نسخ الكود')),
+          backgroundColor: ColorsManager.coralRed,
+          duration: Duration(seconds: 1),
+        ),
+      );
+    }
+  }
 }

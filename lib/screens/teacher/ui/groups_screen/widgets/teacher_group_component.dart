@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:student/core/classes/days.dart';
 import 'package:student/core/classes/group.dart';
 import 'package:student/core/widgets/firestore_functions.dart';
+import 'package:student/core/widgets/generate_qr.dart';
 import 'package:student/helpers/extensions.dart';
 
 import 'package:student/theming/colors.dart';
@@ -46,12 +47,13 @@ class TeacherGroupComponent extends StatelessWidget {
                     children: [
                       IconButton(
                           onPressed: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return GroupQrCode(group: group);
-                              },
-                            );
+                            QrDialog().showQR(context, group, isGroup: true);
+                            // showDialog(
+                            //   context: context,
+                            //   builder: (context) {
+                            //     return GroupQrCode(group: group);
+                            //   },
+                            // );
                           },
                           icon: Icon(
                             Icons.share,
