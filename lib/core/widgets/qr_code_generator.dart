@@ -24,7 +24,6 @@ class QrCodeGenerator extends StatelessWidget {
         height: height.h,
         child: PrettyQrView.data(
           data: data,
-          // errorCorrectLevel: QrErrorCorrectLevel.H,
           decoration: const PrettyQrDecoration(
               image: PrettyQrDecorationImage(
                 image: AssetImage('assets/images/logo.png'),

@@ -37,7 +37,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       backgroundColor: ColorsManager.white(context).withOpacity(.94),
       appBar: MyAppBar(
         title: "اعدادات التطبيق",
-        isProfileOrSettings: true,
+        isSettings: true,
       ),
       body: Directionality(
         textDirection: TextDirection.rtl,
