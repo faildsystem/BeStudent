@@ -28,7 +28,7 @@ class ProfileScreen extends StatelessWidget {
       backgroundColor: ColorsManager.white(context).withOpacity(.94),
       appBar: MyAppBar(
         title: 'الحساب',
-        isProfileOrSettings: true,
+        isProfile: true,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 2.h),
