@@ -7,7 +7,7 @@ class Subject {
     'الرياضيات': Colors.red,
     'الدراسات الاجتماعية': Colors.brown,
     'العلوم': Colors.blue,
-    'الفيزياء': Colors.yellow,
+    'الفيزياء': Colors.cyanAccent,
     'الكيمياء': Colors.teal,
     'الأحياء': Colors.indigo,
     'التاريخ': Colors.green,

@@ -1,10 +1,10 @@
 // version 1
 
-8 - make the student name cell clickable in the attendance screen and add student performance for teacher 
-
-1- onboarding screen 
+1- try to avoid reloading the app bar in each page 
 9- logo and splash screen 
+3- lose focus in appTextField
 
+2- remove unenrolled icon from student and add it in all student screen  (done)
 
 // version 2
 

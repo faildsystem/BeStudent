@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, constant_identifier_names
-import 'dart:developer';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -534,10 +533,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
               }
             },
             validator: (value) {
-              if (value == null ||
-                  value.isEmpty ||
-                  value.startsWith(' ') ||
-                  !AppRegex.isNameValid(value)) {
+              if (value == null || !AppRegex.isNameValid(value.trim())) {
                 addFailController();
                 return 'من فضلك أدخل اسم صحيح';
               }
@@ -565,10 +561,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
               }
             },
             validator: (value) {
-              if (value == null ||
-                  value.isEmpty ||
-                  value.startsWith(' ') ||
-                  !AppRegex.isNameValid(value)) {
+              if (value == null || !AppRegex.isNameValid(value.trim())) {
                 addFailController();
                 return 'من فضلك أدخل اسم صحيح';
               }

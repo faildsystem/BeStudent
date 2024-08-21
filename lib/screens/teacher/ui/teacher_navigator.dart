@@ -34,19 +34,25 @@ class _TeacherNavigatorState extends State<TeacherNavigator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
-        controller: _pageController,
-        children: [
-          const TeacherDashboardScreen(),
-          const TeacherGroupsScreen(),
-          TeacherScheduleScreen(teacherId: widget.teacherId),
-          const SettingsScreen(isTeacher: true),
-        ],
-        onPageChanged: (index) {
-          setState(() {
-            widget.currentIndex = index;
-          });
-        },
+      body: PageStorage(
+        bucket: PageStorageBucket(),
+        child: PageView(
+          controller: _pageController,
+          children: [
+            const TeacherDashboardScreen(key: PageStorageKey('dashboard')),
+            const TeacherGroupsScreen(key: PageStorageKey('groups')),
+            TeacherScheduleScreen(
+                teacherId: widget.teacherId,
+                key: const PageStorageKey('schedule')),
+            const SettingsScreen(
+                isTeacher: true, key: PageStorageKey('settings')),
+          ],
+          onPageChanged: (index) {
+            setState(() {
+              widget.currentIndex = index;
+            });
+          },
+        ),
       ),
       bottomNavigationBar: GNav(
         selectedIndex: widget.currentIndex,

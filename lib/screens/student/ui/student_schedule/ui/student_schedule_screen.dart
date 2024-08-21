@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:student/theming/colors.dart';
 import '../../../../../core/widgets/app_bar.dart';
 import '../appointments.dart';
 import '../widgets/schedule.dart';
@@ -27,7 +28,22 @@ class StudentScheduleScreen extends StatelessWidget {
             }
             if (snapshot.data == null || snapshot.data!.appointments!.isEmpty) {
               return const Center(
-                child: Text('لا توجد مواعيد'),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(
+                      Icons.calendar_today,
+                      size: 100,
+                      color: ColorsManager.mainBlueColor,
+                    ),
+                    Text(
+                      'لا يوجد جدول دراسي',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                  ],
+                ),
               );
             }
 

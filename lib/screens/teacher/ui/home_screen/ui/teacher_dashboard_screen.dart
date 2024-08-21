@@ -276,7 +276,8 @@ class _EventCard extends StatelessWidget {
         title: Text(title,
             style: TextStyles.font18DarkBlue700Weight,
             textAlign: TextAlign.right),
-        subtitle: Text(date, style: const TextStyle(), textAlign: TextAlign.right),
+        subtitle:
+            Text(date, style: const TextStyle(), textAlign: TextAlign.right),
       ),
     );
   }

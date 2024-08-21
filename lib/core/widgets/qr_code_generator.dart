@@ -27,7 +27,7 @@ class QrCodeGenerator extends StatelessWidget {
           // errorCorrectLevel: QrErrorCorrectLevel.H,
           decoration: const PrettyQrDecoration(
               image: PrettyQrDecorationImage(
-                image: AssetImage('assets/images/quiz.png'),
+                image: AssetImage('assets/images/logo.png'),
               ),
               shape: PrettyQrSmoothSymbol(color: ColorsManager.mainBlueColor)),
         ),
